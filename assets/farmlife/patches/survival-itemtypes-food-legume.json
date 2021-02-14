@@ -1,0 +1,8 @@
+[
+  {
+    "op": "replace",
+    "path": "/transitionableProps/0/transitionRatio",
+    "value": 1,
+    "file": "game:itemtypes/food/legume.json"
+  }
+]

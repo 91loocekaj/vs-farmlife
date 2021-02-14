@@ -1,0 +1,8 @@
+{
+	code: "manure",
+	sealHours: 120,
+	ingredients: [
+		{ type: "block", code: "farmlife:poop-small",  quantity: 64 },
+	],
+	output: { type: "block", code: "game:soil-compost-none", stackSize: 1 }
+}

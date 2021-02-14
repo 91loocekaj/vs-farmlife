@@ -1,0 +1,30 @@
+[
+  {
+    "op": "add",
+    "path": "/server/behaviors/-",
+    "value": {
+      "code": "carry",
+      "entityCodes": [
+        "hare-*",
+        "chicken-*",
+        "pig-wild-piglet",
+        "sheep-bighorn-lamb"
+      ]
+    },
+    "file": "game:entities/humanoid/player.json"
+  },
+  {
+    "op": "add",
+    "path": "/client/behaviors/-",
+    "value": {
+      "code": "carry",
+      "entityCodes": [
+        "hare-*",
+        "chicken-*",
+        "pig-wild-piglet",
+        "sheep-bighorn-lamb"
+      ]
+    },
+    "file": "game:entities/humanoid/player.json"
+  }
+]

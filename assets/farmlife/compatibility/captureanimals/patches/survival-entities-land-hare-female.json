@@ -1,0 +1,80 @@
+[
+  {
+    "op": "add",
+    "path": "/attributes/maxSaturation",
+    "value": 8,
+    "file": "game:entities/land/hare-female.json"
+  },
+
+  {
+    "op": "add",
+    "path": "/client/behaviors/-",
+    "value": {
+      "code": "consume"
+    },
+    "file": "game:entities/land/hare-female.json"
+  },
+
+  {
+    "op": "add",
+    "path": "/client/behaviors/-",
+    "value": {
+      "code": "foodmultiply"
+    },
+    "file": "game:entities/land/hare-female.json"
+  },
+
+  {
+    "op": "add",
+    "path": "/server/behaviors/-",
+    "value": {
+      "code": "consume",
+      "poopCodes": [
+        "farmlife:poop-small"
+      ]
+    },
+    "file": "game:entities/land/hare-female.json"
+  },
+
+  {
+    "op": "replace",
+    "path": "/server/behaviors/8",
+    "value": {
+      "code": "foodmultiply",
+      "spawnEntityCode": "hare-baby",
+      "requiresNearbyEntityCode": "hare-male-*",
+      "requiresNearbyEntityRange": 10,
+      "spawnQuantityMin": 6,
+      "spawnQuantityMax": 12,
+      "pregnancyDays": 5,
+      "multiplyCooldownDaysMin": 1,
+      "multiplyCooldownDaysMax": 3,
+      "portionsEatenForMultiply": 1
+    },
+    "file": "game:entities/land/hare-female.json"
+  },
+
+  {
+    "op": "replace",
+    "path": "/server/behaviors/10/aitasks/3",
+    "value": {
+      "code": "seekfoodandeat",
+      "movespeed": 0.01,
+      "priority": 1.4,
+      "eatTime": 2.3,
+      "eatLooseItems": true,
+      "eatItemCategories": [
+        "Vegetable"
+      ],
+      "eatItemCodes": [
+        "game:drygrass"
+      ],
+      "animationSpeed": 1.4,
+      "animation": "Walk",
+      "eatAnimation": "longdig",
+      "mincooldownHours": 0,
+      "maxcooldownHours": 0
+    },
+    "file": "game:entities/land/hare-female.json"
+  },
+]

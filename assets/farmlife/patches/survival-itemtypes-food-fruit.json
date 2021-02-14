@@ -1,0 +1,14 @@
+[
+  {
+    "op": "replace",
+    "path": "/transitionablePropsByType/*/0/transitionRatio",
+    "value": 1,
+    "file": "game:itemtypes/food/fruit.json"
+  },
+  {
+    "op": "replace",
+    "path": "/transitionablePropsByType/*-cranberry/0/transitionRatio",
+    "value": 1,
+    "file": "game:itemtypes/food/fruit.json"
+  }
+]

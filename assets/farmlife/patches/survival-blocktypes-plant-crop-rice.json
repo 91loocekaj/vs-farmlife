@@ -1,0 +1,15 @@
+[
+  {
+    "op": "add",
+    "path": "/dropsByType/*-10/2",
+    "value": {
+      "type": "item",
+      "code": "game:drygrass",
+      "quantity": {
+        "avg": 3,
+        "var": 1
+      }
+    },
+    "file": "game:blocktypes/plant/crop/rice.json"
+  }
+]

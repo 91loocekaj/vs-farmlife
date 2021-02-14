@@ -1,0 +1,10 @@
+{
+	ingredientPattern: "L_L,T_T,L_L",
+	ingredients: {
+		"L": { type: "item", code: "game:leather" },
+		"T": { type: "item", code: "game:flaxtwine" }
+	},
+	width: 3,
+	height: 3,
+	output: { type: "item", code: "farmlife:handlinggloves", quantity: 1  }
+}

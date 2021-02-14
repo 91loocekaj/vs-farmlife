@@ -1,0 +1,50 @@
+{
+	code: "compostbin",
+	entityclass: "GenericTypedContainer",
+	behaviors: [{name: "Container"}],
+	attributes: {
+		partialAttachable: true,
+		inventoryClassName: "chest",
+		defaultType: "normal",
+		types: ["normal"],
+		drop: {
+			"normal": true
+		},
+		quantitySlots: {
+			"normal": 4
+		},
+		dialogTitleLangCode: {
+			"normal": "farmlife:compostbin"
+		},
+		storageType: {
+			"normal": 32
+		},
+		retrieveOnly: {
+			"normal": false
+		},
+		spoilSpeedMulByFoodCat: {
+			"normal": {
+				"vegetable": 10,
+				"grain": 100,
+        "fruit": 60,
+        "protein": 60,
+        "dairy": 400
+			}
+		},
+		openSound: "game:sounds/block/basketopen",
+		closeSound: "game:sounds/block/basketclose",
+	},
+	creativeinventory: { "general": ["*"]},
+	shape: { base: "farmlife:block/wood/compostbin" },
+	blockmaterial: "Wood",
+	replaceable: 1000,
+	resistance: 0.8,
+	maxStackSize: 4,
+	sideopaque: {
+		all: false
+	},
+	sidesolid: {
+		all: false
+	},
+	collisionSelectionBox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 1, z2: 1 }
+}

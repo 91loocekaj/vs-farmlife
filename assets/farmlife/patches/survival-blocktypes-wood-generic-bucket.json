@@ -1,0 +1,10 @@
+[
+  {
+    "op": "add",
+    "path": "/behaviors/3",
+    "value": {
+      "name": "FoodMilkContainer"
+    },
+    "file": "game:blocktypes/wood/generic/bucket.json"
+  }
+]

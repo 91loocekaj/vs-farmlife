@@ -1,0 +1,10 @@
+{
+	ingredientPattern: "SHS,SSS",
+	ingredients: {
+		"H": { type: "block", code: "game:hay-normal" },
+		"S": { type: "item", code: "game:plank-*" }
+	},
+	width: 3,
+	height: 2,
+	output: { type: "block", code: "game:henbox-empty", quantity: 1  }
+}

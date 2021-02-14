@@ -1,0 +1,11 @@
+{
+	ingredientPattern: "S_S,SHS,_L_",
+	ingredients: {
+		"H": { type: "item", code: "game:rot", quantity: 64 },
+		"S": { type: "item", code: "game:stick", quantity: 8},
+		"L": { type: "block", code: "game:log-*"},
+	},
+	width: 3,
+	height: 3,
+	output: { type: "block", code: "farmlife:compostbin", quantity: 1  }
+}

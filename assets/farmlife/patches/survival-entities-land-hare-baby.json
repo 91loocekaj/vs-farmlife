@@ -1,0 +1,131 @@
+[
+  {
+    "op": "add",
+    "path": "/attributes",
+    "value": {
+      "blockDiet": [
+        "crop-cabbage*",
+        "crop-carrot*",
+        "crop-flax*",
+        "crop-parsnip*",
+        "crop-rye*",
+        "crop-soybean*",
+        "crop-spelt*",
+        "crop-turnip*"
+      ],
+      "maxSaturation": 8
+    },
+    "file": "game:entities/land/hare-baby.json"
+  },
+  {
+    "op": "add",
+    "path": "/client/behaviors/-",
+    "value": {
+      "code": "consume"
+    },
+    "file": "game:entities/land/hare-baby.json"
+  },
+
+  {
+    "op": "add",
+    "path": "/server/behaviors/-",
+    "value": {
+      "code": "consume",
+      "poopCodes": [
+        "farmlife:poop-small"
+      ]
+    },
+    "file": "game:entities/land/hare-baby.json"
+  },
+
+  {
+    "op": "replace",
+    "path": "/server/behaviors/8",
+    "value": {
+      "hoursToGrow": 168,
+      "adultEntityCodes": [
+        "hare-male-ashgrey",
+        "hare-female-ashgrey",
+        "hare-male-darkbrown",
+        "hare-female-darkbrown",
+        "hare-male-gold",
+        "hare-female-gold",
+        "hare-male-lightbrown",
+        "hare-female-lightbrown",
+        "hare-male-lightgrey",
+        "hare-female-lightgrey",
+        "hare-male-silver",
+        "hare-female-silver",
+        "hare-male-smokegrey",
+        "hare-female-smokegrey"
+      ],
+      "code": "foodgrow"
+    },
+    "file": "game:entities/land/hare-baby.json"
+  },
+  {
+    "op": "add",
+    "path": "/server/behaviors/-",
+    "value": {
+      "code": "emotionstates",
+      "states": [
+        {
+          "code": "fleeondamage",
+          "duration": 10,
+          "chance": 1,
+          "slot": 0,
+          "priority": 1,
+          "accumType": "max"
+        },
+        {
+          "code": "saturated",
+          "duration": 1200,
+          "chance": 1,
+          "slot": 0,
+          "priority": 1,
+          "accumType": "sum"
+        }
+      ]
+    },
+    "file": "game:entities/land/hare-baby.json"
+  },
+  {
+    "op": "add",
+    "path": "/server/behaviors/9/aitasks/-",
+    "value": {
+      "code": "seekfoodandeat",
+      "movespeed": 0.01,
+      "priority": 1.37,
+      "eatTime": 2.3,
+      "eatLooseItems": true,
+      "eatItemCategories": [
+        "Vegetable"
+      ],
+      "eatItemCodes": [
+        "game:drygrass"
+      ],
+      "animationSpeed": 1.4,
+      "animation": "Walk",
+      "eatAnimation": "longdig",
+      "mincooldownHours": 0,
+      "maxcooldownHours": 0
+    },
+    "file": "game:entities/land/hare-baby.json"
+  },
+  {
+    "op": "add",
+    "path": "/server/behaviors/9/aitasks/-",
+    "value": {
+      "code": "fleeentity",
+      "entityCodes": [
+        "hare-male-*"
+      ],
+      "priority": 1.7,
+      "movespeed": 0.04,
+      "animationSpeed": 1.8,
+      "seekingRange": 1,
+      "animation": "Run"
+    },
+    "file": "game:entities/land/hare-baby.json"
+  }
+]

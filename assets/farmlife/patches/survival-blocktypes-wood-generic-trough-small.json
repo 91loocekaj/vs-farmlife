@@ -1,0 +1,281 @@
+[
+  {
+    "op": "replace",
+    "path": "/collisionselectionbox",
+    "value" : ,
+    "file": "game:blocktypes/wood/generic/trough-small.json"
+  },
+  {
+    "op": "add",
+    "path": "/collisionbox",
+    "value": null,
+    "file": "game:blocktypes/wood/generic/trough-small.json"
+  },
+  {
+    "op": "add",
+    "path": "/selectionbox",
+    "value": {
+      "x1": 0.25,
+      "y1": 0,
+      "z1": 0.0625,
+      "x2": 0.75,
+      "y2": 0.25,
+      "z2": 0.9375,
+      "rotateYByType": {
+        "*-ns": 90,
+        "*-we": 0
+      }
+    },
+    "file": "game:blocktypes/wood/generic/trough-small.json"
+  },
+  {
+    "op": "replace",
+    "path": "/attributes/contentConfig",
+    "value": [
+      {
+        "code": "flax",
+        "content": {
+          "type": "item",
+          "code": "grain-flax"
+        },
+        "foodFor": [
+          "chicken-*"
+        ],
+        "quantityPerFillLevel": 1,
+        "maxFillLevels": 32,
+        "shapesPerFillLevel": [
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4"
+        ],
+        "textureCode": "contents-flax"
+      },
+      {
+        "code": "hay",
+        "content": {
+          "type": "item",
+          "code": "game:drygrass"
+        },
+        "foodFor": [
+          "game:hare-*"
+        ],
+        "quantityPerFillLevel": 1,
+        "maxFillLevels": 32,
+        "shapesPerFillLevel": [
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4"
+        ],
+        "textureCode": "contents-hay"
+      },
+      {
+        "code": "rice",
+        "content": {
+          "type": "item",
+          "code": "grain-rice"
+        },
+        "quantityPerFillLevel": 1,
+        "maxFillLevels": 32,
+        "shapesPerFillLevel": [
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4"
+        ],
+        "foodFor": [
+          "chicken-*"
+        ],
+        "textureCode": "contents-rice"
+      },
+      {
+        "code": "rye",
+        "content": {
+          "type": "item",
+          "code": "grain-rye"
+        },
+        "quantityPerFillLevel": 1,
+        "maxFillLevels": 32,
+        "shapesPerFillLevel": [
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4"
+        ],
+        "foodFor": [
+          "chicken-*"
+        ],
+        "textureCode": "contents-rye"
+      },
+      {
+        "code": "spelt",
+        "content": {
+          "type": "item",
+          "code": "grain-spelt"
+        },
+        "quantityPerFillLevel": 1,
+        "maxFillLevels": 32,
+        "shapesPerFillLevel": [
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill1",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill2",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill3",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4",
+          "block/wood/trough/small/grainfill4"
+        ],
+        "foodFor": [
+          "chicken-*"
+        ],
+        "textureCode": "contents-spelt"
+      }
+    ],
+    "file": "game:blocktypes/wood/generic/trough-small.json"
+  },
+  {
+    "op": "add",
+    "path": "/textures/contents-hay",
+    "value": {
+      "base": "farmlife:block/wood/trough/small/hay"
+    },
+    "file": "game:blocktypes/wood/generic/trough-small.json"
+  }
+]

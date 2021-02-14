@@ -1,0 +1,74 @@
+[
+  {
+    "op": "add",
+    "path": "/attributes/maxSaturation",
+    "value": 8,
+    "file": "game:entities/land/hare-male.json"
+  },
+  {
+    "op": "add",
+    "path": "/client/behaviors/-",
+    "value": {
+      "code": "consume"
+    },
+    "file": "game:entities/land/hare-male.json"
+  },
+
+  {
+    "op": "add",
+    "path": "/server/behaviors/-",
+    "value": {
+      "code": "consume",
+      "poopCodes": [
+        "farmlife:poop-small"
+      ]
+    },
+    "file": "game:entities/land/hare-male.json"
+  },
+
+  {
+    "op": "replace",
+    "path": "/server/behaviors/9/aitasks/3",
+    "value": {
+      "code": "seekfoodandeat",
+      "movespeed": 0.01,
+      "priority": 1.4,
+      "eatTime": 2.3,
+      "eatLooseItems": true,
+      "eatItemCategories": [
+        "Vegetable"
+      ],
+      "eatItemCodes": [
+        "game:drygrass"
+      ],
+      "animationSpeed": 1.4,
+      "animation": "Walk",
+      "eatAnimation": "longdig",
+      "mincooldownHours": 0,
+      "maxcooldownHours": 0
+    },
+    "file": "game:entities/land/hare-male.json"
+  },
+{
+    "op": "add",
+    "path": "/server/behaviors/9/aitasks/-",
+    "value": {
+      "_comment": "Super territorial",
+      "code": "meleeattack",
+      "entityCodes": [
+        "hare-male-*",
+        "hare-baby"
+      ],
+      "priority": 1.5,
+      "damage": 1,
+      "mincooldown": 2500,
+      "maxcooldown": 5000,
+      "minDist": 0.9,
+      "attackDurationMs": 2000,
+      "damagePlayerAtMs": 600,
+      "animation": "Attack",
+      "animationSpeed": 1.5
+    },
+    "file": "game:entities/land/hare-male.json"
+  }
+]

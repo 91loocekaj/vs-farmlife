@@ -1,0 +1,79 @@
+[
+  {
+    "op": "add",
+    "path": "/attributes/blockDiet",
+    "value": [
+        "crop-flax*",
+        "crop-rye*",
+        "crop-soybean*",
+        "crop-spelt*"
+      ],
+    "file": "game:entities/land/chicken-hen.json"
+  },
+  {
+    "op": "add",
+    "path": "/attributes/maxSaturation",
+    "value": 12,
+    "file": "game:entities/land/chicken-hen.json"
+  },
+  {
+    "op": "add",
+    "path": "/client/behaviors/-",
+    "value": {
+      "code": "consume"
+    },
+    "file": "game:entities/land/chicken-baby.json"
+  },
+  {
+    "op": "add",
+    "path": "/server/behaviors/-",
+    "value": {
+      "code": "consume",
+      "poopCodes": [
+        "farmlife:poop-small"
+      ]
+    },
+    "file": "game:entities/land/chicken-baby.json"
+  },
+  {
+    "op": "replace",
+    "path": "/server/behaviors/7",
+    "value": {
+      "code": "foodgrow",
+      "hoursToGrow": 288,
+      "adultEntityCodes": [
+        "chicken-hen",
+        "chicken-hen",
+        "chicken-hen",
+        "chicken-hen",
+        "chicken-hen",
+        "chicken-hen",
+        "chicken-hen",
+        "chicken-hen",
+        "chicken-hen",
+        "chicken-rooster"
+      ]
+    },
+    "file": "game:entities/land/chicken-baby.json"
+  },
+  {
+    "op": "add",
+    "path": "/server/behaviors/10/aitasks/-",
+    "value": {
+      "code": "seekfoodandeat",
+      "priority": 1.5,
+      "eatLooseItems": true,
+      "eatItemCategories": [
+        "Grain"
+      ],
+      "eatSound": "player/eat",
+      "eatAnimation": "Eat",
+      "eatTime": 1.5,
+      "movespeed": 0.01,
+      "animation": "Walk",
+      "mincooldownHours": 0,
+      "maxcooldownHours": 0
+    },
+    "file": "game:entities/land/chicken-baby.json"
+  }
+]
