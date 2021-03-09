@@ -59,6 +59,10 @@ namespace Farmlife
     {
         public static FarmerConfig Loaded { get; set; } = new FarmerConfig();
         public bool RestrictPathfinding { get; set; } = false;
+
+        public float PathRange { get; set; } = 48f;
+
+        public float PathItemRange { get; set; } = 10f;
     }
 
     [HarmonyPatch(typeof(EntityBehaviorHunger), "OnEntityReceiveSaturation")]

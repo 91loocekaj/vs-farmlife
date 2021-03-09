@@ -149,7 +149,7 @@ namespace Farmlife
             extraTargetDist = 0;
             lastPOISearchTotalMs = entity.World.ElapsedMilliseconds;
 
-            entity.World.Api.ModLoader.GetModSystem<EntityPartitioning>().WalkEntities(entity.ServerPos.XYZ, 10, (e) =>
+            entity.World.Api.ModLoader.GetModSystem<EntityPartitioning>().WalkEntities(entity.ServerPos.XYZ, FarmerConfig.Loaded.PathItemRange, (e) =>
             {
                 long? previousItem;
                 failedItems.TryGetValue(e.EntityId, out previousItem);
@@ -193,7 +193,7 @@ namespace Farmlife
 
             if (targetPoi == null)
             {
-                targetPoi = porregistry.GetNearestPoi(entity.ServerPos.XYZ, 48, (poi) =>
+                targetPoi = porregistry.GetNearestPoi(entity.ServerPos.XYZ, FarmerConfig.Loaded.PathRange, (poi) =>
                 {
                     if (poi.Type != "food") return false;
                     IAnimalFoodSource foodPoi;

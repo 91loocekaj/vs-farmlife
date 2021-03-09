@@ -11,9 +11,7 @@
         "crop-rye*",
         "crop-soybean*",
         "crop-spelt*",
-        "crop-turnip*",
-        "Berry",
-        "Honey"
+        "crop-turnip*"
       ],
       "maxSaturation": 20
     },

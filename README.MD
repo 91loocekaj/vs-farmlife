@@ -123,3 +123,9 @@ Food Consumption Behavior(consume)
 
 Entity attributes
 - maxSaturation: What is the maximum this entity can eat, default 20
+
+-----Config Settings-----
+
+RestrictPathfinding: A bool which when true, restricts the food seeking AI to a direct line of sight search
+PathRange: A float which determines how far the food seeking AI can search for food blocks
+PathItemRange: A float which determines how far the food seeking AI can search for food source entities
