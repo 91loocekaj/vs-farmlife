@@ -10,22 +10,22 @@ namespace Farmlife
             base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
             handling = EnumHandHandling.PreventDefaultAction;
 
-            if (byEntity.GetBehavior<EntityBehaviorCarry>() == null) return;
+            if (byEntity.GetBehavior<EntityBehaviorCarry>() == null || byEntity.Api.Side != EnumAppSide.Server) return;
 
             EntityBehaviorCarry carry = byEntity.GetBehavior<EntityBehaviorCarry>();
-            if (carry.alreadyCarrying)
+            if (carry.mounty != null)
             {
                 carry.dropRider();
                 return;
             }
 
-            if (entitySel != null)
+            if (entitySel?.Entity?.Alive == true && carry.CanMount(entitySel.Entity.Code.Path))
             {
-                EntityAgent ent = entitySel.Entity as EntityAgent;
-                
-
-
-                if (ent.MountedOn == null && carry.CanMount(ent.Code.Path)) { ent.TryMount(carry); return; }
+                BlockSchematic es = new BlockSchematic();
+                es.EntitiesUnpacked.Add(entitySel.Entity);
+                es.Pack(byEntity.World, entitySel.Position.AsBlockPos);
+                carry.mounty = es.ToJson();
+                entitySel.Entity.Die(EnumDespawnReason.PickedUp);
             }
         }
 

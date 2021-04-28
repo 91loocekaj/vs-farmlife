@@ -1,17 +1,6 @@
 [
   {
     "op": "add",
-    "path": "/attributes/blockDiet",
-    "value": [
-        "crop-flax*",
-        "crop-rye*",
-        "crop-soybean*",
-        "crop-spelt*"
-      ],
-    "file": "game:entities/land/sheep-bighorn-lamb.json"
-  },
-  {
-    "op": "add",
     "path": "/attributes/maxSaturation",
     "value": 16,
     "file": "game:entities/land/sheep-bighorn-lamb.json"

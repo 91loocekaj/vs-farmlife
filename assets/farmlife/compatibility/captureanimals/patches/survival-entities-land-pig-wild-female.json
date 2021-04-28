@@ -1,23 +1,6 @@
 [
   {
     "op": "add",
-    "path": "/attributes/blockDiet",
-    "value": [
-        "crop-cabbage*",
-        "crop-carrot*",
-        "crop-flax*",
-        "crop-parsnip*",
-        "crop-rye*",
-        "crop-soybean*",
-        "crop-spelt*",
-        "crop-turnip*",
-        "Berry",
-        "Honey"
-      ],
-    "file": "game:entities/land/pig-wild-female.json"
-  },
-  {
-    "op": "add",
     "path": "/attributes/maxSaturation",
     "value": 20,
     "file": "game:entities/land/pig-wild-female.json"

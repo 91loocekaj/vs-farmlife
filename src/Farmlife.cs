@@ -24,8 +24,6 @@ namespace Farmlife
             api.RegisterBlockBehaviorClass("FoodMilkContainer", typeof(BlockBehaviorFoodMilkContainer));
             api.RegisterEntityBehaviorClass("carry", typeof(EntityBehaviorCarry));
 
-            api.RegisterMountable("carrier", EntityBehaviorCarry.GetMountable);
-
             api.RegisterItemClass("ItemHandlingGloves", typeof(ItemHandlingGloves));
 
             AiTaskRegistry.Register("seekfoodandeat", typeof(AiTaskTweakedSeekFoodAndEat));

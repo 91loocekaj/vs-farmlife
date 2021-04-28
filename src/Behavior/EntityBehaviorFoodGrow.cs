@@ -93,6 +93,7 @@ namespace Farmlife
                 entity.World.SpawnEntity(adult);
 
                 adult.WatchedAttributes.SetInt("generation", entity.WatchedAttributes.GetInt("generation", 0));
+                adult.WatchedAttributes["hunger"] = entity.WatchedAttributes.GetTreeAttribute("hunger").Clone();
             }
             else
             {

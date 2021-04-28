@@ -3,12 +3,6 @@
     "op": "add",
     "path": "/attributes",
     "value": {
-      "blockDiet": [
-        "crop-flax*",
-        "crop-rye*",
-        "crop-soybean*",
-        "crop-spelt*"
-      ],
       "maxSaturation": 12
     },
     "file": "game:entities/land/chicken-baby.json"

@@ -150,6 +150,7 @@ namespace Farmlife
 
             entity.World.BlockAccessor.WalkBlocks(searchStart, searchEnd, (Block nest, BlockPos nestPos) =>
             {
+                if (result) return;
                 if (nest.Code.Path == "henbox-empty")
                 {
                     Block upgrade = entity.World.BlockAccessor.GetBlock(new AssetLocation("game:henbox-1egg"));
