@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>farmlife</RootNamespace>
     <AssemblyName>farmlife</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -68,16 +69,32 @@
     <Content Include="modinfo.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\AI\AiTaskPetSeekEntity.cs" />
+    <Compile Include="src\AI\AiTaskStayCloseToMaster.cs" />
+    <Compile Include="src\AI\AiTaskPetMeleeAttack.cs" />
+    <Compile Include="src\AI\AiTaskPetSeekFoodAndEat.cs" />
+    <Compile Include="src\AI\AiTaskPetWander.cs" />
+    <Compile Include="src\AI\AiTaskTweakedSeekBlockAndLay.cs" />
     <Compile Include="src\AI\AiTaskTweakedSeekFoodAndEat.cs" />
     <Compile Include="src\Behavior\EntityBehaviorConsume.cs" />
     <Compile Include="src\Behavior\EntityBehaviorFoodGrow.cs" />
     <Compile Include="src\Behavior\EntityBehaviorFoodMultiply.cs" />
-    <Compile Include="src\Behavior\EntityBehaviorLayEgg.cs" />
-    <Compile Include="src\Block Behavior\BlockBehaviorFoodMilkContainer.cs" />
-    <Compile Include="src\Behavior\EntityBehaviorFoodMilk.cs" />
     <Compile Include="src\Behavior\EntityBehaviorCarry.cs" />
+    <Compile Include="src\Block Entity Behavior\BlockEntityBehaviorMaggots.cs" />
+    <Compile Include="src\Block Entity Behavior\BlockEntityBehaviorFoodSource.cs" />
+    <Compile Include="src\Behavior\EntityBehaviorPickup.cs" />
+    <Compile Include="src\Block Entity\BlockEntityGeneticHenBox.cs" />
+    <Compile Include="src\Behavior\EntityBehaviorMasterCommand.cs" />
+    <Compile Include="src\Behavior\EntityBehaviorPetCommand.cs" />
+    <Compile Include="src\Behavior\EntityBehaviorShearable.cs" />
+    <Compile Include="src\Block Entity\BlockEntityCompostBin.cs" />
     <Compile Include="src\Farmlife.cs" />
+    <Compile Include="src\Item\ItemCollar.cs" />
+    <Compile Include="src\Item\ItemPetWhistle.cs" />
+    <Compile Include="src\Item\ItemCagedCreature.cs" />
+    <Compile Include="src\Item\ItemShiftCreature.cs" />
     <Compile Include="src\Item\ItemHandlingGloves.cs" />
+    <Compile Include="src\Patches.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\" />

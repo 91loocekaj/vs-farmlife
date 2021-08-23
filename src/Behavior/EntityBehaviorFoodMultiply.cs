@@ -9,125 +9,68 @@ using Vintagestory.GameContent;
 
 namespace Farmlife
 {
-    public class EntityBehaviorFoodMultiply : EntityBehavior
+    public class EntityBehaviorFoodMultiply : EntityBehaviorMultiply
     {
-        ITreeAttribute multiplyTree;
-        JsonObject attributes;
-        long callbackId;
+        long callback;
+        JsonObject typeAttributes;
 
         internal float PregnancyDays
         {
-            get { return attributes["pregnancyDays"].AsFloat(3f); }
+            get { return typeAttributes["pregnancyDays"].AsFloat(3f); }
         }
 
         internal AssetLocation SpawnEntityCode
         {
-            get { return new AssetLocation(attributes["spawnEntityCode"].AsString("")); }
+            get { return new AssetLocation(typeAttributes["spawnEntityCode"].AsString("")); }
         }
 
         internal string RequiresNearbyEntityCode
         {
-            get { return attributes["requiresNearbyEntityCode"].AsString(""); }
+            get { return typeAttributes["requiresNearbyEntityCode"].AsString(""); }
         }
 
         internal float RequiresNearbyEntityRange
         {
-            get { return attributes["requiresNearbyEntityRange"].AsFloat(5); }
+            get { return typeAttributes["requiresNearbyEntityRange"].AsFloat(5); }
         }
 
-        /*internal int GrowthCapQuantity
+        public new float SpawnQuantityMin
         {
-            get { return attributes["growthCapQuantity"].AsInt(10); }
+            get { return typeAttributes["spawnQuantityMin"].AsFloat(1); }
         }
-        internal float GrowthCapRange
+        public new float SpawnQuantityMax
         {
-            get { return attributes["growthCapRange"].AsFloat(10); }
-        }
-        internal AssetLocation[] GrowthCapEntityCodes
-        {
-            get { return AssetLocation.toLocations(attributes["growthCapEntityCodes"].AsStringArray(new string[0])); }
-        }*/
-
-        //What saturation she needs to get pregnant
-        public float reproduceSaturation
-        {
-            get { return attributes["reproduceSaturation"].AsFloat(0.5f); }
+            get { return typeAttributes["spawnQuantityMax"].AsFloat(2); }
         }
 
-        //What health the mother will lose the baby
-        public float healthMiscarriage
+        internal ITreeAttribute Sperm
         {
-            get { return attributes["healthMiscarriage"].AsFloat(0.25f); }
-        }
-
-        //What health the mother will lose the baby
-        public float foodMiscarriage
-        {
-            get { return attributes["foodMiscarriage"].AsFloat(0.25f); }
-        }
-
-        public float forTwoRate
-        {
-            get { return attributes["forTwoRate"].AsFloat(0.5f); }
-        }
-
-        public double MultiplyCooldownDaysMin
-        {
-            get { return attributes["multiplyCooldownDaysMin"].AsFloat(6); }
-        }
-
-        public double MultiplyCooldownDaysMax
-        {
-            get { return attributes["multiplyCooldownDaysMax"].AsFloat(12); }
-        }
-
-        /*public float PortionsEatenForMultiply
-        {
-            get { return attributes["portionsEatenForMultiply"].AsFloat(3); }
-        }*/
-
-        public float SpawnQuantityMin
-        {
-            get { return attributes["spawnQuantityMin"].AsFloat(1); }
-        }
-        public float SpawnQuantityMax
-        {
-            get { return attributes["spawnQuantityMax"].AsFloat(2); }
+            get { return multiplyTree.GetTreeAttribute("sperm"); }
+            set { if (value != null) { multiplyTree["sperm"] = value; entity.WatchedAttributes.MarkPathDirty("multiply"); } else multiplyTree.RemoveAttribute("sperm"); }
         }
 
 
-        public double TotalDaysLastBirth
+
+        public override bool ShouldEat
         {
-            get { return multiplyTree.GetDouble("totalDaysLastBirth"); }
-            set { multiplyTree.SetDouble("totalDaysLastBirth", value); }
+            get
+            {
+                return true;
+            }
         }
 
-        public double TotalDaysPregnancyStart
+        public EntityBehaviorFoodMultiply(Entity entity) : base(entity)
         {
-            get { return multiplyTree.GetDouble("totalDaysPregnancyStart"); }
-            set { multiplyTree.SetDouble("totalDaysPregnancyStart", value); }
-        }
 
-        public double TotalDaysCooldownUntil
-        {
-            get { return multiplyTree.GetDouble("totalDaysCooldownUntil"); }
-            set { multiplyTree.SetDouble("totalDaysCooldownUntil", value); }
         }
-
-        public bool IsPregnant
-        {
-            get { return multiplyTree.GetBool("isPregnant"); }
-            set { multiplyTree.SetBool("isPregnant", value); }
-        }
-
 
         public override void Initialize(EntityProperties properties, JsonObject attributes)
         {
-            base.Initialize(properties, attributes);
+            this.typeAttributes = attributes;
 
-            this.attributes = attributes;
-
-
+            MultiplyCooldownDaysMin = attributes["multiplyCooldownDaysMin"].AsFloat(6);
+            MultiplyCooldownDaysMax = attributes["multiplyCooldownDaysMax"].AsFloat(12);
+            PortionsEatenForMultiply = attributes["portionsEatenForMultiply"].AsFloat(3);
 
 
             multiplyTree = entity.WatchedAttributes.GetTreeAttribute("multiply");
@@ -137,22 +80,22 @@ namespace Farmlife
                 if (multiplyTree == null)
                 {
                     entity.WatchedAttributes.SetAttribute("multiply", multiplyTree = new TreeAttribute());
-                    TotalDaysLastBirth = -9999;
 
                     double daysNow = entity.World.Calendar.TotalHours / 24f;
                     TotalDaysCooldownUntil = daysNow + (MultiplyCooldownDaysMin + entity.World.Rand.NextDouble() * (MultiplyCooldownDaysMax - MultiplyCooldownDaysMin));
+                    TotalDaysLastBirth = -9999;
                 }
 
-                callbackId = entity.World.RegisterCallback(CheckMultiply, 3000);
+                callback = entity.World.RegisterCallback(CheckMultiply, 3000);
             }
         }
 
-
-        private void CheckMultiply(float dt)
+        private void CheckMultiply(float deltaTime)
         {
-            if (!entity.Alive) return;
+            EntityBehaviorConsume bc = entity.GetBehavior<EntityBehaviorConsume>();
+            if (!entity.Alive || bc == null || multiplyTree.GetInt("birthingEvents") >= (entity.Properties.Attributes?["maxBirths"].AsInt(1) ?? 1)) return;
 
-            callbackId = entity.World.RegisterCallback(CheckMultiply, 3000);
+            callback = entity.World.RegisterCallback(CheckMultiply, 3000);
 
             if (entity.World.Calendar == null) return;
 
@@ -169,26 +112,29 @@ namespace Farmlife
                 return;
             }
 
-            //System.Diagnostics.Debug.WriteLine(GetSaturation() < (foodMiscarriage * (entity.Properties?.Attributes?["maxSaturation"].AsFloat(20f) ?? 20f)));
-            if (GetSaturation() < (foodMiscarriage * (entity.Properties?.Attributes?["maxSaturation"].AsFloat(20f) ?? 20f)))
+            if (bc.SatPerc < 0.5f * entity.Stats.GetBlended("vulenrability"))
             {
-                LoseBaby();
+                //Miscarriage due to lack of food
+                TotalDaysLastBirth = daysNow;
+                TotalDaysCooldownUntil = daysNow + (MultiplyCooldownDaysMin + entity.World.Rand.NextDouble() * (MultiplyCooldownDaysMax - MultiplyCooldownDaysMin));
+                IsPregnant = false;
+                entity.WatchedAttributes.MarkPathDirty("multiply");
+                entity.Stats.Remove("hungerrate", "pregnant");
                 return;
             }
 
-            ITreeAttribute health = entity.WatchedAttributes.GetTreeAttribute("health");
-            if (health != null && (health.GetFloat("currenthealth")/health.GetFloat("maxhealth")) < healthMiscarriage)
+            EntityBehaviorHealth bh = entity.GetBehavior<EntityBehaviorHealth>();
+
+            if (bh != null && (bh.Health / bh.MaxHealth) < 0.25f * entity.Stats.GetBlended("vulenrability"))
             {
-                LoseBaby();
+                //Miscarriage due to poor health
+                TotalDaysLastBirth = daysNow;
+                TotalDaysCooldownUntil = daysNow + (MultiplyCooldownDaysMin + entity.World.Rand.NextDouble() * (MultiplyCooldownDaysMax - MultiplyCooldownDaysMin));
+                IsPregnant = false;
+                entity.WatchedAttributes.MarkPathDirty("multiply");
+                entity.Stats.Remove("hungerrate", "pregnant");
                 return;
             }
-
-            /*if (GrowthCapQuantity > 0 && IsGrowthCapped())
-            {
-                TimeLastMultiply = entity.World.Calendar.TotalHours;
-                return;
-            }*/
-
 
             if (daysNow - TotalDaysPregnancyStart > PregnancyDays)
             {
@@ -198,16 +144,44 @@ namespace Farmlife
                 TotalDaysLastBirth = daysNow;
                 TotalDaysCooldownUntil = daysNow + (MultiplyCooldownDaysMin + rand.NextDouble() * (MultiplyCooldownDaysMax - MultiplyCooldownDaysMin));
                 IsPregnant = false;
-                entity.Stats.Set("hungerrate", "pregnacy", 0, true);
                 entity.WatchedAttributes.MarkPathDirty("multiply");
+                entity.Stats.Remove("hungerrate", "pregnant");
+                multiplyTree.SetInt("birthingEvents", multiplyTree.GetInt("birthingEvents") + 1);
                 EntityProperties childType = entity.World.GetEntityType(SpawnEntityCode);
 
                 int generation = entity.WatchedAttributes.GetInt("generation", 0);
+                ITreeAttribute Egg = entity.WatchedAttributes.GetTreeAttribute("genome");
+
+                int[] dadGenes = null;
+                int[] momGenes = null;
+
+                if (Sperm != null && Egg != null)
+                {
+                    dadGenes = (Sperm["sequence"] as IntArrayAttribute).value;
+                    momGenes = (Egg["sequence"] as IntArrayAttribute).value;
+                }
+
+                string command = entity.WatchedAttributes.GetTreeAttribute("command")?.GetString("masterUID");
 
                 while (q > 1 || rand.NextDouble() < q)
                 {
                     q--;
                     Entity childEntity = entity.World.ClassRegistry.CreateEntity(childType);
+
+                    if (momGenes != null && dadGenes != null)
+                    {
+                        ITreeAttribute childGenome = childEntity.WatchedAttributes.GetOrAddTreeAttribute("genome");
+                        int[] childSequence = new int[Math.Min(momGenes.Length, dadGenes.Length)];
+
+                        for (int i = 0; i < childSequence.Length; i++)
+                        {
+                            if (momGenes[i] != dadGenes[i]) childSequence[i] = entity.World.Rand.Next(Math.Min(momGenes[i], dadGenes[i]), Math.Max(momGenes[i], dadGenes[i]) + 1); else childSequence[i] = momGenes[i];
+                        }
+
+                        childGenome["sequence"] = new IntArrayAttribute(childSequence);
+                    }
+
+                    if (command != null) childEntity.WatchedAttributes.GetOrAddTreeAttribute("command").SetString("masterUID", command);
 
                     childEntity.ServerPos.SetFrom(entity.ServerPos);
                     childEntity.ServerPos.Motion.X += (rand.NextDouble() - 0.5f) / 20f;
@@ -215,8 +189,8 @@ namespace Farmlife
 
                     childEntity.Pos.SetFrom(childEntity.ServerPos);
                     entity.World.SpawnEntity(childEntity);
-                    entity.Attributes.SetString("origin", "reproduction");
-                    childEntity.WatchedAttributes.SetInt("generation", generation + 1);
+                    childEntity.Attributes.SetString("origin", "reproduction");
+                    if (generation > 0 || entity.WatchedAttributes.GetBool("playerFed")) childEntity.WatchedAttributes.SetInt("generation", generation + 1);
                 }
 
             }
@@ -226,48 +200,32 @@ namespace Farmlife
 
         private bool TryGetPregnant()
         {
-            if (GetSaturation() < (reproduceSaturation * (entity.Properties?.Attributes?["maxSaturation"].AsFloat(20f) ?? 20f))) return false;
+            if (entity.World.Rand.NextDouble() > 0.03) return false;
             if (TotalDaysCooldownUntil > entity.World.Calendar.TotalDays) return false;
 
-            ITreeAttribute tree = entity.WatchedAttributes.GetTreeAttribute("hunger");
-            if (tree == null) return false;
+            EntityBehaviorConsume bc = entity.GetBehavior<EntityBehaviorConsume>();
+            if (bc == null) return false;
 
-            float saturation = tree.GetFloat("saturation", 0);
-
-            Entity maleentity = null;
-            if (RequiresNearbyEntityCode != null && (maleentity = GetRequiredEntityNearby()) == null) return false;
-
-            entity.Stats.Set("hungerrate", "pregnacy", forTwoRate, true);
-
-            if (maleentity != null)
+            if (!bc.IsHungry)
             {
-                maleentity.WatchedAttributes.SetFloat("saturation", Math.Max(0, maleentity.WatchedAttributes.GetFloat("saturation") - 1));
+                Entity maleentity = null;
+                if (RequiresNearbyEntityCode != null && (maleentity = GetRequiredEntityNearby()) == null) return false;
+
+                entity.Stats.Set("hungerrate", "pregnant", 0.5f, true);
+
+                if (maleentity != null)
+                {
+                    Sperm = entity.WatchedAttributes.GetTreeAttribute("genome");
+                }
+
+                IsPregnant = true;
+                TotalDaysPregnancyStart = entity.World.Calendar.TotalDays;
+                entity.WatchedAttributes.MarkPathDirty("multiply");
+
+                return true;
             }
 
-            IsPregnant = true;
-            TotalDaysPregnancyStart = entity.World.Calendar.TotalDays;
-            entity.WatchedAttributes.MarkPathDirty("multiply");
-
-            return true;
-        }
-
-        public void LoseBaby()
-        {
-            //We lost the baby ;_:
-            double daysNow = entity.World.Calendar.TotalDays;
-            TotalDaysLastBirth = daysNow;
-            TotalDaysCooldownUntil = daysNow + (MultiplyCooldownDaysMin + entity.World.Rand.NextDouble() * (MultiplyCooldownDaysMax - MultiplyCooldownDaysMin));
-            IsPregnant = false;
-            entity.Stats.Set("hungerrate", "pregnacy", 0, true);
-            entity.WatchedAttributes.MarkPathDirty("multiply");
-        }
-
-        float GetSaturation()
-        {
-            ITreeAttribute tree = entity.WatchedAttributes.GetTreeAttribute("hunger");
-            if (tree == null) return 0;
-
-            return tree.GetFloat("saturation", 0);
+            return false;
         }
 
         private Entity GetRequiredEntityNearby()
@@ -278,7 +236,9 @@ namespace Farmlife
             {
                 if (e.WildCardMatch(new AssetLocation(RequiresNearbyEntityCode)))
                 {
-                    if (!e.WatchedAttributes.GetBool("doesEat") || (e.WatchedAttributes["hunger"] as ITreeAttribute)?.GetFloat("saturation") >= (e.Properties.Attributes?["maxSaturation"].AsFloat(20f) ?? 20f) * reproduceSaturation)
+                    EntityBehaviorConsume bc = e.GetBehavior<EntityBehaviorConsume>();
+
+                    if (!e.WatchedAttributes.GetBool("doesEat") || bc?.IsHungry == false)
                     {
                         return true;
                     }
@@ -289,67 +249,57 @@ namespace Farmlife
             });
         }
 
-        public override void OnEntityDespawn(EntityDespawnReason despawn)
-        {
-            entity.World.UnregisterCallback(callbackId);
-        }
-
-
-        public override void GetInfoText(StringBuilder infotext)
-        {
-            multiplyTree = entity.WatchedAttributes.GetTreeAttribute("multiply");
-
-            if (IsPregnant)
-            {
-                infotext.AppendLine(Lang.Get("Is pregnant"));
-                ITreeAttribute health = entity.WatchedAttributes.GetTreeAttribute("health");
-                if (GetSaturation() < ((foodMiscarriage + 0.1f) * (entity.Properties?.Attributes?["maxSaturation"].AsFloat(20f) ?? 20f)) ||
-                    (health != null && (health.GetFloat("currenthealth") / health.GetFloat("maxhealth")) < (healthMiscarriage + 0.1f)))
-                    infotext.AppendLine(Lang.Get("farmlife:miscarriage"));
-            }
-            else
-            {
-                if (entity.Alive)
-                {
-                    /*ITreeAttribute tree = entity.WatchedAttributes.GetTreeAttribute("hunger");
-                    if (tree != null)
-                    {
-                        float saturation = tree.GetFloat("saturation", 0);
-                        infotext.AppendLine(Lang.Get("Portions eaten: {0}", saturation));
-                    }*/
-
-                    double daysLeft = TotalDaysCooldownUntil - entity.World.Calendar.TotalDays;
-
-                    if (daysLeft > 0)
-                    {
-                        if (daysLeft > 3)
-                        {
-                            infotext.AppendLine(Lang.Get("Several days left before ready to mate"));
-                        }
-                        else
-                        {
-                            infotext.AppendLine(Lang.Get("Less than 3 days before ready to mate"));
-                        }
-
-                    }
-                    else
-                    {
-                        if (GetSaturation() < (reproduceSaturation * (entity.Properties?.Attributes?["maxSaturation"].AsFloat(20f) ?? 20f))) infotext.AppendLine(Lang.Get("farmlife:mate"));
-                        else infotext.AppendLine(Lang.Get("Ready to mate"));
-                    }
-                }
-            }
-
-            base.GetInfoText(infotext);
-        }
-        public EntityBehaviorFoodMultiply(Entity entity) : base(entity)
-        {
-        }
-
         public override string PropertyName()
         {
             return "foodmultiply";
         }
-    }
 
+        public override void GetInfoText(StringBuilder infotext)
+        {
+            if (!entity.Alive) return;
+            multiplyTree = entity.WatchedAttributes.GetTreeAttribute("multiply");
+            if (multiplyTree == null) return;
+
+            if (multiplyTree.GetInt("birthingEvents") >= (entity.Properties.Attributes?["maxBirths"].AsInt(1) ?? 1))
+            {
+                infotext.AppendLine(Lang.Get("farmlife:infertile"));
+                return;
+            }
+
+            ITreeAttribute food = entity.WatchedAttributes.GetTreeAttribute("hunger");
+            ITreeAttribute health = entity.WatchedAttributes.GetTreeAttribute("health");
+
+            if (IsPregnant)
+            {
+                infotext.AppendLine(Lang.Get("Is pregnant"));
+
+                if ((food != null && food.GetFloat("saturation") <= (entity.Properties?.Attributes?["maxSaturation"].AsFloat(20f) ?? 20f) * ((0.5f * entity.Stats.GetBlended("vulenrability")) + 0.1f))
+                    || (health != null && health.GetFloat("currenthealth") <= health.GetFloat("maxhealth") * ((0.25f * entity.Stats.GetBlended("vulenrability")) + 0.1f)))
+                {
+                    infotext.AppendLine(Lang.Get("farmlife:miscarriage"));
+                }
+            }
+            else
+            {
+                double daysLeft = TotalDaysCooldownUntil - entity.World.Calendar.TotalDays;
+
+                if (daysLeft > 0)
+                {
+                    if (daysLeft > 3)
+                    {
+                        infotext.AppendLine(Lang.Get("Several days left before ready to mate"));
+                    }
+                    else
+                    {
+                        infotext.AppendLine(Lang.Get("Less than 3 days before ready to mate"));
+                    }
+
+                }
+                else
+                {
+                    infotext.AppendLine(Lang.Get("Ready to mate"));
+                }
+            }
+        }
+    }
 }

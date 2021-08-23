@@ -1,0 +1,32 @@
+{
+	code: "collar",
+  class: "ItemCollar",
+	creativeinventory: { "general": ["*"], "items": ["*"] },
+	shape: { base: "farmlife:item/collar" },
+	textures: {
+		temporal : {base: "game:item/resource/temporalgear"},
+		reedrope : {base: "game:block/cloth/ropedcloth"}
+	},
+	guiTransform: {
+	translation: { x: 25, y: 14.25, z: 0 },
+	rotation: { x: -21, y: -18, z: 157 },
+	origin: { x: 0, y: 0, z: 0 },
+	scale: 3.39
+},
+fpHandTransform: {
+	translation: { x: 0.05, y: -0.57, z: 0 },
+	rotation: { x: 3, y: -77, z: -15 },
+	scale: 2.83
+},
+groundTransform: {
+	translation: { x: 0, y: 0.37, z: 0 },
+	rotation: { x: 0, y: 0, z: 90 },
+	origin: { x: 0.5, y: 0.5, z: 0.5299 },
+	scale: 3.6
+},
+tpHandTransform: {
+	translation: { x: -0.74, y: -0.52, z: -0.33 },
+	rotation: { x: 0, y: -146, z: 90 },
+	scale: 0.67
+}
+}

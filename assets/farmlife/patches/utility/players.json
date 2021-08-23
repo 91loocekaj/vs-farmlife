@@ -1,0 +1,28 @@
+[
+  {
+    "op": "add",
+    "path": "/server/behaviors/-",
+    "value": {
+      "code": "carry",
+      "entityCodes": [
+        "hare-*",
+        "chicken-*",
+        "pig-wild-piglet",
+        "sheep-bighorn-lamb",
+        "deer-fawn",
+        "aurochs-lamb",
+        "wolf-pup",
+        "wolf-pup-dog"
+      ]
+    },
+    "file": "game:entities/humanoid/player.json"
+  },
+  {
+    "op": "add",
+    "path": "/server/behaviors/-",
+    "value": {
+      "code": "mastercommand"
+    },
+    "file": "game:entities/humanoid/player.json"
+  },
+]

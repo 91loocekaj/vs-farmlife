@@ -1,0 +1,119 @@
+[
+  {
+    "op": "add",
+    "path": "/attributes",
+    "value": {
+      "maxSaturation": 20,
+      "maxBirths": 8,
+      "nutrition": 10
+    },
+    "file": "game:entities/land/pig-wild-female.json"
+  },
+
+  {
+    "op": "add",
+    "path": "/client/behaviors/-",
+    "value": {
+      "code": "consume"
+    },
+    "file": "game:entities/land/pig-wild-female.json"
+  },
+
+  {
+    "op": "add",
+    "path": "/server/behaviors/-",
+    "value": {
+      "code": "consume",
+      "poopCodes": [
+        "farmlife:poop-omnivore-small",
+        "farmlife:poop-omnivore-medium"
+      ]
+    },
+    "file": "game:entities/land/pig-wild-female.json"
+  },
+
+  {
+    "op": "replace",
+    "path": "/client/behaviors/4/code",
+    "value": "foodmultiply",
+    "file": "game:entities/land/pig-wild-female.json"
+  },
+  {
+    "op": "replace",
+    "path": "/server/behaviors/8",
+    "value": {
+      "code": "foodmultiply",
+      "spawnEntityCode": "pig-wild-piglet",
+      "spawnQuantityMin": 7,
+      "spawnQuantityMax": 14,
+      "growthCapEntityCodes": [
+        "pig-wild-piglet",
+        "pig-wild-female",
+        "pig-wild-male"
+      ],
+      "requiresNearbyEntityCode": "pig-wild-male",
+      "requiresNearbyEntityRange": 10,
+      "pregnancyDays": 18,
+      "multiplyCooldownDaysMin": 1,
+      "multiplyCooldownDaysMax": 3,
+      "portionsEatenForMultiply": 10
+    },
+    "file": "game:entities/land/pig-wild-female.json"
+  },
+
+  {
+    "op": "replace",
+    "path": "/server/behaviors/10/aitasks/3",
+    "value": {
+      "code": "seekfoodandeat",
+      "movespeed": 0.01,
+      "eatLooseItems" : true,
+      "eatItemCategories" : [
+        "Grain",
+        "Fruit",
+        "Vegetable",
+        "Dairy",
+        "Protein"
+      ],
+      "eatItemCodes": [
+        "game:drygrass",
+        "game:rot",
+        "game:redmeat-raw",
+        "game:bushmeat-raw",
+        "game:egg-chicken-raw",
+        "game:poultry-raw",
+        "farmlife:animalfeed"
+      ],
+      "priority": 1.5,
+      "animationSpeed": 2,
+      "animation": "Walk",
+      "eatAnimation": "Eat",
+      "eatSound": "player/eat",
+      "eatTime": 1.5,
+      "mincooldownHours": 0,
+      "maxcooldownHours": 0,
+    },
+    "file": "game:entities/land/pig-wild-female.json"
+  },
+  {
+      "op": "add",
+      "path": "/server/behaviors/10/aitasks/-",
+      "value": {
+        "code": "meleeattack",
+        "entityCodes": [
+          "grub",
+          "earthworm"
+        ],
+        "priority": 1.5,
+        "damage": 1.1,
+        "mincooldown": 250,
+        "maxcooldown": 500,
+        "minDist": 0.9,
+        "attackDurationMs": 1000,
+        "damagePlayerAtMs": 600,
+        "animation": "Eat",
+        "animationSpeed": 1.5
+      },
+      "file": "game:entities/land/pig-wild-female.json"
+    },
+]

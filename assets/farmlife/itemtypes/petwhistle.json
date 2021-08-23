@@ -1,0 +1,26 @@
+{
+	code: "petwhistle",
+  class: "ItemPetWhistle",
+	creativeinventory: { "general": ["*"], "items": ["*"] },
+	shape: { base: "farmlife:item/whistle" },
+	texture: { base: "game:block/wood/planks/generic" },
+	guiTransform: {
+	translation: { x: 3, y: 3, z: 0 },
+	rotation: { x: 61, y: 127, z: 50 },
+	origin: { x: 0.5, y: 0, z: 0.5 },
+	scale: 2.28
+},
+fpHandTransform: {
+	rotation: { x: -41, y: 156, z: 0 }
+},
+groundTransform: {
+	translation: { x: 0, y: 0.17, z: 0 },
+	rotation: { x: 0, y: 0, z: 0 },
+	origin: { x: 0.5, y: 0.5, z: 0.5299 },
+	scale: 1.57
+},
+tpHandTransform: {
+	translation: { x: -1.79, y: -1.1, z: -1.4 },
+	rotation: { x: 0, y: 85, z: 0 }
+},
+}

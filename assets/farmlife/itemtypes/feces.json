@@ -1,0 +1,55 @@
+{
+	code: "feces",
+  variantgroups: [
+		{ code: "type", states: ["omnivore", "avian", "grazer"] }
+	],
+	shape: { base: "farmlife:block/poop/poopicon" },
+  texture: {base: "farmlife:block/poop/{type}"},
+	creativeinventory: { "general": ["*"], "items": ["*"] },
+	maxstacksize: 64,
+  attributes: {
+    fertilizerPropsByType: {
+      "*-omnivore": { n: 15, p: 15, k: 15 },
+      "*-avian": { n: 20, p: 4, k: 4 },
+      "*-grazer": { n: 4, p: 4, k: 20 },
+    },
+		dissolveInWater: true,
+		handbook: {
+			groupBy: ["*"]
+		}
+	},
+	materialDensity: 258,
+	combustiblePropsByType: {
+    "*-omnivore": {
+  		burnTemperature: 400,
+  		burnDuration: 4,
+  	},
+    "*-avian": {
+  		burnTemperature: 400,
+  		burnDuration: 4,
+  	},
+    "*-grazer": {
+  		burnTemperature: 700,
+  		burnDuration: 60
+  	},
+  },
+	guiTransform: {
+		translation: { x: -5, y: 13, z: 0 },
+		rotation: { x: 155, y: 126, z: 0 },
+		origin: { x: 0, y: -0.39, z: 0 },
+		scale: 2.01
+	},
+fpHandTransform: {
+  translation: { x: 0.2, y: -0.15, z: 0 },
+  rotation: { x: 0, y: 93, z: -30 }
+},
+groundTransform: {
+  translation: { x: 0, y: 0.21, z: 0 },
+  rotation: { x: 0, y: 0, z: 0 },
+  origin: { x: 0.5, y: 0.5, z: 0.5299 },
+  scale: 2
+},
+tpHandTransform: {
+  translation: { x: -1.53, y: -1.03, z: -1.4 }
+},
+}

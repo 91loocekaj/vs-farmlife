@@ -1,0 +1,100 @@
+[
+  {
+    "op": "add",
+    "path": "/attributes",
+    "value": {
+      "maxSaturation": 12,
+      "maxBirths": 128,
+      "nutrition": 6
+    },
+    "file": "game:entities/land/chicken-hen.json"
+  },
+  {
+    "op": "add",
+    "path": "/client/behaviors/-",
+    "value": {
+      "code": "consume"
+    },
+    "file": "game:entities/land/chicken-hen.json"
+  },
+
+  {
+    "op": "add",
+    "path": "/server/behaviors/-",
+    "value": {
+      "code": "consume",
+      "poopCodes": [
+        "farmlife:poop-avian-small"
+      ]
+    },
+    "file": "game:entities/land/chicken-hen.json"
+  },
+
+  {
+    "op": "replace",
+    "path": "/server/behaviors/10/aitasks/3",
+    "value": {
+      "code": "seekfoodandeat",
+      "eatLooseItems" : true,
+      "eatItemCategories" : ["Grain"],
+      "eatItemCodes": [
+        "farmlife:animalfeed"
+      ],
+      "grazeDigest" : 18,
+      "priority": 1.38,
+      "eatSound": "player/eat",
+      "eatTime": 1.5,
+      "movespeed": 0.01,
+      "eatAnimation": "Eat",
+      "animation": "Walk",
+      "mincooldownHours": 0,
+      "maxcooldownHours": 0,
+    },
+    "file": "game:entities/land/chicken-hen.json"
+  },
+
+  {
+    "op": "replace",
+    "path": "/server/behaviors/10/aitasks/2",
+    "value": {
+      "code": "seekblockandlay",
+      "priority": 1.39,
+      "layTime": 5,
+      "chickCode": "chicken-baby",
+      "sitDays": 0.9,
+      "incubationDays": 5,
+      "movespeed": 0.01,
+      "animation": "Walk",
+      "mincooldownHours": 1,
+      "maxcooldownHours": 2,
+      "sitAnimation": "Sit",
+      "requiresNearbyEntityCode": "chicken-rooster",
+      "requiresNearbyEntityRange": 12,
+      "growthCapEntityCodes": ["chicken-baby", "chicken-hen", "chicken-rooster"],
+      "failBlockCode": "egg-chicken-1",
+      "sound": "creature/chicken/hen-lay"
+    },
+    "file": "game:entities/land/chicken-hen.json"
+  },
+  {
+      "op": "add",
+      "path": "/server/behaviors/10/aitasks/-",
+      "value": {
+        "code": "meleeattack",
+        "entityCodes": [
+          "grub",
+          "earthworm"
+        ],
+        "priority": 1.5,
+        "damage": 1.1,
+        "mincooldown": 250,
+        "maxcooldown": 500,
+        "minDist": 0.9,
+        "attackDurationMs": 1000,
+        "damagePlayerAtMs": 600,
+        "animation": "Eat",
+        "animationSpeed": 1.5
+      },
+      "file": "game:entities/land/chicken-hen.json"
+    },
+]

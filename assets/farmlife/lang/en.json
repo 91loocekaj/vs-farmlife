@@ -1,15 +1,48 @@
 {
-"block-poop-small" : "Poop(Small)",
-"block-poop-medium" : "Poop(Medium)",
-"block-poop-large" : "Poop(Large)",
+"block-poop-avian-*" : "Poop(Bird)",
+"block-poop-grazer-*" : "Poop(Grazer)",
+"block-poop-omnivore-*" : "Poop",
 
 "item-handlinggloves" : "Animal Handling Gloves",
+"item-feces-avian" : "Bird Poop",
+"item-feces-grazer" : "Grazer Poop",
+"item-feces-omnivore" : "Poop",
+"item-woolfibers" : "Greasy Wool",
+"item-wooltwine" : "Wool Twine",
+"item-collar" : "Pet Collar",
+"item-petwhistle" : "Pet Whistle",
+"item-animalfeed" : "Animal Feed",
 
 "itemdesc-handlinggloves" : "Used for grabbing small animals. NOT A WEARABLE!",
+"itemdesc-collar" : "Never lose your best friend again, with the temporal collar!",
+"itemdesc-animalfeed" : "All animals cannot resist this specially made food mix",
+"itemdesc-woolfibers" : "A bundle of greasy wool fibers. Needs to be cleaned.",
 
 "itemhelp-grabanimal" : "Grab Small Animal",
+"itemhelp-changeorder" : "Change order",
+"itemhelp-changeaggro" : "Change aggresion",
+"itemhelp-command" : "Command pets",
+"itemhelp-claimpet" : "Claim pet",
 
 "block-compostbin": "Compost Bin",
+"game:item-cagedanimal-hare-baby" : "Caged Animal (Hare)",
+"game:item-cagedanimal-chicken-baby" : "Caged Animal (Chicken)",
+"game:item-cagedanimal-sheep-*" : "Caged Animal (Sheep)",
+"game:item-cagedanimal-pig-*" : "Caged Animal (Pig)",
+"game:item-cagedanimal-wolf-*" : "Caged Animal (Wolf)",
+"medievalexpansion:item-cagedanimal-aurochs-*" : "Caged Animal (Aurochs)",
+"lichen:item-cagedanimal-deer-*" : "Caged Animal (Deer)",
+
+"game:tradingwindow-humanoid-trader-animal": "{0} the animal trader",
+"item-creature-humanoid-trader-animal" : "Trader (Animal)",
+"item-dead-creature-humanoid-trader-animal" : "Dead Trader",
+"item-creature-wolf-male-dog" : "Dog (Male)",
+"item-dead-creature-wolf-male-dog" : "Dead Male Dog",
+"item-creature-wolf-female-dog" : "Dog (Female)",
+"item-dead-creature-wolf-female-dog" : "Dead Female Dog",
+"item-creature-wolf-pup-dog" : "Dog Puppy",
+"item-dead-creature-wolf-pup-dog" : "Dead Dog Puppy",
+
 
 "compostbin": "Compost Pile",
 
@@ -17,80 +50,238 @@
 "mate": "Too hungry to mate",
 "milkerror": "Need more food to produce milk",
 "milkmessage": "Lactating for {0} days, currently not fed enough to be milkable.",
-"malnourished": "Malnourished, need more food to grow.",
-"saturation": "Saturation: {0}/{1}",
+"malnourished": "Hungry!",
+"saturation": "Saturation: {0}/{1} ({2}%)",
+"feral": "Wild",
+"infertile": "Infertile",
+"shearable" : "Can be sheared",
+
+"genelevel-1" : "Poor",
+"genelevel-2" : "Below Average",
+"genelevel-3" : "Average",
+"genelevel-4" : "Above Average",
+"genelevel-5" : "Exceptional",
+
+"genetitle" : "-----Traits of {0}-----",
+"genehealth" : "Health: {0}",
+"genespeed" : "Speed: {0}",
+"genedigest" : "Digestion: {0}",
+"genehunger" : "Hunger: {0}",
+"generesist" : "Resistance: {0}",
+
+"birthingInfo": "Births Count: {0} / {1}",
+"growthInfo": "Age: {0}",
+
+"commandsdisplay": "Current Order: {0}, Current Aggro: {1}",
+"owner" : "Owner: {0}",
+"commandsingular": "Commanded {0} to {1} ({2})",
+"commandplural": "Commanded {0} pets to {1} ({2})",
+
+"order-0" : "Stay",
+"order-1" : "Wander",
+"order-2" : "Follow",
+
+"aggro-0" : "Passive",
+"aggro-1" : "Defend",
+"aggro-2" : "Protect",
+"aggro-3" : "Hunt",
 
 "farmersguide-title": "Farmer's Guide",
 "farmersguide-text" :"<strong>-----Farmer's Guide-----</strong>
-This guide is a much more in depth explanation of animal husbandry. Livestock animals need food in order to reproduce, produce eggs, lactate, grow and poop. Animals can be fed by dropping their preferred food on the ground or putting it in a trough. In order to reproduce both the male and female need at least 50% saturation in order to mate. Males lose one saturation from mating and females experience a 50% increase in hunger rate for the duration of their pregnancy. Children after meeting the required time to grow, need to be at full saturation in order to grow into an adult. Animals consume one saturation and poop every 24 hours.
-  <strong>-----Hare-----</strong>
-  Rabbits can be seen as a highly efficient protein source  and source of small hides due to their fast reproduction, growth, and small diet, but they are highly competitive and vulnerable to predators.
+This guide is a much more in depth explanation of animal husbandry. Livestock animals need food in order to reproduce, produce eggs, lactate, grow and poop. Animals can be fed by dropping their preferred food on the ground or putting it in a <a href=\"handbooksearch://trough\">trough</a>.
 
-  Maximum saturation = 8
-  Item Food = All vegetables, as well as hay(dry grass).
-  Block food = All crops planted on farmland
-  Trough feed = Hay in small trough
-  Poop amount = Small
+<strong>-----Part 1: Basic Knowledge-----</strong>
 
-  Gestation time(in game days) = 5
-  Pregnancy Recovery Time(in game days) = 1-3
-  Litter size = 6-12
-  Baby to Adult Time(in game days) = 7
+<strong>-----Entity HUD Keyword Meanings-----</strong>
+<strong>Saturation: x/y (z%)</strong>
+This shows you the current saturation of the entity if it is a farmable one. X is the current saturation, y is the maximum saturation, and z is the percentage of the current saturation.
+<strong>Hungry!</strong>
+If an entity has this word in it means that it is hungry. Hungry animals will not mate, grow, mate, and cannot be milked. On average animals are hungry when their saturation is below 75% but this varies with the Resistance trait.
+<strong>Wild</strong>
+When a wild female reproduces, its offspring will not increase in generation. The player must feed her either by trough or dropping an item she can eat. Once she is no longer wild, all her offspring and their offspring will gain generations.
+<strong>Infertile</strong>
+Females have a limited number of times they can give birth, and when they reach the max they can no longer get pregnant. Infertile chickens will also no longer lay eggs or incubate eggs.
+<strong>Can be sheared</strong>
+When an entity can be sheared it will display this. Right clicking with shears will cause it to drop an item. There is a chance you will damage it in the process.
 
-  Additional notes = Males are extremely competitive and will attack other males and babies for 1 damage
+<strong>-----Traits-----</strong>
+ All farmable animals have genetic traits that determine different stats for it, shift+ctrl+right click an entity with an empty hand, to see the stats in your info log. Stats are inherited from parents. They range from Poor, Below Average, Average, Above Average, Exceptional
+<strong>Health</strong>: Increases or decreases maximum health. Levels: -1, -0.5, 0, +0.5, +1
+<strong>Speed</strong>: Increases or decreases movement speed. Levels: -40%, -20%, 0, +20%, + 40%
+<strong>Digestion</strong>: Determines saturation per portion of food. Levels: 0.5, 0.75, 1, 1.25, 1.5
+<strong>Hunger</strong>: Determines how much saturation is lost per day. Levels 1.5, 1.25, 1, 0.75, 0.5
+<strong>Resistance</strong>: Determines how much food an animal needs not to be hungry and how resistant they are to miscarriages. (with Useful Stuff mod installed also determines how much damage they take)
+Levels: +25%, +12.5%, 0, -12.5%, 25%
 
-  <strong>-----Chicken-----</strong>
-  Chickens will provide a daily supply of eggs, given they have enough room and food for them. They have the smallest and most expensive diet though.
+<strong>-----Reproduction-----</strong>
+Animals cannot be hungry to mate. When mating occurs the female gets pregnant she will have an increased food consumption of +50% for the duration of her pregnancy. Pregnant females can have a miscarriage if either their saturation drops below 50% or their health drops below 25%. This is affected by the Resistance trait. Babies have only half the maximum saturation of their adult selves. Babies that are hungry will stop growing, so keep them fed throughout their childhood! Female animals have a limited number of times they can get pregnant/lay eggs, then they will become infertile and stop bearing children.
 
-  Maximum saturation = 12
-  Item Food = All grains.
-  Block food = All grain crops planted on farmland
-  Trough feed = All grain in small trough
-  Poop amount = Small
+<strong>-----Feeding-----</strong>
+Animals can eat and gain saturation by either grazing on vegetation, eating loose items, preying on other animals, or eating food from troughs. Animals will also be attracted to players when they have a food they like in their hands. Note: Animals will eat items and prey even if they are already full. All farmable animals can be fed <a href=\"handbook://item-farmlife:animalfeed\">animal feed</a> either in a trough or as an item. It is relatively cheap and has a long shelf life but requires much more effort to make and attracts everything, including predatory wolves, and agile deers that can jump fences and steal food. Animals still need food even when unloaded, the only way for them to get food and not starve is for a trough with food is nearby.
 
-  Gestation time(in game days) = 5
-  Pregnancy Recovery Time(in game days) = 1-3
-  Litter size = 1-2
-  Baby to Adult Time(in game days) = 12
+<strong>-----Part 2: Animal Breakdown-----</strong>
 
-  Additional notes = Hens will attempt to lay eggs in nearby hen boxes and need to be at 75% saturation to lay eggs
+<strong>-----Pig-----</strong>
+Maximum saturation = 20
+Eats items: All grains, all vegetables, all meat, all dairy, all fruit as well as hay(dry grass), raw meats, and rot.
+Grazes on: Grass, mushrooms, (If Wild Farming is installed: Ferns, Flowers)
+Eats in trough: All grains except rice, most vegetables, hay, and rot in large trough
+Preys on: Grubs, (If Primitive Survival is installed: Earthworms)
+Poop amount: Small to medium
+Poop Type: Normal
+Gestation time(in game days) = 18
+Pregnancy Recovery Time(in game days) = 1-3
+Litter size = 7-14
+Baby to Adult Time(in game hours) = 168
+Maximum number of births: 8
 
-  <strong>-----Pig-----</strong>
-  These beasts have the largest litter size and diet of all the animals. Though they eat a lot more, and are a risk to bushes and beehives.
+<strong>-----Sheep-----</strong>
+Maximum saturation = 16
+Eats items: All grains and hay
+Grazes on: Grass, (If Wild Farming is installed: Ferns, Flowers)
+Eats in trough: All grains except rice, some vegetables, hay, and rot in large trough
+Preys on: N/A
+Poop amount: Small to Large
+Poop Type: Grazer
+Gestation time(in game days) = 20
+Pregnancy Recovery Time(in game days) = 14-21
+Litter size = 1
+Baby to Adult Time(in game hours) = 336
+Maximum number of births: 3
+Additional Info: Female sheep can be milked, and adults can be sheared for wool
 
-  Maximum saturation = 20
-  Item Food = All grains, all vegetables, all meat, all dairy, all fruit as well as hay(dry grass), raw meats, and rot.
-  Block food = All crops planted on farmland, ripe bushes, beehives
-  Trough feed = All grain, hay, and rot in large trough
-  Poop amount = Small to medium
+<strong>-----Chicken-----</strong>
+Maximum saturation = 12
+Eats items: All grains
+Grazes on: Grass, mushrooms, (If Wild Farming is installed: Ferns, Flowers)
+Eats in trough: All grain except rice, in small trough
+Preys on: Grubs, (If Primitive Survival is installed: Earthworms)
+Poop amount: Small
+Poop Type: Avian
+Incubation time(in game days) = 5
+Pregnancy Recovery Time(in game days) = N/A
+Litter size = 3
+Baby to Adult Time(in game hours) = 120
+Maximum number of eggs: 128
+Additional Info: Infertile hens will not incubate eggs
 
-  Gestation time(in game days) = 5
-  Pregnancy Recovery Time(in game days) = 1-3
-  Litter size = 7-14
-  Baby to Adult Time(in game days) = 7
+<strong>-----Hare-----</strong>
+Maximum saturation = 8
+Eats items: All vegetables, as well as hay(dry grass).
+Grazes on: Grass, (If Wild Farming is installed: Ferns, Flowers)
+Eats in trough: All grain except rice, most vegetables, hay, and rot in large trough
+Preys on: N/A
+Poop amount: Small
+Poop Type: Grazer
+Gestation time(in game days) = 5
+Pregnancy Recovery Time(in game days) = 1-3
+Litter size = 6-12
+Baby to Adult Time(in game hours) = 168
+Maximum number of births: 8
+Additional Info: Males will attack other males and babies, keep them separated
 
-  <strong>-----Sheep-----</strong>
-  These creatures are currently the only source of dairy in the game and produce the largest amount of poop. Though there diet is somewhat picky and they have the slowest reproduction of all the animals
+<strong>-----Wolf-----</strong>
+Maximum saturation = 20
+Eats items: All meat
+Grazes on: N/A
+Eats in trough: Only animal feed in large or small trough
+Preys on: Hares, Chickens, and Players!
+Poop amount: Small to medium
+Poop Type: Normal
+Gestation time(in game days) = 12
+Pregnancy Recovery Time(in game days) = 7-10
+Litter size = 4-6
+Baby to Adult Time(in game hours) = 192
+Maximum number of births: 5
+Additional Info: Extremely hostile, can cause significant injury to players.
 
-  Maximum saturation = 16
-  Item Food = All grains, as well as hay(dry grass).
-  Block food = All grain crops planted on farmland
-  Trough feed = All grain and hay in large trough
-  Poop amount = Medium to Large
+<strong>-----Dog-----</strong>
+Maximum saturation = 20
+Eats items: All meat
+Grazes on: N/A
+Eats in trough: Only animal feed in large or small trough
+Preys on: N/A
+Poop amount: Small to medium
+Poop Type: Normal
+Gestation time(in game days) = 12
+Pregnancy Recovery Time(in game days) = 7-10
+Litter size = 4-6
+Baby to Adult Time(in game hours) = 192
+Maximum number of births: 5
+Additional Info: Any kills the dog gets, it does not get nutrients from, and the credit for the kill goes to its owners
 
-  Gestation time(in game days) = 20
-  Pregnancy Recovery Time(in game days) = 14-21
-  Litter size = 1
-  Baby to Adult Time(in game days) = 16
+<strong>-----Aurochs(If Medieval Expansion is installed)-----</strong>
+Maximum saturation = 24
+Eats items: All grains, and hay
+Grazes on: Grass, (If Wild Farming is installed: Ferns, Flowers)
+Eats in trough: All grains except rice, carrots, hay, in large trough
+Preys on: N/A
+Poop amount: Medium to Large
+Poop Type: Grazer
+Gestation time(in game days) = 20
+Pregnancy Recovery Time(in game days) = 4-11
+Litter size = 1
+Baby to Adult Time(in game hours) = 336
+Maximum number of births: 4
+Additional Info: Females can be milked
 
-  Additional notes = Do not continue hold right click after a failed milking attempt. This could lead to a loss of milk due to a bug. Also ewes need to be at 75% saturation to produce milk
+<strong>-----Deer(If Lichen is installed)-----</strong>
+Maximum saturation = 18
+Eats items: All grains and hay
+Grazes on: Grass, (If Wild Farming is installed: Ferns, Flowers)
+Eats in trough: Only animal feed from large trough
+Preys on: N/A
+Poop amount: Small to Large
+Poop Type: Grazer
+Gestation time(in game days) = 12
+Pregnancy Recovery Time(in game days) = 4-11
+Litter size = 1-3
+Baby to Adult Time(in game hours) = 168
+Maximum number of births: 5
+Additional Info: Very agile, can jump over fences. Very hard to domesticate. Females produce milk and males can be sheared for their antlers.
 
-<strong>-----Tips-----</strong>
-- You only need one male to breed. Having multiple males for breeding is extremely ineffienct and in the case of hares, deadly.
-- You should use troughs as soon as you can as food items can despawn and animals are attracted to troughs from far distances.
-- Hen boxes can be used to make egg collection easier
-- Put unwanted foods like bushmeat into a compost bin to put into a large trough for pigs
-- Hares and chickens can go under small half spaces while predators like foxes cannot. Use that to you advantage to safely catch them. Similarly baby hares can fit under spaces even smaller than that. Use a chisel to make a small hole they can go through to separate them from aggresive male hares.
-- Hares, chickens, lambs, and piglets can all be picked up using animal handling gloves.",
+<strong>-----Part 3: Other Knowledge-----</strong>
+
+<strong>-----Pets-----</strong>
+Wolves can be turned into dogs once they reach generation 10. To turn them into a dog shift-right click with a <a href=\"handbook://item-farmlife:collar\">collar</a> and they will be owned by you. Note: The color of the dog may be different from when it was a wolf. To give the dog commands, use a <a href=\"handbook://item-farmlife:petwhistle\">pet whistle</a>. Dogs will stop obeying you if they are hungry. Shift+left click to set and order, and ctrl+left click to set an aggro level. Shift+right with a dog selected to give them the current command or aggro level, or if you are not looking at a specific pet it will give every pet within a 30 block radius that order and aggro.
+
+Current Commands:
+<strong>Stay</strong>: The pet will not move
+<strong>Wander</strong>: The pet will freely wander around
+<strong>Follow</strong>: The pet will follow you and teleport to you if you get too far away
+
+Current aggro levels:
+<strong>Passive</strong>: The pet will not attack at all
+<strong>Defend</strong>: The pet will attack entities that attack it
+<strong>Protect</strong>: The pet will attack entities that attack it, it’s owner, or generation 3 animals
+<strong>Hunt</strong>: The pet will attack entities that it’s owner attacks, attack it, it’s owner, or generation 3 animals
+
+<strong>-----Grubs-----</strong>
+<a href=\"handbook://item-insect-grub\">Grubs</a> can be collected by placing a compost bin full of rot on top of a hopper. Grubs will grow and eat the rot and fall into the hopper. They can be eaten for a tiny snack(GROSS!), and you can place them on the ground by shift+right clicking. They will go around and eat poop.
+
+<strong>-----Animal Handling Gloves-----</strong>
+These <a href=\"handbook://item-farmlife:handlinggloves\">thick leather gloves</a> can be used to pick up all farmable baby animals as well as grown up hares and chickens. Simple right click to pick them up and right click again to drop. Note: If you take any damage or switch to another item you will drop the animal.
+
+<strong>-----Animal Trader-----</strong>
+Animal traders specialize in the selling of domesticated animals. They will sell <a href=\"handbooksearch://caged\">caged babies</a> at generation 10, for a hefty fee of course.
+
+<strong>-----Poop-----</strong>
+<a href=\"handbooksearch://poop\">Poop</a> can be used to fertilize farmland or can turn medium fertility soil into high fertility soil.
+
+<strong>-----Compost Bin-----</strong>
+The <a href=\"handbook://block-farmlife:compostbin\">compost bin</a> can be used to rot perishable things or to farm maggots.
+
+<strong>-----Wool-----</strong>
+Wool can be sheared from adult sheep. <a href=\"handbook://item-farmlife:woolfibers\">Greasy wool fibers</a> need to be cleaned with lime water to be turned into twine, and <a href=\"handbook://item-farmlife:wooltwine\">wool twine</a> can be turned into <a href=\"handbook://block-wool-white-down\">white wool sheets</a>. Wool can be used in similar ways to linen and has double the clothing repairing abilities.
+
+<strong>-----Other Tips & Knowledge-----</strong>
+Hold shift while filling a trough to put in 4 at a time
+Grain crops drop grass
+If you have meat from another mod, it can be fed to meat eating wolves and pigs by making sure it is in an edible form, by either cooking or curing it.
+While animals can graze on all plants, not all plants are good for them. While horsetail can heal, lily of the valley, fly agaric mushrooms, cinnamon ferns, and eagle ferns will poison animals.
+If you want to raise dogs for other people, make sure you do not claim the wolves! Once you put a collar on a wolf it turns into a dog that only you control, and any babies made from female dogs owned by you will also be owned by you.
+The traits will also show you the age of the baby, and the amount of births a female animal has left. If Useful Stuff mod is installed it will also display that entities given name with a ceramic tablet.
+For big animals, like sheep, make sure you give them a wide area and put there trough in the middle of the pen. They will walk in circles if they cannot path properly.
+",
 
 }

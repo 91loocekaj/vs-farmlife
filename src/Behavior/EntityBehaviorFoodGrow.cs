@@ -3,6 +3,7 @@ using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API;
+using Vintagestory.GameContent;
 
 namespace Farmlife
 {
@@ -10,17 +11,8 @@ namespace Farmlife
     {
         ITreeAttribute growTree;
         JsonObject typeAttributes;
-        long callbackId;
 
-        internal float HoursToGrow
-        {
-            get { return typeAttributes["hoursToGrow"].AsFloat(96); }
-        }
-
-        internal float nutritionReq
-        {
-            get { return typeAttributes["nutritionReq"].AsFloat(1); }
-        }
+        internal float HoursToGrow { get; set; }
 
         internal AssetLocation[] AdultEntityCodes
         {
@@ -33,11 +25,31 @@ namespace Farmlife
             set { growTree.SetDouble("timeSpawned", value); }
         }
 
+        internal double TimeKeeper
+        {
+            get { return growTree.GetDouble("timeKeeper"); }
+            set { growTree.SetDouble("timeKeeper", value); }
+        }
+
+        internal double Age
+        {
+            get { return growTree.GetDouble("hungerGrowth"); }
+            set { growTree.SetDouble("hungerGrowth", value); }
+        }
+
+
+
+        public EntityBehaviorFoodGrow(Entity entity) : base(entity)
+        {
+        }
+
         public override void Initialize(EntityProperties properties, JsonObject typeAttributes)
         {
             base.Initialize(properties, typeAttributes);
 
             this.typeAttributes = typeAttributes;
+            HoursToGrow = typeAttributes["hoursToGrow"].AsFloat(96);
+            
 
             growTree = entity.WatchedAttributes.GetTreeAttribute("grow");
 
@@ -45,23 +57,22 @@ namespace Farmlife
             {
                 entity.WatchedAttributes.SetAttribute("grow", growTree = new TreeAttribute());
                 TimeSpawned = entity.World.Calendar.TotalHours;
+                TimeKeeper = entity.World.Calendar.TotalHours;
+                
+                Age = 0;
             }
-
-            callbackId = entity.World.RegisterCallback(CheckGrowth, 3000);
         }
 
-
-        private void CheckGrowth(float dt)
+        public override void OnGameTick(float deltaTime)
         {
-            if (!entity.Alive) return;
+            if (!entity.Alive || entity.World.Calendar.TotalHours - TimeKeeper < 1) return;
+            TimeKeeper++;
+            
+            EntityBehaviorConsume bc = entity.GetBehavior<EntityBehaviorConsume>();
 
-            if (entity.World.Calendar.TotalHours >= TimeSpawned + HoursToGrow && !CheckSaturation())
-            {
-                entity.WatchedAttributes.SetBool("babyneedfood", true);
-                entity.WatchedAttributes.MarkPathDirty("babyneedfood");
-            }
+            if (bc != null && !bc.IsHungry) Age++;
 
-            if (entity.World.Calendar.TotalHours >= TimeSpawned + HoursToGrow && CheckSaturation())
+            if (Age >= HoursToGrow)
             {
                 AssetLocation[] entityCodes = AdultEntityCodes;
                 if (entityCodes.Length == 0) return;
@@ -80,11 +91,15 @@ namespace Farmlife
                 // Delay adult spawning if we're colliding
                 if (entity.World.CollisionTester.IsColliding(entity.World.BlockAccessor, collisionBox, entity.ServerPos.XYZ, false))
                 {
-                    callbackId = entity.World.RegisterCallback(CheckGrowth, 3000);
+
                     return;
                 }
 
                 Entity adult = entity.World.ClassRegistry.CreateEntity(adultType);
+
+                ITreeAttribute genes = entity.WatchedAttributes.GetTreeAttribute("genome");
+                adult.WatchedAttributes.GetOrAddTreeAttribute("hunger").SetFloat("saturation", bc.CurrentSat);
+                if (genes != null) adult.WatchedAttributes["genome"] = genes.Clone();
 
                 adult.ServerPos.SetFrom(entity.ServerPos);
                 adult.Pos.SetFrom(adult.ServerPos);
@@ -93,33 +108,23 @@ namespace Farmlife
                 entity.World.SpawnEntity(adult);
 
                 adult.WatchedAttributes.SetInt("generation", entity.WatchedAttributes.GetInt("generation", 0));
-                adult.WatchedAttributes["hunger"] = entity.WatchedAttributes.GetTreeAttribute("hunger").Clone();
             }
             else
             {
-                callbackId = entity.World.RegisterCallback(CheckGrowth, 3000);
+                if (Age >= 0.1 * HoursToGrow)
+                {
+                    float newAge = (float)(Age / HoursToGrow - 0.1);
+                    if (newAge >= 1.01f * growTree.GetFloat("age"))
+                    {
+                        growTree.SetFloat("age", newAge);
+                        entity.WatchedAttributes.MarkPathDirty("grow");
+                    }
+                }
             }
 
             entity.World.FrameProfiler.Mark("entity-checkgrowth");
         }
 
-        bool CheckSaturation()
-        {
-            //Child will only grow if they have at least 75% saturation
-            ITreeAttribute tree = entity.WatchedAttributes.GetTreeAttribute("hunger");
-            if (tree == null) return false;
-
-            return tree.GetFloat("saturation", 0) >= (nutritionReq * (entity.Properties?.Attributes?["maxSaturation"].AsFloat(20f) ?? 20f));
-        }
-
-        public override void OnEntityDespawn(EntityDespawnReason despawn)
-        {
-            entity.World.UnregisterCallback(callbackId);
-        }
-
-        public EntityBehaviorFoodGrow(Entity entity) : base(entity)
-        {
-        }
 
         public override string PropertyName()
         {

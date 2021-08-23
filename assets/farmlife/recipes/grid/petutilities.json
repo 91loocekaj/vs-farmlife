@@ -1,0 +1,23 @@
+[
+  {
+		ingredientPattern: "H,C,P",
+		ingredients: {
+			"H": { type: "item", code: "game:hammer-*", isTool: true, toolDurabilityCost: 10 },
+			"C": { type: "item", code: "game:chisel-*", isTool: true, toolDurabilityCost: 10 },
+			"P": { type: "item", code: "game:plank-*" }
+		},
+		width: 1,
+		height: 3,
+		output: { type: "item", code: "farmlife:petwhistle", quantity: 1 }
+	},
+  {
+		ingredientPattern: "R,S",
+		ingredients: {
+			"R": { type: "item", code: "game:rope" },
+			"S": { type: "item", code: "game:gear-temporal" }
+		},
+		width: 1,
+		height: 2,
+		output: { type: "item", code: "farmlife:collar"  }
+	},
+]

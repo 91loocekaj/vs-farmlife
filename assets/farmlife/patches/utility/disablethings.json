@@ -1,0 +1,17 @@
+[
+  {
+    "op": "add",
+    "path": "/0/enabled",
+    "value": false,
+    "file": "farmlife:recipes/grid/petutilities.json",
+    "condition": { "when": "FLpetsEnabled", "isValue": "false" }
+  },
+
+  {
+    "op": "add",
+    "path": "/1/enabled",
+    "value": false,
+    "file": "farmlife:recipes/grid/petutilities.json",
+    "condition": { "when": "FLpetsEnabled", "isValue": "false" }
+  },
+]

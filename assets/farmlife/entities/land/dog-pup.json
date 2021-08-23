@@ -1,0 +1,212 @@
+{
+	code: "wolf-pup-dog",
+	class: "EntityAgent",
+	hitboxSize: { x: 0.85, y: 0.5 },
+	deadHitboxSize: { x: 0.75, y: 0.4 },
+	eyeHeight: 0.4,
+	drops: [
+
+	],
+	attributes: {
+		nutrition: 5,
+		maxSaturation: 10
+	},
+	client: {
+		renderer: "Shape",
+		shape: { base: "game:entity/land/wolf-pup" },
+		texture: { base: "game:entity/wolf/wolf-pup1", alternates: [ { base: "game:entity/wolf/wolf-pup2" } ] },
+		size: 0.9,
+		sizeGrowthFactor: 0.2,
+		behaviors: [
+			{ code: "repulseagents" },
+			{ code: "controlledphysics", stepHeight: 1.1251 },
+			{ code: "floatupwhenstuck", onlyWhenDead: true },
+			{ code: "interpolateposition" },
+			{ code: "harvestable" },
+			{ code: "ropetieable" },
+			{ code: "consume" },
+			{ code: "petcommand" }
+		],
+		animations: [
+			{
+				code: "hurt",
+				animation: "hurt",
+				animationSpeed: 2.2,
+				weight: 10,
+				blendMode: "AddAverage"
+			},
+			{
+				code: "die",
+				animation: "die",
+				animationSpeed: 1.5,
+				weight: 10,
+				blendMode: "Average",
+				triggeredBy: { onControls: ["dead"] }
+			},
+			{
+				code: "idle",
+				animation: "idle",
+				blendMode: "AddAverage",
+				easeOutSpeed: 4,
+				triggeredBy: { defaultAnim: true },
+			},
+			{
+				code: "sleep",
+				animation: "sleep",
+				easeInSpeed: 4,
+				easeOutSpeed: 4,
+				blendMode: "Average",
+			},
+			{
+				code: "sit",
+				animation: "sit",
+				easeInSpeed: 4,
+				easeOutSpeed: 4,
+				blendMode: "Average",
+			}
+		]
+	},
+	server: {
+		behaviors: [
+			{ code: "repulseagents" },
+			{ code: "controlledphysics", stepHeight: 1.1251 },
+			{ code: "health", currenthealth: 5, maxhealth: 5 },
+			{ code: "deaddecay", hoursToDecay: 96, decayedBlock: "game:carcass-small" },
+			{ code: "floatupwhenstuck", onlyWhenDead: true },
+			{ code: "harvestable", drops: [],
+			},
+			{ code: "breathe" },
+			{
+				hoursToGrow: 192,
+				adultEntityCodes: ["farmlife:wolf-male-dog", "farmlife:wolf-female-dog"],
+				code: "foodgrow"
+			},
+			{
+				code: "taskai",
+				aitasks: [
+					{
+						code: "stayclosetomaster",
+						priority: 2.5,
+						movespeed: 0.04,
+						maxDistance: 10,
+						searchRange: 40,
+						animationSpeed: 2,
+						animation: "Run"
+					},
+					{
+						code: "getoutofwater",
+						priority: 1.4,
+						movespeed: 0.015,
+						animation: "Walk",
+						animationSpeed: 2.2
+					},
+					{
+			      code: "petseekfoodandeat",
+			      movespeed: 0.01,
+			      priority: 1.39,
+						priorityForCancel: 1.4,
+			      eatLooseItems: true,
+			      eatItemCategories: [
+			        "Protein"
+			      ],
+			      eatItemCodes: [
+							"game:redmeat-raw",
+			        "game:bushmeat-raw",
+			        "game:egg-chicken-raw",
+			        "game:poultry-raw",
+			        "farmlife:animalfeed"
+			      ],
+			      eatSound: "player/eat",
+			      eatTime: 1.5,
+			      animationSpeed: 1.4,
+			      animation: "Walk",
+			      eatAnimation: "Eat",
+			      mincooldownHours: 0,
+			      maxcooldownHours: 0
+			    },
+					{
+						code: "petwander",
+						priority: 1.34,
+						priorityForCancel: 1.35,
+						movespeed: 0.006,
+						animation: "Walk"
+					},
+					{
+						code: "idle",
+						priority: 1.3,
+						priorityForCancel: 1.35,
+						minduration: 4667,
+						maxduration: 4667,
+						mincooldown: 80000,
+						maxcooldown: 500000,
+						animation: "Howl",
+						animationSpeed: 0.5,
+						sound: "game:creature/wolf/pup-howl",
+						soundRange: 110
+					},
+					{
+						code: "idle",
+						priority: 1.2,
+						priorityForCancel: 1.35,
+						minduration: 2500,
+						maxduration: 2500,
+						mincooldown: 6000,
+						maxcooldown: 20000,
+						animation: "Sniff",
+						animationSpeed: 1.25,
+					},
+					{
+						code: "idle",
+						priority: 1.36,
+						priorityForCancel: 1.37,
+						minduration: 200000,
+						maxduration: 800000,
+						mincooldown: 10000,
+						maxcooldown: 30000,
+						animation: "Sleep",
+						duringDayTimeFrames: [ { fromHour: 10, toHour: 18 }, { fromHour: 1, toHour: 3 } ],
+						stopRange: 10,
+						stopOnHurt: true
+					},
+					{
+						code: "idle",
+						priority: 1.32,
+						priorityForCancel: 1.35,
+						minduration: 2830,
+						maxduration: 2830,
+						mincooldown: 80000,
+						maxcooldown: 200000,
+						animation: "Flop",
+						sound: "game:creature/wolf/pup-flop"
+					},
+					{
+						code: "idle",
+						priority: 0.9,
+						minduration: 5000,
+						maxduration: 30000,
+						mincooldown: 2000,
+						maxcooldown: 120000,
+						priorityForCancel: 1.33,
+						animation: "Sit",
+						stopRange: 5
+					},
+					{
+						code: "lookaround",
+						priority: 0.5
+					}
+				]
+			},
+			{ code: "ropetieable" },
+			{ code: "consume", "poopCodes": [
+        "farmlife:poop-omnivore-small"
+      ] },
+			{ code: "petcommand" }
+		]
+	},
+	sounds: {
+		hurt: "game:creature/wolf/pup-hurt",
+		death: "game:creature/wolf/pup-hurt",
+		idle: "game:creature/wolf/pup-bark"
+	},
+	idleSoundChance: 0.01
+}

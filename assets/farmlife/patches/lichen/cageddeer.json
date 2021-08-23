@@ -1,0 +1,10 @@
+[
+  {
+  "op": "replace",
+  "path": "/enabled",
+  "value": true,
+  "file": "lichen:itemtypes/cagedanimal.json",
+  "condition": { "when": "FLlichenEnabled", "isValue": "true" },
+  "dependsOn": [{ "modid": "lichen" }]
+}
+]

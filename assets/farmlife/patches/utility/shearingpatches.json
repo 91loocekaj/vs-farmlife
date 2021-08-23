@@ -1,0 +1,96 @@
+[
+  {
+    "op": "add",
+    "path": "/client/behaviors/-",
+    "value": {
+      "code": "shearable",
+      "shearableAt" : 480,
+      "minQuantity": 1,
+      "maxQuantity": 2,
+      "woolItem": "lichen:antler-large"
+    },
+    "file": "lichen:entities/land/deer-male.json",
+    "condition": { "when": "FLshearingEnabled", "isValue": "true" },
+    "dependsOn": [{ "modid": "lichen" }]
+  },
+  {
+    "op": "add",
+    "path": "/server/behaviors/-",
+    "value": {
+      "code": "shearable",
+      "shearableAt" : 480,
+      "minQuantity": 1,
+      "maxQuantity": 2,
+      "woolItem": "lichen:antler-large"
+    },
+    "file": "lichen:entities/land/deer-male.json",
+    "condition": { "when": "FLshearingEnabled", "isValue": "true" },
+    "dependsOn": [{ "modid": "lichen" }]
+  },
+  {
+    "op": "add",
+    "path": "/client/behaviors/-",
+    "value": {
+      "code": "shearable",
+      "shearableAt" : 480,
+      "minQuantity": 1,
+      "maxQuantity": 2,
+      "woolItem": "lichen:antler-albino"
+    },
+    "file": "lichen:entities/land/white-hart.json",
+    "condition": { "when": "FLshearingEnabled", "isValue": "true" },
+    "dependsOn": [{ "modid": "lichen" }]
+  },
+  {
+    "op": "add",
+    "path": "/server/behaviors/-",
+    "value": {
+      "code": "shearable",
+      "shearableAt" : 480,
+      "minQuantity": 1,
+      "maxQuantity": 2,
+      "woolItem": "lichen:antler-albino"
+    },
+    "file": "lichen:entities/land/white-hart.json",
+    "condition": { "when": "FLshearingEnabled", "isValue": "true" },
+    "dependsOn": [{ "modid": "lichen" }]
+  },
+  {
+    "op": "add",
+    "path": "/client/behaviors/-",
+    "value": {
+      "code": "shearable"
+    },
+    "file": "game:entities/land/sheep-bighorn-female.json",
+    "condition": { "when": "FLshearingEnabled", "isValue": "true" },
+  },
+  {
+    "op": "add",
+    "path": "/server/behaviors/-",
+    "value": {
+      "code": "shearable"
+    },
+    "file": "game:entities/land/sheep-bighorn-female.json",
+    "condition": { "when": "FLshearingEnabled", "isValue": "true" },
+  },
+  {
+    "op": "add",
+    "path": "/client/behaviors/-",
+    "value": {
+      "code": "shearable"
+    },
+    "file": "game:entities/land/sheep-bighorn-male.json",
+    "condition": { "when": "FLshearingEnabled", "isValue": "true" },
+  },
+  {
+    "op": "add",
+    "path": "/server/behaviors/-",
+    "value": {
+      "code": "shearable",
+      "minQuantity" : 16,
+      "maxQuantity" : 32
+    },
+    "file": "game:entities/land/sheep-bighorn-male.json",
+    "condition": { "when": "FLshearingEnabled", "isValue": "true" },
+  },
+]

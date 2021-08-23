@@ -1,0 +1,95 @@
+[
+  {
+    "op": "add",
+    "path": "/attributes",
+    "value": {
+      "maxSaturation": 9,
+      "nutrition": 5
+    },
+    "file": "lichen:entities/land/deer-fawn.json",
+    "condition": { "when": "FLlichenEnabled", "isValue": "true" },
+    "dependsOn": [{ "modid": "lichen" }]
+  },
+
+  {
+    "op": "add",
+    "path": "/client/behaviors/-",
+    "value": {
+      "code": "consume"
+    },
+    "file": "lichen:entities/land/deer-fawn.json",
+    "condition": { "when": "FLlichenEnabled", "isValue": "true" },
+    "dependsOn": [{ "modid": "lichen" }]
+  },
+
+  {
+    "op": "replace",
+    "path": "/client/behaviors/1",
+    "value": { "code": "controlledphysics", "stepHeight": 2.5 },
+    "file": "lichen:entities/land/deer-fawn.json",
+    "condition": { "when": "FLlichenEnabled", "isValue": "true" },
+    "dependsOn": [{ "modid": "lichen" }]
+  },
+
+  {
+    "op": "add",
+    "path": "/server/behaviors/-",
+    "value": {
+      "code": "consume",
+      "poopCodes": [
+        "farmlife:poop-grazer-small",
+        "farmlife:poop-grazer-medium"
+      ]
+    },
+    "file": "lichen:entities/land/deer-fawn.json",
+    "condition": { "when": "FLlichenEnabled", "isValue": "true" },
+    "dependsOn": [{ "modid": "lichen" }]
+  },
+
+  {
+    "op": "replace",
+    "path": "/server/behaviors/1",
+    "value": { "code": "controlledphysics", "stepHeight": 2.5 },
+    "file": "lichen:entities/land/deer-fawn.json",
+    "condition": { "when": "FLlichenEnabled", "isValue": "true" },
+    "dependsOn": [{ "modid": "lichen" }]
+  },
+
+  {
+    "op": "replace",
+    "path": "/server/behaviors/9",
+    "value": {
+      "code": "foodgrow",
+      "hoursToGrow": 168,
+      "adultEntityCodes": ["lichen:deer-male", "lichen:deer-female", "lichen:deer-male", "lichen:deer-female", "lichen:deer-male", "lichen:deer-female", "lichen:deer-male", "lichen:deer-female", "lichen:deer-male", "lichen:deer-female", "lichen:white-hart"],
+    },
+    "file": "lichen:entities/land/deer-fawn.json",
+    "condition": { "when": "FLlichenEnabled", "isValue": "true" },
+    "dependsOn": [{ "modid": "lichen" }]
+  },
+
+  {
+      "op": "add",
+      "path": "/server/behaviors/10/aitasks/-",
+      "value": {
+        "code": "seekfoodandeat",
+        "movespeed": 0.01,
+        "priority": 1.37,
+        "eatLooseItems": true,
+        "eatItemCodes": [
+          "game:drygrass",
+          "farmlife:animalfeed"
+        ],
+        "eatSound": "game:player/eat",
+        "eatTime": 1.5,
+        "eatAnimation": "Eat",
+        "animationSpeed": 1.4,
+        "animation": "Walk",
+        "mincooldownHours": 0,
+        "maxcooldownHours": 0
+      },
+      "file": "lichen:entities/land/deer-fawn.json",
+      "condition": { "when": "FLlichenEnabled", "isValue": "true" },
+      "dependsOn": [{ "modid": "lichen" }]
+    }
+]

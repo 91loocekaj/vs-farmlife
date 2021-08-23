@@ -1,0 +1,10 @@
+[
+  {
+  "op": "replace",
+  "path": "/enabled",
+  "value": true,
+  "file": "medievalexpansion:itemtypes/cagedanimal.json",
+  "condition": { "when": "FLmedievalexpansionEnabled", "isValue": "true" },
+  "dependsOn": [{ "modid": "medievalexpansion" }]
+}
+]

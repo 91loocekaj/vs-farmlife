@@ -1,0 +1,14 @@
+[
+  {
+    "op": "add",
+    "path": "/server/behaviors/-",
+    "value": {
+      "code": "health",
+      "currenthealth": 1,
+      "maxhealth": 1
+    },
+    "file": "primitivesurvival:entities/land/earthworm.json",
+    "condition": { "when": "FLprimitivesurvivalEnabled", "isValue": "true" },
+    "dependsOn": [{ "modid": "lichen" }]
+  },
+]

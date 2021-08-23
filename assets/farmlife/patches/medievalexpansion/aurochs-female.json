@@ -1,0 +1,83 @@
+[
+  {
+    "op": "add",
+    "path": "/attributes",
+    "value": {
+      "maxSaturation": 24,
+      "maxBirths": 4,
+      "nutrition": 12
+    },
+    "file": "medievalexpansion:entities/land/aurochs-female.json",
+    "condition": { "when": "FLmedievalexpansionEnabled", "isValue": "true" },
+    "dependsOn": [{ "modid": "medievalexpansion" }]
+  },
+
+  {
+    "op": "replace",
+    "path": "/client/behaviors/4/code",
+    "value": "foodmultiply",
+    "file": "medievalexpansion:entities/land/aurochs-female.json",
+    "condition": { "when": "FLmedievalexpansionEnabled", "isValue": "true" },
+    "dependsOn": [{ "modid": "medievalexpansion" }]
+  },
+  {
+    "op": "replace",
+    "path": "/server/behaviors/8/code",
+    "value": "foodmultiply",
+    "file": "medievalexpansion:entities/land/aurochs-female.json",
+    "condition": { "when": "FLmedievalexpansionEnabled", "isValue": "true" },
+    "dependsOn": [{ "modid": "medievalexpansion" }]
+  },
+
+  {
+    "op": "add",
+    "path": "/client/behaviors/-",
+    "value": {
+      "code": "consume"
+    },
+    "file": "medievalexpansion:entities/land/aurochs-female.json",
+    "condition": { "when": "FLmedievalexpansionEnabled", "isValue": "true" },
+    "dependsOn": [{ "modid": "medievalexpansion" }]
+  },
+  {
+    "op": "add",
+    "path": "/server/behaviors/-",
+    "value": {
+      "code": "consume",
+      "poopCodes": [
+        "farmlife:poop-grazer-large",
+        "farmlife:poop-grazer-medium"
+      ]
+    },
+    "file": "medievalexpansion:entities/land/aurochs-female.json",
+    "condition": { "when": "FLmedievalexpansionEnabled", "isValue": "true" },
+    "dependsOn": [{ "modid": "medievalexpansion" }]
+  },
+    {
+      "op": "replace",
+      "path": "/server/behaviors/10/aitasks/6",
+      "value": {
+        "code": "seekfoodandeat",
+        "movespeed": 0.01,
+        "priority": 1.37,
+        "eatLooseItems": true,
+        "eatItemCategories": [
+          "Grain"
+        ],
+        "eatItemCodes": [
+          "game:drygrass",
+          "farmlife:animalfeed"
+        ],
+        "eatSound": "game:player/eat",
+        "eatTime": 1.5,
+        "eatAnimation": "Eat",
+        "animationSpeed": 1.4,
+        "animation": "Walk",
+        "mincooldownHours": 0,
+        "maxcooldownHours": 0
+      },
+      "file": "medievalexpansion:entities/land/aurochs-female.json",
+      "condition": { "when": "FLmedievalexpansionEnabled", "isValue": "true" },
+      "dependsOn": [{ "modid": "medievalexpansion" }]
+    }
+]

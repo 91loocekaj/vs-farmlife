@@ -1,0 +1,8 @@
+[
+  {
+    "op": "replace",
+    "path": "/entityClass",
+    "value": "GeneticHenBox",
+    "file": "game:blocktypes/wood/henbox.json"
+  }
+]

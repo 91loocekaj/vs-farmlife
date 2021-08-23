@@ -6,6 +6,7 @@ using Vintagestory.API.MathTools;
 using Vintagestory.API;
 using System;
 using Vintagestory.API.Common.Entities;
+using Vintagestory.API.Util;
 
 namespace Farmlife
 {
@@ -15,11 +16,15 @@ namespace Farmlife
 
         POIRegistry porregistry;
         int slotNumber;
+        int heldID;
         IAnimalFoodSource targetPoi;
+        EntityBehaviorConsume bc;
 
         float moveSpeed = 0.02f;
         long stuckatMs = 0;
         bool nowStuck = false;
+        double grazedLast = 0;
+        double grazeDigest;
 
         float eatTime = 1f;
 
@@ -46,6 +51,8 @@ namespace Farmlife
 
         float extraTargetDist;
         long lastPOISearchTotalMs;
+
+        public float MaxSat { get { return (entity.Properties?.Attributes?["maxSaturation"].AsFloat(20f) ?? 20f); } }
 
         public AiTaskTweakedSeekFoodAndEat(EntityAgent entity) : base(entity)
         {
@@ -132,18 +139,19 @@ namespace Farmlife
 
         public override bool ShouldExecute()
         {
-            ITreeAttribute hunger = entity.WatchedAttributes.GetTreeAttribute("hunger");
+            ITreeAttribute hunger = entity.WatchedAttributes.GetOrAddTreeAttribute("hunger");
 
-            if (hunger == null || hunger.GetFloat("saturation") >= (entity.Properties?.Attributes?["maxSaturation"].AsFloat(20f) ?? 20f)) return false;
-            // Don't search more often than every 15 seconds
+            // Don't search more often than every 3 seconds
             if (lastPOISearchTotalMs + 3000 > entity.World.ElapsedMilliseconds) return false;
             if (cooldownUntilMs > entity.World.ElapsedMilliseconds) return false;
             if (cooldownUntilTotalHours > entity.World.Calendar.TotalHours) return false;
             if (whenInEmotionState != null && !entity.HasEmotionState(whenInEmotionState)) return false;
             if (whenNotInEmotionState != null && entity.HasEmotionState(whenNotInEmotionState)) return false;
 
-            EntityBehaviorMultiply bh = entity.GetBehavior<EntityBehaviorMultiply>();
-            if (bh != null && !bh.ShouldEat && entity.World.Rand.NextDouble() < 0.996) return false; // 0.4% chance go to the food source anyway just because (without eating anything).
+            bc = entity.GetBehavior<EntityBehaviorConsume>();
+
+            if (!FarmerConfig.Loaded.GluttonyEnabled && bc != null && bc.CurrentSat >= bc.MaxSat) return false;
+            
 
             targetPoi = null;
             extraTargetDist = 0;
@@ -181,9 +189,10 @@ namespace Farmlife
                 {
                     ItemSlot active = eplr.Player.InventoryManager.ActiveHotbarSlot;
                     slotNumber = eplr.Player.InventoryManager.ActiveHotbarSlotNumber;
-                    EnumFoodCategory? cat = active.Itemstack?.Collectible?.NutritionProps?.FoodCategory;
-                    if (!active.Empty && (eatItemCodes.Contains(active.Itemstack.Collectible.Code) || (cat != null && eatItemCategories.Contains((EnumFoodCategory)cat))))
+                    EnumFoodCategory? cat = active?.Itemstack?.Collectible?.NutritionProps?.FoodCategory;
+                    if (active != null && !active.Empty && (eatItemCodes.Contains(active.Itemstack.Collectible.Code) || (cat != null && eatItemCategories.Contains((EnumFoodCategory)cat))))
                     {
+                        heldID = active.Itemstack.Collectible.Id;
                         targetPoi = new MPlayerPoi(eplr);
                     }
                 }
@@ -191,55 +200,47 @@ namespace Farmlife
                 return true;
             });
 
-            if (targetPoi == null)
+            if (targetPoi == null && (bc == null || bc.CurrentSat < bc.MaxSat))
             {
-                targetPoi = porregistry.GetNearestPoi(entity.ServerPos.XYZ, FarmerConfig.Loaded.PathRange, (poi) =>
+                targetPoi = tryGrazing();
+
+                if (targetPoi == null)
                 {
-                    if (poi.Type != "food") return false;
-                    IAnimalFoodSource foodPoi;
-
-                    if ((foodPoi = poi as IAnimalFoodSource)?.IsSuitableFor(entity) == true)
+                    targetPoi = porregistry.GetNearestPoi(entity.ServerPos.XYZ, FarmerConfig.Loaded.PathRange, (poi) =>
                     {
-                        TFailedAttempt attempt;
-                        failedSeekTargets.TryGetValue(foodPoi, out attempt);
+                        if (poi.Type != "food") return false;
+                        IAnimalFoodSource foodPoi;
 
-                        if (attempt == null && FarmerConfig.Loaded.RestrictPathfinding && !lineOfSight(foodPoi))
+                        if ((foodPoi = poi as IAnimalFoodSource)?.IsSuitableFor(entity) == true)
                         {
-                            failedSeekTargets[foodPoi] = attempt = new TFailedAttempt();
-                            attempt.Count++;
-                            attempt.LastTryMs = world.ElapsedMilliseconds + 60000;
-                            return false;
+                            TFailedAttempt attempt;
+                            failedSeekTargets.TryGetValue(foodPoi, out attempt);
+
+                            if (attempt == null && FarmerConfig.Loaded.RestrictPathfinding && !lineOfSight(foodPoi))
+                            {
+                                failedSeekTargets[foodPoi] = attempt = new TFailedAttempt();
+                                attempt.Count++;
+                                attempt.LastTryMs = world.ElapsedMilliseconds + 60000;
+                                return false;
+                            }
+
+                            if (attempt == null) return true;
+
+                            if (attempt.LastTryMs < world.ElapsedMilliseconds && (!attempt.closedOff || attempt.LastTryMs + 240000 < world.ElapsedMilliseconds))
+                            {
+                                return true;
+                            }
                         }
 
-                        if (attempt == null) return true;
-                        
-                        if (attempt.LastTryMs < world.ElapsedMilliseconds && (!attempt.closedOff || attempt.LastTryMs + 240000 < world.ElapsedMilliseconds))
-                        {
-                            return true;
-                        }
-                    }
-
-                    return false;
-                }) as IAnimalFoodSource;
-            }
-
-            /*if (targetPoi != null)
-            {
-                if (targetPoi is BlockEntity || targetPoi is Block)
-                {
-                    Block block = entity.World.BlockAccessor.GetBlock(targetPoi.Position.AsBlockPos);
-                    Cuboidf[] collboxes = block.GetCollisionBoxes(entity.World.BlockAccessor, targetPoi.Position.AsBlockPos);
-                    if (collboxes != null && collboxes.Length != 0 && collboxes[0].Y2 > 0.3f)
-                    {
-                        extraTargetDist = 0.15f;
-                    }
+                        return false;
+                    }) as IAnimalFoodSource;
                 }
-            }*/
+
+                
+            }
 
             return targetPoi != null;
         }
-
-
 
         public float MinDistanceToTarget()
         {
@@ -269,7 +270,8 @@ namespace Farmlife
 
             if (targetPoi is MPlayerPoi)
             {
-                if ((targetPoi as MPlayerPoi).plr.Player.InventoryManager.ActiveHotbarSlotNumber != slotNumber)
+                IPlayerInventoryManager inv = (targetPoi as MPlayerPoi).plr.Player.InventoryManager;
+                if (inv.ActiveHotbarSlotNumber != slotNumber || inv.ActiveHotbarSlot.Empty || inv.ActiveHotbarSlot.Itemstack.Collectible.Id != heldID)
                 {
                     
                     return false;
@@ -289,7 +291,7 @@ namespace Farmlife
             {
                 pathTraverser.Stop();
 
-                EntityBehaviorMultiply bh = entity.GetBehavior<EntityBehaviorMultiply>();
+                EntityBehaviorFoodMultiply bh = entity.GetBehavior<EntityBehaviorFoodMultiply>();
                 if (bh != null && !bh.ShouldEat) return false;
 
                 if (targetPoi.IsSuitableFor(entity) != true) return false;
@@ -326,27 +328,37 @@ namespace Farmlife
                     ITreeAttribute tree = entity.WatchedAttributes.GetTreeAttribute("hunger");
                     if (tree == null) entity.WatchedAttributes["hunger"] = tree = new TreeAttribute();
 
-                    if (doConsumePortion)
+                    if (doConsumePortion && bc != null)
                     {
                         if (targetPoi is LooseItemFoodSource)
                         {
                             float sat = targetPoi.ConsumeOnePortion() * entity.Stats.GetBlended("digestion");
                             quantityEaten += sat;
-                            tree.SetFloat("saturation", sat + tree.GetFloat("saturation", 0));
+                            tree.SetFloat("saturation", GameMath.Clamp(sat + tree.GetFloat("saturation", 0), 0, MaxSat));
                             entity.WatchedAttributes.SetDouble("lastMealEatenTotalHours", entity.World.Calendar.TotalHours);
                             entity.WatchedAttributes.MarkPathDirty("hunger");
+                            entity.WatchedAttributes.SetBool("playerFed", true);
                         }
                         else
                         {
-                            while (targetPoi?.IsSuitableFor(entity) == true && tree.GetFloat("saturation") < (entity.Properties?.Attributes?["maxSaturation"].AsFloat(20f) ?? 20f))
+                            while (targetPoi?.IsSuitableFor(entity) == true && tree.GetFloat("saturation") < MaxSat)
                             {
                                 float sat = targetPoi.ConsumeOnePortion() * entity.Stats.GetBlended("digestion");
                                 quantityEaten += sat;
-                                tree.SetFloat("saturation", sat + tree.GetFloat("saturation", 0));
+                                tree.SetFloat("saturation", GameMath.Clamp(sat + tree.GetFloat("saturation", 0), 0, MaxSat));
                                 entity.WatchedAttributes.SetDouble("lastMealEatenTotalHours", entity.World.Calendar.TotalHours);
                                 entity.WatchedAttributes.MarkPathDirty("hunger");
+                                if (!(targetPoi is GrazingPOI)) entity.WatchedAttributes.SetBool("playerFed", true);
                             }
                         }
+                    }
+                    else if (doConsumePortion)
+                    {
+                        float sat = targetPoi.ConsumeOnePortion();
+                        quantityEaten += sat;
+                        tree.SetFloat("saturation", sat + tree.GetFloat("saturation", 0));
+                        entity.WatchedAttributes.SetDouble("lastMealEatenTotalHours", entity.World.Calendar.TotalHours);
+                        entity.WatchedAttributes.MarkPathDirty("hunger");
                     }
                     else quantityEaten = 1;
 
@@ -376,15 +388,6 @@ namespace Farmlife
 
 
             return true;
-        }
-
-
-        float GetSaturation()
-        {
-            ITreeAttribute tree = entity.WatchedAttributes.GetTreeAttribute("hunger");
-            if (tree == null) entity.WatchedAttributes["hunger"] = tree = new TreeAttribute();
-
-            return tree.GetFloat("saturation");
         }
 
 
@@ -477,7 +480,53 @@ namespace Farmlife
             return blockSel?.Position == target.Position.AsBlockPos;
         }
 
+        private IAnimalFoodSource tryGrazing()
+        {
+            if (entity.World.Calendar.TotalHours - grazeDigest < 1) return null;
+            GrazingPOI munchon = null;
+            
+            BlockPos tmpPos = entity.SidedPos.AsBlockPos.Copy();
+            Block nearby;
 
+            for (int x = -1; x < 2; x++)
+            {
+                for (int z = -1; z < 2; z++)
+                {
+                    for (int y = 0; y > -2; y--)
+                    {
+                        //if (Math.Abs(x) + Math.Abs(z) > 1) continue;
+                        tmpPos.Set(entity.SidedPos.AsBlockPos);
+                        nearby = world.BlockAccessor.GetBlock(tmpPos.Add(x,z,y));
+
+                        if (nearby.Attributes?["grazingProperties"].Exists == true)
+                        {
+                            Dictionary<string, double> eatList = nearby.Attributes["grazingProperties"]["canEat"].AsObject<Dictionary<string, double>>();
+
+                            if (eatList == null) return null;
+
+                            foreach(var val in eatList)
+                            {
+                                AssetLocation ani = new AssetLocation(val.Key);
+                                if (ani.Equals(entity.Code) || (ani.IsWildCard && WildcardUtil.Match(ani, entity.Code)))
+                                {
+                                    if (entity.World.Calendar.TotalHours - grazedLast >= val.Value)
+                                    {
+                                        grazedLast = entity.World.Calendar.TotalHours;
+                                        grazeDigest = entity.World.Calendar.TotalHours;
+                                        return new GrazingPOI(tmpPos, entity.World.GetBlock(new AssetLocation(nearby.Attributes["grazingProperties"]["eatenBlock"].AsString("air"))).BlockId, entity.World.BlockAccessor,
+                                            nearby.Attributes["grazingProperties"]["saturation"].AsFloat(1), nearby.Attributes["grazingProperties"]["health"].AsFloat(0));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+
+
+            return munchon;
+        }
     }
 
     public class TFailedAttempt
@@ -516,6 +565,44 @@ namespace Farmlife
         public bool IsSuitableFor(Entity entity)
         {
             return false;
+        }
+    }
+
+    public class GrazingPOI : IAnimalFoodSource
+    {
+        public Vec3d Position => grazingBlock.ToVec3d().Add(0.5, 0.5, 0.5);
+
+        public string Type => "food";
+
+        Entity lastChecked;
+        BlockPos grazingBlock;
+        int afterGraze;
+        float health;
+        IBlockAccessor blockAccessor;
+        bool alreadyMunched = false;
+        float food = 1;
+
+        public GrazingPOI(BlockPos pos, int id, IBlockAccessor builder, float nutr = 1, float hp = 0)
+        {
+            grazingBlock = pos;
+            afterGraze = id;
+            blockAccessor = builder;
+            food = nutr;
+            health = hp;
+        }
+
+        public float ConsumeOnePortion()
+        {
+            blockAccessor.SetBlock(afterGraze, grazingBlock);
+            alreadyMunched = true;
+            if (health != 0) lastChecked.ReceiveDamage(new DamageSource() { Type = health > 0 ? EnumDamageType.Heal : EnumDamageType.Poison, Source = EnumDamageSource.Internal }, health);
+            return food;
+        }
+
+        public bool IsSuitableFor(Entity entity)
+        {
+            lastChecked = entity;
+            return !alreadyMunched;
         }
     }
 }

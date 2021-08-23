@@ -1,0 +1,14 @@
+[
+  {
+  	ingredientPattern: "VFM,_S_",
+  	ingredients: {
+  		"F": { type: "item", code: "game:flour-*" },
+      "V": { type: "item", code: "game:vegetable-*" },
+      "M": { type: "item", code: "game:bonemeal" },
+      "S": { type: "item", code: "game:salt" }
+  	},
+  	width: 3,
+  	height: 2,
+  	output: { type: "item", code: "farmlife:animalfeed", quantity: 8 }
+  },
+]

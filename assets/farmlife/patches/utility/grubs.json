@@ -1,0 +1,36 @@
+[
+  {
+    "op": "add",
+    "path": "/classByType",
+    "value": {
+      "*-grub": "ItemShiftCreature"
+    },
+    "file": "game:itemtypes/food/insect.json"
+  },
+  {
+    "op": "add",
+    "path": "/attributes",
+    "value": {
+      "blockDiet": [
+        "Poop"
+      ]
+    },
+    "file": "game:entities/land/grub.json"
+  },
+  {
+    "op": "add",
+    "path": "/server/behaviors/6/aitasks/-",
+    "value":
+        {
+          "code": "seekfoodandeat",
+          "movespeed": 0.01,
+          "priority": 1.6,
+          "animationSpeed": 0.8,
+          "eatTime": 1,
+          "animation": "Walk",
+          "mincooldownHours": 0,
+          "maxcooldownHours": 0
+        },
+    "file": "game:entities/land/grub.json"
+  }
+]

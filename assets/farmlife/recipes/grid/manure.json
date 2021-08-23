@@ -1,0 +1,10 @@
+{
+	ingredientPattern: "CCC	CSC	CCC",
+	ingredients: {
+		"C": { type: "item", code: "farmlife:feces-*", quantity: 4 },
+		"S": { type: "block", code: "game:soil-medium-none" }
+	},
+	width: 3,
+	height: 3,
+	output: { type: "block", code: "game:soil-compost-none", quantity: 1  }
+}

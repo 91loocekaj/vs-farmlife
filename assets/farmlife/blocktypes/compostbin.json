@@ -1,7 +1,8 @@
 {
 	code: "compostbin",
-	entityclass: "GenericTypedContainer",
+	entityclass: "CompostBin",
 	behaviors: [{name: "Container"}],
+	entityBehaviors: [{ name: "Maggots", properties: {minSpawn: 10, maxSpawn: 64} }],
 	attributes: {
 		partialAttachable: true,
 		inventoryClassName: "chest",
@@ -21,15 +22,6 @@
 		},
 		retrieveOnly: {
 			"normal": false
-		},
-		spoilSpeedMulByFoodCat: {
-			"normal": {
-				"vegetable": 10,
-				"grain": 100,
-        "fruit": 60,
-        "protein": 60,
-        "dairy": 400
-			}
 		},
 		openSound: "game:sounds/block/basketopen",
 		closeSound: "game:sounds/block/basketclose",

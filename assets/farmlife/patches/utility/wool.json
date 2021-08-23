@@ -1,0 +1,14 @@
+[
+  {
+    "op": "add",
+    "path": "/attributes/clothingRepairStrength",
+    "value": 1,
+    "file": "game:blocktypes/cloth/wool.json"
+  },
+  {
+    "op": "replace",
+    "path": "/attributes/handbook/exclude",
+    "value": false,
+    "file": "game:blocktypes/cloth/wool.json"
+  }
+]

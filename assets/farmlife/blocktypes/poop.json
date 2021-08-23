@@ -3,49 +3,42 @@
 	behaviors: [{name: "UnstableFalling"}, { name: "RightClickPickup", properties: {dropsPickupMode: true}}],
 	class: "BlockRequireSolidGround",
 	entityClass: "Transient",
+	entityBehaviors: [{ name: "FoodSource", properties: {foodType: "Poop", yOffset: 0, saturation: 0} }],
 	attributes: {
-		nopoop: false,
 		transientProps: {
 			convertFrom: "*",
 			convertTo: "game:air",
 			inGameHours: "72",
 		},
-    fertilizerPropsByType:{
-      "*-small": { n: 5, p: 5, k: 5 },
-      "*-medium": { n: 10, p: 10, k: 10 },
-      "*-large": { n: 15, p: 15, k: 15 },
-      },
 		dissolveInWater: true,
 		handbook: {
-			groupBy: ["poop-*"]
+			exclude: true
 		}
 	},
 	dropsByType: {
-		"*-small" : [{type: "block", code: "farmlife:poop-small", quantity: {avg: 1}}],
-		"*-medium" : [{type: "block", code: "farmlife:poop-small", quantity: {avg: 2}}],
-		"*-large" : [{type: "block", code: "farmlife:poop-small", quantity: {avg: 3}}]
+		"*-small" : [{type: "item", code: "farmlife:feces-{type}", quantity: {avg: 1}}],
+		"*-medium" : [{type: "item", code: "farmlife:feces-{type}", quantity: {avg: 2}}],
+		"*-large" : [{type: "item", code: "farmlife:feces-{type}", quantity: {avg: 3}}]
 	},
 	creativeinventory: { "general": ["*"]},
 	variantgroups: [
-		{ code: "type", states: ["small", "medium", "large"] },
+		{ code: "type", states: ["omnivore", "avian", "grazer"] },
+		{ code: "size", states: ["small", "medium", "large"] },
 	],
-	shape: {base: "farmlife:block/poop/poop-{type}"},
+	shape: {base: "farmlife:block/poop/poop-{size}"},
   shapeInventory: { base: "farmlife:block/poop/poopicon" },
-  texture: {base: "farmlife:block/poop/poop"},
+  texture: {base: "farmlife:block/poop/{type}"},
 	randomDrawOffset: true,
+	randomizeRotations: true,
 	lightAbsorption: 0,
 	resistance: 1,
+	replaceable: 6600,
 	sidesolid: { all: false },
 	sideopaque: { all: false },
 	selectionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.2, z2: 1 },
 	collisionbox: null,
 	materialDensity: 3000,
-	blockmaterial: "Other",
-	guiTransform: {
-		rotation: { x: -22.5937, y: 132, z: 0 },
-		origin: { x: 0.5, y: 0.22, z: 0.5 },
-		scale: 1.25
-	},
+	blockmaterial: "Plant",
   fpHandTransform: {
   translation: { x: 0, y: 0.19, z: 0.5 },
   rotation: { x: 0, y: -24, z: 0 }

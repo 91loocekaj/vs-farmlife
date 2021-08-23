@@ -1,0 +1,77 @@
+[
+  {
+    "op": "add",
+    "path": "/attributes/grazingProperties",
+    "value": {
+      "eatenBlock": "wildfarming:wildplant-fern-{type}",
+      "canEat": {
+        "sheep-*": 3,
+        "hare-*": 3,
+        "pig-*": 3,
+        "chicken-*": 3,
+        "medievalexpansion:aurochs-*": 3,
+        "lichen:deer-*": 3,
+        "lichen:white-hart": 3
+      },
+      "saturation": 3,
+      "healthBytype": {
+        "*-eaglefern": -0.5,
+        "*-cinnamonfern": -0.5
+      }
+    },
+    "dependsOn": [{ "modid": "wildfarming" }],
+    "condition": { "when": "FLwildfarmingEnabled", "isValue": "true" },
+    "file": "game:blocktypes/plant/fern.json"
+  },
+  {
+    "op": "add",
+    "path": "/attributes/grazingProperties",
+    "value": {
+      "eatenBlock": "wildfarming:wildplant-flower-{flower}-{cover}",
+      "canEat": {
+        "sheep-*": 3,
+        "hare-*": 3,
+        "pig-*": 3,
+        "chicken-*": 3,
+        "medievalexpansion:aurochs-*": 3,
+        "lichen:deer-*": 3,
+        "lichen:white-hart": 3
+      },
+      "saturationByType": {
+        "*-edelweiss-*": 2,
+        "*-heather-*": 6,
+        "*-horsetail-*": 2,
+        "*-westerngorse-*": 9,
+        "*-californiapoppy-*": 3,
+        "*": 3
+      },
+      "healthBytype": {
+        "*-lilyofthevalley-*": -0.5,
+        "*-horsetail-*" : 3
+      }
+    },
+    "dependsOn": [{ "modid": "wildfarming" }],
+    "condition": { "when": "FLwildfarmingEnabled", "isValue": "true" },
+    "file": "game:blocktypes/plant/flower.json"
+  },
+  {
+    "op": "add",
+    "path": "/attributes/grazingProperties",
+    "value": {
+      "eatenBlock": "wildfarming:wildplant-flower-{flower}-{color}-{cover}",
+      "canEat": {
+        "sheep-*": 3,
+        "hare-*": 3,
+        "pig-*": 3,
+        "chicken-*": 3,
+        "medievalexpansion:aurochs-*": 3,
+        "lichen:deer-*": 3,
+        "lichen:white-hart": 3
+      },
+      "saturation": 5
+    },
+    "dependsOn": [{ "modid": "wildfarming" }],
+    "condition": { "when": "FLwildfarmingEnabled", "isValue": "true" },
+    "file": "game:blocktypes/plant/flower-lupine.json"
+  },
+]

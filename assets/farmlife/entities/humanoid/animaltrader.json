@@ -1,0 +1,478 @@
+{
+	code: "humanoid-trader-animal",
+	class: "EntityTrader",
+	canClimb: true,
+	hitboxSize: { x: 0.6, y: 1.75 },
+	deadHitboxSize: { x: 0.75, y: 0.5 },
+	client: {
+		renderer: "Shape",
+		shape: { base: "game:entity/humanoid/trader" },
+		texture: { base: "game:entity/humanoid/trader", alternates: [ { base: "game:entity/humanoid/traderclothes/set1" }, { base: "game:entity/humanoid/traderclothes/set2" },
+                                                             { base: "game:entity/humanoid/traderclothes/set3" }, { base: "game:entity/humanoid/traderclothes/set4" },
+                                                             { base: "game:entity/humanoid/traderclothes/set5" }  ] },
+		behaviors: [
+			{ code: "nametag", "showtagonlywhentargeted": true },
+			{ code: "repulseagents" },
+			{ code: "controlledphysics", stepHeight: 1.01 },
+			{ code: "interpolateposition" }
+		],
+		animations: [
+			{
+				code: "die",
+				animation: "die",
+				animationSpeed: 1.75,
+				weight: 10,
+				blendMode: "AddAverage"
+			},
+			{
+				code: "hurt",
+				animation: "hurt",
+				animationSpeed: 2,
+				blendMode: "AddAverage"
+			}
+		]
+	},
+	server: {
+		attributes: {
+			pathfinder: {
+				minTurnAnglePerSec: 720,
+				maxTurnAnglePerSec: 1440
+			},
+			tradeProps: {
+				money: { avg: 30, var: 10 },
+
+
+
+
+    "selling": {
+        "maxItems": 10,
+        "list": [
+          {
+              "code": "game:skep-populated-east",
+              "type": "block",
+              "stacksize": 1,
+              "stock": {
+                  "avg": 2,
+                  "var": 1
+              },
+              "price": {
+                  "avg": 50,
+                  "var": 10
+              }
+          },
+					{
+              "code": "game:cagedanimal-hare-baby",
+              "type": "item",
+              "stacksize": 1,
+              "stock": {
+                  "avg": 1,
+                  "var": 0
+              },
+              "price": {
+                  "avg": 60,
+                  "var": 10
+              }
+          },
+					{
+              "code": "game:cagedanimal-chicken-baby",
+              "type": "item",
+              "stacksize": 1,
+              "stock": {
+                  "avg": 1,
+                  "var": 0
+              },
+              "price": {
+                  "avg": 75,
+                  "var": 10
+              }
+          },
+					{
+              "code": "game:cagedanimal-pig-wild-piglet",
+              "type": "item",
+              "stacksize": 1,
+              "stock": {
+                  "avg": 1,
+                  "var": 0
+              },
+              "price": {
+                  "avg": 100,
+                  "var": 10
+              }
+          },
+					{
+              "code": "game:cagedanimal-sheep-bighorn-lamb",
+              "type": "item",
+              "stacksize": 1,
+              "stock": {
+                  "avg": 1,
+                  "var": 0
+              },
+              "price": {
+                  "avg": 120,
+                  "var": 10
+              }
+          },
+					{
+              "code": "game:cagedanimal-wolf-pup",
+              "type": "item",
+              "stacksize": 1,
+              "stock": {
+                  "avg": 1,
+                  "var": 0
+              },
+              "price": {
+                  "avg": 200,
+                  "var": 10
+              }
+          },
+					{
+              "code": "lichen:cagedanimal-deer-fawn",
+              "type": "item",
+              "stacksize": 1,
+              "stock": {
+                  "avg": 1,
+                  "var": 0
+              },
+              "price": {
+                  "avg": 200,
+                  "var": 10
+              }
+          },
+					{
+              "code": "medievalexpansion:cagedanimal-aurochs-lamb",
+              "type": "item",
+              "stacksize": 1,
+              "stock": {
+                  "avg": 1,
+                  "var": 0
+              },
+              "price": {
+                  "avg": 150,
+                  "var": 10
+              }
+          },
+					{
+							"code": "game:wool-brown-down",
+							"type": "block",
+							"stacksize": 2,
+							"stock": {
+									"avg": 4,
+									"var": 1
+							},
+							"price": {
+									"avg": 8,
+									"var": 0.5
+							}
+					},
+					{
+							"code": "game:wool-black-down",
+							"type": "block",
+							"stacksize": 2,
+							"stock": {
+									"avg": 4,
+									"var": 1
+							},
+							"price": {
+									"avg": 8,
+									"var": 0.5
+							}
+					},
+        ]
+    },
+    "buying": {
+        "maxItems": 10,
+        "list": [
+          {
+              "code": "game:bread-spelt-perfect",
+              "type": "item",
+              "stacksize": 8,
+              "stock": {
+                  "avg": 5,
+                  "var": 1.25
+              },
+              "price": {
+                  "avg": 1,
+                  "var": 0.25
+              }
+          },
+          {
+              "code": "game:bread-rye-perfect",
+              "type": "item",
+              "stacksize": 8,
+              "stock": {
+                  "avg": 5,
+                  "var": 1.25
+              },
+              "price": {
+                  "avg": 1,
+                  "var": 0.25
+              }
+          },
+          {
+              "code": "game:bread-flax-perfect",
+              "type": "item",
+              "stacksize": 8,
+              "stock": {
+                  "avg": 5,
+                  "var": 1.25
+              },
+              "price": {
+                  "avg": 1,
+                  "var": 0.25
+              }
+          },
+          {
+              "code": "game:bread-rice-perfect",
+              "type": "item",
+              "stacksize": 8,
+              "stock": {
+                  "avg": 5,
+                  "var": 1.25
+              },
+              "price": {
+                  "avg": 1,
+                  "var": 0.25
+              }
+          },
+					{
+							"code": "game:hoe-tinbronze",
+							"type": "item",
+							"stacksize": 1,
+							"stock": {
+									"avg": 2,
+									"var": 0.5
+							},
+							"price": {
+									"avg": 2,
+									"var": 0.5
+							}
+					},
+					{
+							"code": "game:hoe-bismuthbronze",
+							"type": "item",
+							"stacksize": 1,
+							"stock": {
+									"avg": 2,
+									"var": 0.5
+							},
+							"price": {
+									"avg": 2,
+									"var": 0.5
+							}
+					},
+					{
+							"code": "game:hoe-blackbronze",
+							"type": "item",
+							"stacksize": 1,
+							"stock": {
+									"avg": 2,
+									"var": 0.5
+							},
+							"price": {
+									"avg": 3,
+									"var": 0.75
+							}
+					},
+					{
+							"code": "game:knife-tinbronze",
+							"type": "item",
+							"stacksize": 1,
+							"stock": {
+									"avg": 2,
+									"var": 0.5
+							},
+							"price": {
+									"avg": 3,
+									"var": 0.75
+							}
+					},
+					{
+							"code": "game:knife-bismuthbronze",
+							"type": "item",
+							"stacksize": 1,
+							"stock": {
+									"avg": 2,
+									"var": 0.5
+							},
+							"price": {
+									"avg": 3,
+									"var": 0.75
+							}
+					},
+					{
+							"code": "game:knife-blackbronze",
+							"type": "item",
+							"stacksize": 1,
+							"stock": {
+									"avg": 2,
+									"var": 0.5
+							},
+							"price": {
+									"avg": 4,
+									"var": 1
+							}
+					},
+					{
+							"code": "game:scythe-tinbronze",
+							"type": "item",
+							"stacksize": 1,
+							"stock": {
+									"avg": 2,
+									"var": 0.5
+							},
+							"price": {
+									"avg": 3,
+									"var": 0.75
+							}
+					},
+					{
+							"code": "game:scythe-bismuthbronze",
+							"type": "item",
+							"stacksize": 1,
+							"stock": {
+									"avg": 2,
+									"var": 0.5
+							},
+							"price": {
+									"avg": 3,
+									"var": 0.75
+							}
+					},
+					{
+							"code": "game:scythe-blackbronze",
+							"type": "item",
+							"stacksize": 1,
+							"stock": {
+									"avg": 2,
+									"var": 0.5
+							},
+							"price": {
+									"avg": 4,
+									"var": 1
+							}
+					},
+					{
+							"code": "game:linensack",
+							"type": "item",
+							"stacksize": 1,
+							"stock": {
+									"avg": 2,
+									"var": 0.5
+							},
+							"price": {
+									"avg": 1,
+									"var": 0.25
+							}
+					},
+					{
+							"code": "game:stone-halite",
+							"type": "item",
+							"stacksize": 20,
+							"stock": {
+									"avg": 3,
+									"var": 0.75
+							},
+							"price": {
+									"avg": 1,
+									"var": 0.25
+							}
+					}
+        ]
+    }
+
+
+
+			}
+		},
+		behaviors: [
+			{ code: "nametag", "showtagonlywhentargeted": true, selectFromRandomName: ["Bear", "Grylls", "Davie", "Joe", "Forest"] },
+			{ code: "repulseagents" },
+			{ code: "controlledphysics", stepHeight: 1.01 },
+			{ code: "reviveondeath", minHours: 24, maxHours: 72 },
+			{ code: "health", currenthealth: 25, maxhealth: 25 },
+			{
+				code: "emotionstates",
+				states: [
+					{ code: "aggressiveondamage", duration: 6, chance: 0.6, slot: 0, priority: 2, accumType: "noaccum" },
+					{ code: "fleeondamage", duration: 10, chance: 0.4, slot: 0, priority: 1, accumType: "max" }
+				],
+			},
+			{
+				code: "taskai",
+				aitasks: [
+					{
+						code: "meleeattack",
+						entityCodes: ["player"],
+						priority: 2,
+						damage: 5,
+						mincooldown: 2500,
+						maxcooldown: 3500,
+						attackDurationMs: 900,
+						damagePlayerAtMs: 300,
+						animation: "Attack",
+						animationSpeed: 2,
+						whenInEmotionState: "aggressiveondamage",
+					},
+					{
+						code: "seekentity",
+						entityCodes: ["player"],
+						priority: 1.5,
+						mincooldown: 1000,
+						maxcooldown: 1500,
+						seekingRange: 20,
+						movespeed: 0.035,
+						animation: "Run",
+						animationSpeed: 1.75,
+						whenInEmotionState: "aggressiveondamage"
+					},
+					{
+						code: "fleeentity",
+						entityCodes: ["player"],
+						priority: 1.5,
+						movespeed: 0.035,
+						seekingRange: 12,
+						animation: "Run",
+						animationSpeed: 1.75,
+						whenInEmotionState: "fleeondamage"
+					},
+					{
+						code: "idle",
+						priority: 1.2,
+						minduration: 2500,
+						maxduration: 2500,
+						mincooldown: 2000,
+						maxcooldown: 10000,
+						animation: "laugh"
+					},
+					{
+						code: "idle",
+						priority: 1.2,
+						minduration: 2500,
+						maxduration: 2500,
+						mincooldown: 5000,
+						maxcooldown: 30000,
+						animation: "idle2"
+					},
+					{
+						code: "wander",
+						priority: 1.0,
+						movespeed: 0.01,
+						animation: "Walk",
+						wanderChance: 0.005,
+						maxDistanceToSpawn: 4,
+						wanderRangeMin: 1,
+						wanderRangeMax: 3,
+						teleportWhenOutOfRange: true,
+						teleportInGameHours: 1
+					},
+					{
+						code: "lookaround",
+						priority: 0.5
+					}
+				]
+			}
+		],
+	},
+	sounds: {
+	}
+}
