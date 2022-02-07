@@ -2,10 +2,12 @@
   "type": "code",
   "modid": "farmlife",
   "name": "Farm Life",
-  "author": "jakecool19",
+  "authors": ["jakecool19"],
   "description": "Adds a realistic hunger system to livestock, allows rabbit and early game farming, and more!",
-  "version": "1.0.6",
-  "dependency": {
+  "RequiredOnClient": true,
+	"RequiredOnServer": true,
+  "version": "1.2.0",
+  "dependencies": {
     "game": ""
   }
 }

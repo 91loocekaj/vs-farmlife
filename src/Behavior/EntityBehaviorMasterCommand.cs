@@ -13,7 +13,7 @@ namespace Farmlife
             get { return (entity as EntityPlayer).Player; }
         }
 
-        public override void OnEntityReceiveDamage(DamageSource damageSource, float damage)
+        public override void OnEntityReceiveDamage(DamageSource damageSource, ref float damage)
         {
             if (damageSource?.SourceEntity != null && damageSource.SourceEntity.HasBehavior<EntityBehaviorHealth>())
             {
@@ -31,7 +31,7 @@ namespace Farmlife
                     });
                 }
             }
-                base.OnEntityReceiveDamage(damageSource, damage);
+                base.OnEntityReceiveDamage(damageSource, ref damage);
         }
 
         public override void DidAttack(DamageSource source, EntityAgent targetEntity, ref EnumHandling handled)

@@ -55,6 +55,7 @@
 "feral": "Wild",
 "infertile": "Infertile",
 "shearable" : "Can be sheared",
+"breedingcap" : "Cannot mate, overpopulated!",
 
 "genelevel-1" : "Poor",
 "genelevel-2" : "Below Average",
@@ -93,31 +94,31 @@ This guide is a much more in depth explanation of animal husbandry. Livestock an
 <strong>-----Part 1: Basic Knowledge-----</strong>
 
 <strong>-----Entity HUD Keyword Meanings-----</strong>
-<strong>Saturation: x/y (z%)</strong>
+Saturation: x/y (z%)
 This shows you the current saturation of the entity if it is a farmable one. X is the current saturation, y is the maximum saturation, and z is the percentage of the current saturation.
-<strong>Hungry!</strong>
+Hungry!
 If an entity has this word in it means that it is hungry. Hungry animals will not mate, grow, mate, and cannot be milked. On average animals are hungry when their saturation is below 75% but this varies with the Resistance trait.
-<strong>Wild</strong>
+Wild
 When a wild female reproduces, its offspring will not increase in generation. The player must feed her either by trough or dropping an item she can eat. Once she is no longer wild, all her offspring and their offspring will gain generations.
-<strong>Infertile</strong>
+Infertile
 Females have a limited number of times they can give birth, and when they reach the max they can no longer get pregnant. Infertile chickens will also no longer lay eggs or incubate eggs.
-<strong>Can be sheared</strong>
+Can be sheared
 When an entity can be sheared it will display this. Right clicking with shears will cause it to drop an item. There is a chance you will damage it in the process.
 
 <strong>-----Traits-----</strong>
  All farmable animals have genetic traits that determine different stats for it, shift+ctrl+right click an entity with an empty hand, to see the stats in your info log. Stats are inherited from parents. They range from Poor, Below Average, Average, Above Average, Exceptional
-<strong>Health</strong>: Increases or decreases maximum health. Levels: -1, -0.5, 0, +0.5, +1
-<strong>Speed</strong>: Increases or decreases movement speed. Levels: -40%, -20%, 0, +20%, + 40%
-<strong>Digestion</strong>: Determines saturation per portion of food. Levels: 0.5, 0.75, 1, 1.25, 1.5
-<strong>Hunger</strong>: Determines how much saturation is lost per day. Levels 1.5, 1.25, 1, 0.75, 0.5
-<strong>Resistance</strong>: Determines how much food an animal needs not to be hungry and how resistant they are to miscarriages. (with Useful Stuff mod installed also determines how much damage they take)
+Health: Increases or decreases maximum health. Levels: -1, -0.5, 0, +0.5, +1
+Speed: Increases or decreases movement speed. Levels: -20%, -10%, 0, +10%, + 10%
+Digestion: Determines saturation per portion of food. Levels: 0.5, 0.75, 1, 1.25, 1.5
+Hunger: Determines how much saturation is lost per day. Levels 1.5, 1.25, 1, 0.75, 0.5
+Resistance: Determines how much food an animal needs not to be hungry and how resistant they are to miscarriages. (with Useful Stuff mod installed also determines how much damage they take)
 Levels: +25%, +12.5%, 0, -12.5%, 25%
 
 <strong>-----Reproduction-----</strong>
 Animals cannot be hungry to mate. When mating occurs the female gets pregnant she will have an increased food consumption of +50% for the duration of her pregnancy. Pregnant females can have a miscarriage if either their saturation drops below 50% or their health drops below 25%. This is affected by the Resistance trait. Babies have only half the maximum saturation of their adult selves. Babies that are hungry will stop growing, so keep them fed throughout their childhood! Female animals have a limited number of times they can get pregnant/lay eggs, then they will become infertile and stop bearing children.
 
 <strong>-----Feeding-----</strong>
-Animals can eat and gain saturation by either grazing on vegetation, eating loose items, preying on other animals, or eating food from troughs. Animals will also be attracted to players when they have a food they like in their hands. Note: Animals will eat items and prey even if they are already full. All farmable animals can be fed <a href=\"handbook://item-farmlife:animalfeed\">animal feed</a> either in a trough or as an item. It is relatively cheap and has a long shelf life but requires much more effort to make and attracts everything, including predatory wolves, and agile deers that can jump fences and steal food. Animals still need food even when unloaded, the only way for them to get food and not starve is for a trough with food is nearby.
+Animals can eat and gain saturation by either grazing on vegetation, eating loose items, preying on other animals, or eating food from troughs. Animals will also be attracted to players when they have a food they like in their hands. Note: Animals will eat items and prey even if they are already full. All farmable animals can be fed animal feed either in a trough or as an item. It is relatively cheap and has a long shelf life but requires much more effort to make and attracts everything, including predatory wolves, and agile deers that can jump fences and steal food. Animals still need food even when unloaded, the only way for them to get food and not starve is for a trough with food is nearby.
 
 <strong>-----Part 2: Animal Breakdown-----</strong>
 
@@ -148,7 +149,7 @@ Pregnancy Recovery Time(in game days) = 14-21
 Litter size = 1
 Baby to Adult Time(in game hours) = 336
 Maximum number of births: 3
-Additional Info: Female sheep can be milked, and adults can be sheared for wool
+Additional Info: Female sheep can be milked
 
 <strong>-----Chicken-----</strong>
 Maximum saturation = 12
@@ -195,21 +196,6 @@ Baby to Adult Time(in game hours) = 192
 Maximum number of births: 5
 Additional Info: Extremely hostile, can cause significant injury to players.
 
-<strong>-----Dog-----</strong>
-Maximum saturation = 20
-Eats items: All meat
-Grazes on: N/A
-Eats in trough: Only animal feed in large or small trough
-Preys on: N/A
-Poop amount: Small to medium
-Poop Type: Normal
-Gestation time(in game days) = 12
-Pregnancy Recovery Time(in game days) = 7-10
-Litter size = 4-6
-Baby to Adult Time(in game hours) = 192
-Maximum number of births: 5
-Additional Info: Any kills the dog gets, it does not get nutrients from, and the credit for the kill goes to its owners
-
 <strong>-----Aurochs(If Medieval Expansion is installed)-----</strong>
 Maximum saturation = 24
 Eats items: All grains, and hay
@@ -225,11 +211,26 @@ Baby to Adult Time(in game hours) = 336
 Maximum number of births: 4
 Additional Info: Females can be milked
 
+<strong>-----Gemsbokl(If Lichen is installed)-----</strong>
+Maximum saturation = 18
+Eats items: All grains and hay
+Grazes on: Grass, (If Wild Farming is installed: Ferns, Flowers)
+Eats in trough: Anything sheep eat
+Preys on: N/A
+Poop amount: Small to Large
+Poop Type: Grazer
+Gestation time(in game days) = 13
+Pregnancy Recovery Time(in game days) = 4-11
+Litter size = 1-2
+Baby to Adult Time(in game hours) = 336
+Maximum number of births: 6
+Additional Info: Very agile, can jump over fences. Very hard to domesticate. Females produce milk and adults can be sheared for horns
+
 <strong>-----Deer(If Lichen is installed)-----</strong>
 Maximum saturation = 18
 Eats items: All grains and hay
 Grazes on: Grass, (If Wild Farming is installed: Ferns, Flowers)
-Eats in trough: Only animal feed from large trough
+Eats in trough: Anything sheep eat
 Preys on: N/A
 Poop amount: Small to Large
 Poop Type: Grazer
@@ -238,23 +239,9 @@ Pregnancy Recovery Time(in game days) = 4-11
 Litter size = 1-3
 Baby to Adult Time(in game hours) = 168
 Maximum number of births: 5
-Additional Info: Very agile, can jump over fences. Very hard to domesticate. Females produce milk and males can be sheared for their antlers.
+Additional Info: Very agile, can jump over fences. Very hard to domesticate. Males can be sheared for their antlers.
 
 <strong>-----Part 3: Other Knowledge-----</strong>
-
-<strong>-----Pets-----</strong>
-Wolves can be turned into dogs once they reach generation 10. To turn them into a dog shift-right click with a <a href=\"handbook://item-farmlife:collar\">collar</a> and they will be owned by you. Note: The color of the dog may be different from when it was a wolf. To give the dog commands, use a <a href=\"handbook://item-farmlife:petwhistle\">pet whistle</a>. Dogs will stop obeying you if they are hungry. Shift+left click to set and order, and ctrl+left click to set an aggro level. Shift+right with a dog selected to give them the current command or aggro level, or if you are not looking at a specific pet it will give every pet within a 30 block radius that order and aggro.
-
-Current Commands:
-<strong>Stay</strong>: The pet will not move
-<strong>Wander</strong>: The pet will freely wander around
-<strong>Follow</strong>: The pet will follow you and teleport to you if you get too far away
-
-Current aggro levels:
-<strong>Passive</strong>: The pet will not attack at all
-<strong>Defend</strong>: The pet will attack entities that attack it
-<strong>Protect</strong>: The pet will attack entities that attack it, it’s owner, or generation 3 animals
-<strong>Hunt</strong>: The pet will attack entities that it’s owner attacks, attack it, it’s owner, or generation 3 animals
 
 <strong>-----Grubs-----</strong>
 <a href=\"handbook://item-insect-grub\">Grubs</a> can be collected by placing a compost bin full of rot on top of a hopper. Grubs will grow and eat the rot and fall into the hopper. They can be eaten for a tiny snack(GROSS!), and you can place them on the ground by shift+right clicking. They will go around and eat poop.
@@ -270,9 +257,6 @@ Animal traders specialize in the selling of domesticated animals. They will sell
 
 <strong>-----Compost Bin-----</strong>
 The <a href=\"handbook://block-farmlife:compostbin\">compost bin</a> can be used to rot perishable things or to farm maggots.
-
-<strong>-----Wool-----</strong>
-Wool can be sheared from adult sheep. <a href=\"handbook://item-farmlife:woolfibers\">Greasy wool fibers</a> need to be cleaned with lime water to be turned into twine, and <a href=\"handbook://item-farmlife:wooltwine\">wool twine</a> can be turned into <a href=\"handbook://block-wool-white-down\">white wool sheets</a>. Wool can be used in similar ways to linen and has double the clothing repairing abilities.
 
 <strong>-----Other Tips & Knowledge-----</strong>
 Hold shift while filling a trough to put in 4 at a time

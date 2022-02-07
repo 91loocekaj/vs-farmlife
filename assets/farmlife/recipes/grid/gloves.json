@@ -1,7 +1,7 @@
 {
 	ingredientPattern: "L_L,T_T,L_L",
 	ingredients: {
-		"L": { type: "item", code: "game:leather" },
+		"L": { type: "item", code: "game:leather-*" },
 		"T": { type: "item", code: "game:flaxtwine" }
 	},
 	width: 3,

@@ -213,7 +213,7 @@ namespace Farmlife
 
             if (__instance.entity.World.Side == EnumAppSide.Server)
             {
-                AiTaskManager tmgr = __instance.entity.GetBehavior<EntityBehaviorTaskAI>().taskManager;
+                AiTaskManager tmgr = __instance.entity.GetBehavior<EntityBehaviorTaskAI>().TaskManager;
                 tmgr.StopTask(typeof(AiTaskWander));
                 tmgr.StopTask(typeof(AiTaskSeekEntity));
                 tmgr.StopTask(typeof(AiTaskSeekFoodAndEat));
@@ -362,7 +362,7 @@ namespace Farmlife
 
         [HarmonyPatch("OnInteract")]
         [HarmonyPrefix]
-        static bool MultiIn(IPlayer byPlayer, BlockSelection blockSel, BlockEntityTrough __instance, ContentConfig[] ___contentConfigs, ref bool __result)
+        static bool MultiIn(IPlayer byPlayer, BlockSelection blockSel, BlockEntityTrough __instance, ref bool __result)
         {
             if (!byPlayer.Entity.Controls.Sneak) return true;
 
@@ -372,7 +372,7 @@ namespace Farmlife
             ItemStack[] stacks = __instance.GetNonEmptyContentStacks();
 
 
-            ContentConfig contentConf = ItemSlotTrough.getContentConfig(__instance.Api.World, ___contentConfigs, handSlot);
+            ContentConfig contentConf = ItemSlotTrough.getContentConfig(__instance.Api.World, __instance.contentConfigs, handSlot);
             if (contentConf == null) { __result = false; return false; }
 
             // Add new

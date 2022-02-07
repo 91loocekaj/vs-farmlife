@@ -49,6 +49,7 @@ namespace Farmlife
 
         public override void OnGameTick(float deltaTime)
         {
+            if (!FarmerConfig.Loaded.ShearingEnabled) return;
             if (entity.WatchedAttributes.GetInt("generation") < minGen) return;
             if (!entity.Alive || entity.World.Calendar.TotalHours - TimeKeeper < 1) return;
             TimeKeeper++;
@@ -62,7 +63,7 @@ namespace Farmlife
 
         public override void OnInteract(EntityAgent byEntity, ItemSlot itemslot, Vec3d hitPosition, EnumInteractMode mode, ref EnumHandling handled)
         {
-            //System.Diagnostics.Debug.WriteLine(Growth);
+            if (!FarmerConfig.Loaded.ShearingEnabled) return;
             if (itemslot.Itemstack?.Collectible.Tool == EnumTool.Shears && Growth >= shearableAt && entity.Api.Side == EnumAppSide.Server)
             {
                 Growth = 0;
@@ -75,6 +76,7 @@ namespace Farmlife
 
         public override void GetInfoText(StringBuilder infotext)
         {
+            if (!FarmerConfig.Loaded.ShearingEnabled) return;
             if (!entity.Alive || entity.WatchedAttributes.GetInt("generation") < minGen) return;
             shearTree = entity.WatchedAttributes.GetTreeAttribute("shear");
             if (shearTree == null || Growth < shearableAt) return;

@@ -3,7 +3,7 @@
 	class: "ItemCagedCreature",
 	enabled: false,
 	variantgroups: [
-		{ code: "type", states: ["deer-fawn"] }
+		{ code: "type", states: ["deer-fawn", "gemsbok-calf"] }
 	],
 	shape: { base: "game:block/wood/cage/closed", rotateY: 0 },
 	creativeinventory: { "general": ["*"], "decorative": ["*"] },

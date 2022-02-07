@@ -101,9 +101,9 @@ namespace Farmlife
             dropRider();
         }
 
-        public override void OnEntityReceiveDamage(DamageSource damageSource, float damage)
+        public override void OnEntityReceiveDamage(DamageSource damageSource, ref float damage)
         {
-            base.OnEntityReceiveDamage(damageSource, damage);
+            base.OnEntityReceiveDamage(damageSource, ref damage);
             if (damageSource.Type == EnumDamageType.Heal) return;
             dropRider();
         }

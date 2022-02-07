@@ -73,4 +73,37 @@
       "condition": { "when": "FLlichenEnabled", "isValue": "true" },
       "dependsOn": [{ "modid": "lichen" }]
     },
+
+    {
+      "op": "add",
+      "path": "/client/behaviors/-",
+      "value": {
+        "code": "shearable",
+        "minQuantity": 1,
+        "maxQuantity": 2,
+        "shearableAt": 480,
+        "minGen": 1,
+        "scratchChance": 0.5,
+        "woolItem": "lichen:antler-large"
+      },
+      "file": "lichen:entities/land/deer-male.json",
+      "condition": { "when": "FLlichenEnabled", "isValue": "true" },
+      "dependsOn": [{ "modid": "lichen" }]
+    },
+    {
+      "op": "add",
+      "path": "/server/behaviors/-",
+      "value": {
+        "code": "shearable",
+        "minQuantity": 1,
+        "maxQuantity": 2,
+        "shearableAt": 480,
+        "minGen": 1,
+        "scratchChance": 0.5,
+        "woolItem": "lichen:antler-large"
+      },
+      "file": "lichen:entities/land/deer-male.json",
+      "condition": { "when": "FLlichenEnabled", "isValue": "true" },
+      "dependsOn": [{ "modid": "lichen" }]
+    },
 ]

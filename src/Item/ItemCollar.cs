@@ -30,7 +30,7 @@ namespace Farmlife
 
             if (!FarmerConfig.Loaded.PetsEnabled) return;
 
-            if (byEntity.Controls.Sneak && entitySel != null && entitySel.Entity.WatchedAttributes.GetInt("generation") >= 10 && entitySel.Entity.Properties.Attributes?["petForm"].Exists == true)
+            if (byEntity.Controls.Sneak && entitySel != null && entitySel.Entity.WatchedAttributes.GetInt("generation") >= 3 && entitySel.Entity.Properties.Attributes?["petForm"].Exists == true)
             {
                 IPlayer master = (byEntity as EntityPlayer)?.Player;
 
@@ -69,7 +69,7 @@ namespace Farmlife
                     if (grow != null) entity.WatchedAttributes.SetAttribute("grow", grow.Clone());
                     if (hunger != null) entity.WatchedAttributes.SetAttribute("hunger", hunger.Clone());
                     if (genome != null) entity.WatchedAttributes.SetAttribute("genome", genome.Clone());
-                    entity.WatchedAttributes.SetInt("generation", old.WatchedAttributes.GetInt("generation", 10) - 10);
+                    entity.WatchedAttributes.SetInt("generation", old.WatchedAttributes.GetInt("generation", 3) - 3);
                     entity.WatchedAttributes.GetOrAddTreeAttribute("command").SetString("masterUID", master.PlayerUID);
                     entity.WatchedAttributes.SetBool("playerFed", true);
 

@@ -145,8 +145,8 @@ namespace Farmlife
             if (lastPOISearchTotalMs + 3000 > entity.World.ElapsedMilliseconds) return false;
             if (cooldownUntilMs > entity.World.ElapsedMilliseconds) return false;
             if (cooldownUntilTotalHours > entity.World.Calendar.TotalHours) return false;
-            if (whenInEmotionState != null && !entity.HasEmotionState(whenInEmotionState)) return false;
-            if (whenNotInEmotionState != null && entity.HasEmotionState(whenNotInEmotionState)) return false;
+            if (whenInEmotionState != null && !entity.GetBehavior<EntityBehaviorEmotionStates>().IsInEmotionState(whenInEmotionState)) return false;
+            if (whenNotInEmotionState != null && entity.GetBehavior<EntityBehaviorEmotionStates>().IsInEmotionState(whenNotInEmotionState)) return false;
 
             bc = entity.GetBehavior<EntityBehaviorConsume>();
 

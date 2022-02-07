@@ -104,17 +104,17 @@ namespace Farmlife
         public void ClearHitList()
         {
             hitList = new List<Entity>();
-            AiTaskManager tmg = entity.GetBehavior<EntityBehaviorTaskAI>()?.taskManager;
+            AiTaskManager tmg = entity.GetBehavior<EntityBehaviorTaskAI>()?.TaskManager;
 
             tmg?.StopTask(typeof(AiTaskPetMeleeAttack));
             tmg?.StopTask(typeof(AiTaskPetSeekEntity));
         }
 
-        public override void OnEntityReceiveDamage(DamageSource damageSource, float damage)
+        public override void OnEntityReceiveDamage(DamageSource damageSource, ref float damage)
         {
             if (damageSource?.SourceEntity != null && damageSource.SourceEntity.HasBehavior<EntityBehaviorHealth>()) AddThreat(damageSource.SourceEntity, EnumPetAggro.Defend);
 
-            base.OnEntityReceiveDamage(damageSource, damage);
+            base.OnEntityReceiveDamage(damageSource, ref damage);
         }
 
         public override void OnEntityLoaded()

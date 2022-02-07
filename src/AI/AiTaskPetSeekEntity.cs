@@ -114,8 +114,8 @@ namespace Farmlife
             if (pc == null || pc.CurrentOrder == EnumPetOrder.Idle || pc.CurrentAggro == EnumPetAggro.Passive) return false;
             //if (rand.NextDouble() > 0.1f && (whenInEmotionState == null || !entity.HasEmotionState(whenInEmotionState))) return false;
 
-            if (whenInEmotionState != null && !entity.HasEmotionState(whenInEmotionState)) return false;
-            if (whenNotInEmotionState != null && entity.HasEmotionState(whenNotInEmotionState)) return false;
+            if (whenInEmotionState != null && !entity.GetBehavior<EntityBehaviorEmotionStates>().IsInEmotionState(whenInEmotionState)) return false;
+            if (whenNotInEmotionState != null && entity.GetBehavior<EntityBehaviorEmotionStates>().IsInEmotionState(whenNotInEmotionState)) return false;
             if (lastSearchTotalMs + 4000 > entity.World.ElapsedMilliseconds) return false;
             //if (whenInEmotionState == null && rand.NextDouble() > 0.5f) return false;
 

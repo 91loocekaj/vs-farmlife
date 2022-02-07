@@ -1,0 +1,288 @@
+{
+"block-poop-avian-*" : "Guano",
+"block-poop-grazer-*" : "Excrément d'Herbivore",
+"block-poop-omnivore-*" : "Excrément",
+
+"item-handlinggloves" : "Gants de Manipulation Animale",
+"item-feces-avian" : "Guano",
+"item-feces-grazer" : "Excrément d'Herbivore",
+"item-feces-omnivore" : "Excrément",
+"item-woolfibers" : "Laine Graisseuse",
+"item-wooltwine" : "Bobine de Laine",
+"item-collar" : "Collier d'Animal Domestique",
+"item-petwhistle" : "Sifflet d'Animal Domestique",
+"item-animalfeed" : "Nourriture pour Animaux",
+
+"itemdesc-handlinggloves" : "Utiliser pour manipuler les petits animaux. NE PEUT PAS ÊTRE PORTÉ COMME VÊTEMENT!",
+"itemdesc-collar" : "Ne perdez plus jamais votre fidèle compagnon grâce au collier temporel!",
+"itemdesc-animalfeed" : "Aucun animal ne peut résister à ce mélange soigneusement conçu.",
+"itemdesc-woolfibers" : "Un paquet de fibres de laine sales. Doit être nettoyée.",
+
+"itemhelp-grabanimal" : "Attraper un petit animal",
+"itemhelp-changeorder" : "Changer l'ordre",
+"itemhelp-changeaggro" : "Changer l'agressivité",
+"itemhelp-command" : "Donner un ordre ",
+"itemhelp-claimpet" : "Devenir propriétaire d'un animal",
+
+"block-compostbin": "Bac à Compost",
+"game:item-cagedanimal-hare-baby" : "Animal en Cage (Liève)",
+"game:item-cagedanimal-chicken-baby" : "Animal en Cage (Poulet)",
+"game:item-cagedanimal-sheep-*" : "Animal en Cage (Mouton)",
+"game:item-cagedanimal-pig-*" : "Animal en Cage (Cochon)",
+"game:item-cagedanimal-wolf-*" : "Animal en Cage (Loup)",
+"medievalexpansion:item-cagedanimal-aurochs-*" : "Animal en Cage (Auroch)",
+"lichen:item-cagedanimal-deer-*" : "Animal en Cage (Cerf)",
+
+"game:tradingwindow-humanoid-trader-animal": "{0} Le marchand d'animaux",
+"item-creature-humanoid-trader-animal" : "Marchand (Animaux)",
+"item-dead-creature-humanoid-trader-animal" : "Marchand Mort",
+"item-creature-wolf-male-dog" : "Chien ",
+"item-dead-creature-wolf-male-dog" : "Chien Mort",
+"item-creature-wolf-female-dog" : "Chienne",
+"item-dead-creature-wolf-female-dog" : "Chienne Morte",
+"item-creature-wolf-pup-dog" : "Chiot",
+"item-dead-creature-wolf-pup-dog" : "Chiot Mort",
+
+
+"compostbin": "Tas de Compost",
+
+"miscarriage": "À risque de fausse couche",
+"mate": "Trop affamé pour la reproduction",
+"milkerror": "A besoin de plus de nourriture avant de produire du lait",
+"milkmessage": "En lactation pour {0} jours, actuellement pas assez nourrie pour la traite.",
+"malnourished": "Affamé(e)!",
+"saturation": "Satiété: {0}/{1} ({2}%)",
+"feral": "Sauvage",
+"infertile": "Stérile",
+"shearable" : "Peut être tondu(e)"
+"breedingcap" : "Ne peut pas se reproduire: surpopulation!",
+
+"genelevel-1" : "Médiocres",
+"genelevel-2" : "En bas de la Moyenne",
+"genelevel-3" : "Dans la Moyenne",
+"genelevel-4" : "Au-delà de la Moyenne",
+"genelevel-5" : "Exceptionnels",
+
+"genetitle" : "-----Caractéristiques de {0}-----",
+"genehealth" : "Santé: {0}",
+"genespeed" : "Vitesse: {0}",
+"genedigest" : "Digestion: {0}",
+"genehunger" : "Faim: {0}",
+"generesist" : "Résistance: {0}",
+
+"birthingInfo": "Nombre de mise bas: {0} / {1}",
+"growthInfo": "Âge: {0}",
+
+"commandsdisplay": "Ordre Actuel: {0}, Agressivité Actuelle: {1}",
+"owner" : "Propriétaire: {0}",
+"commandsingular": "A commandé {0} de {1} ({2})",
+"commandplural": "A commandé {0} animaux de {1} ({2})",
+
+"order-0" : "Rester",
+"order-1" : "Se Promener",
+"order-2" : "Suivre",
+
+"aggro-0" : "Rester Passif",
+"aggro-1" : "Défendre",
+"aggro-2" : "Protéger",
+"aggro-3" : "Chasser",
+
+"farmersguide-title": "Guide du Fermier",
+"farmersguide-text" :"<strong>-----Guide du Fermier-----</strong>
+Ce guide se veut une explication en profondeur de l'élevage animal. Les animaux d'élevage ont besoin de nourriture pour se reproduire, produire des oeufs, entrer en lactation, grandir et excréter. Ils peuvent être nourris en leur jetant leur nourriture favorite au sol ou en la mettant dans une <a href=\"handbooksearch://trough\">mangeoire</a>.
+
+<strong>-----Partie 1: Connaissances Élémentaires-----</strong>
+
+<strong>-----Entity HUD Keyword Meanings-----</strong>
+<strong>Satiété: x/y (z%)</strong>
+Sert à montrer le niveau de satiété d'entité pouvant être élevées. X est la satiété actuelle, y est la satiété maximale alors que z représente le pourcentage de cette fraction.
+<strong>Affamé(e)!</strong>
+Si une entité a ce terme dans sa description, cela veut dire qu'elle a faim. Les animaux affamés ne peuvent pas se reproduire, grandir, s'accoupler ou être traits. Généralement, les animaux deviennent affamés lorsque leur satiété est en dessous de 75% , mais cela peut varier en fonction de la caractéristique Résistance.
+<strong>Sauvage</strong>
+Quand un animal sauvage se reproduit, sa progéniture n'augmentera pas de niveau de génération (de domestication). Le joueur doit les nourrir soit par le biais d'une mangeoire ou en jetant au sol des aliments qu'ils peuvent ingérer. Une fois apprivoisé, toute la progéniture de l'entité apprivoisée ainsi que leurs futures descendances pourront gagner des niveaux de Génération.
+<strong>Stérile</strong>
+Les femelles ont un nombre limité de mise bas possible et quand elle dépassent cette limite, elle ne peuvent plus être engrossée. D'ailleurs, les poules stériles ne produiront et ne couvreront plus d'oeufs.
+<strong>Peut être tondu(e)</strong>
+Quand une entité peut être tondue, ce terme sera utilisé. Un clic droit lorsqu'équipé de cisaille causera la tombée d'un objet. Il y a toujours un risque d'endommager l'objet.
+
+<strong>-----Caractéristiques-----</strong>
+ Tous les animaux domesticables ont des caractéristiques génétiques qui déterminent leurs différents attributs.Shift+ctrl+clic droit sur une entité à main nue permet de voir leurs attributs dans l'encadré d'information. Hérités des parents, ils couvrent une étendue de Médiocre, En bas de la Moyenne, Dans la Moyenne, Au-delà de la Moyenne jusqu'à Exceptionnels.
+<strong>Santé</strong>: Augmente ou diminue le niveau de santé maximum. Niveaux: -1, -0.5, 0, +0.5, +1
+<strong>Vitesse</strong>: Augmente ou diminue la vitesse de déplacement. Niveaux: -40%, -20%, 0, +20%, + 40%
+<strong>Digestion</strong>: Détermine la satiété gagnée par portion de nourriture. Niveaux: 0.5, 0.75, 1, 1.25, 1.5
+<strong>Faim</strong>: Détermine la quantité de points de satiété perdus par jour. Niveaux 1.5, 1.25, 1, 0.75, 0.5
+<strong>R.sistance</strong>: Détermine quelle quantité de nourriture est requise pour qu'un animal ne soit pas affamé et leur résistance aux chances de fausses couches. (Avec le mod Useful Stuff mod installé, détermine aussi la résistance aux dégâts reçus)
+Niveaux: +25%, +12.5%, 0, -12.5%, 25%
+
+<strong>-----Reproduction-----</strong>
+Pour se reproduire, les animaux ne doivent pas être affamés. Quand l'accouplement se produit, la femelle tombera enceinte et aura une consommation de nourriture augmenté de 50% pour la durée de la grossesse. Les femelles sont à risque de fausse couche lorsque leur satiété est sous la barre des 50% ou que leur santé est sous la barre des 25%. Tout cela est modifié par la caractéristique Résistance. Les bébés ont seulement la moitié de la satiété des adultes. Ils cesseront de grandir s'ils sont affamés: les nourrir durant leur croissance est donc primordial! Les animaux femelles ont un nombre limité de cycles reproductifs. Dépassé ce nombre, elles deviendront stériles / ne pondront plus d'oeufs.
+
+<strong>-----Alimentation-----</strong>
+Les animaux peuvent gagner en satiété en pâturant sur la la végétation environnante, en mangeant des aliments au sol, en chassant d'autres animaux ou en mangeant ce qui se trouve dans des mangeoires. Ils seront aussi attiré vers les joueurs qui ont en main un aliment qu'ils affectionnent. Note: Les animaux continueront de manger des aliments et chasser des proies même si leur satiété est comblée. Tous les animaux d'élevage peuvent être nourris avec de la <a href=\"handbook://item-farmlife:animalfeed\">nourriture pour animaux</a> mis dans une mangeoire ou jetée au sol. Relativement peu coûteux et ayant une durée utile assez longue, elle requiert cependant plus d'effort en échange d'attirer tous les animaux, incluant les loups voraces et les cerfs agiles qui peuvent sauter par-dessus les clôtures et subtiliser de la nourriture. Ils auront tous besoin de nourriture même s'ils ne sont plus en mémoire active pour le jeu. Le seul moyen de les garder nourris est de garder une mangeoire remplie à proximité.
+
+<strong>-----Partie 2: Approfondissement sur les Animaux-----</strong>
+
+<strong>-----Cochons-----</strong>
+Satiété Maximale = 20
+Mangent: Tout grain, tout légume, toute viande, tout produit laitier, tout fruit ainsi que du fourrage(foin),les viandes crues et la pourriture.
+Pâturent: Herbe, champignons, (Si Wild Farming est installé: Fougères, Fleurs)
+Mangent en Mangeoire: Tout grains excepté le riz, la majorité des légumes, du foin et de la pourriture dans une grande mangeoire.
+Sont les Prédateurs de: Larves, (Si Primitive Survival est installé: Vers de Terre)
+Quantité d'Excréments Produits: Petite à Moyenne
+Type d'Excrément: Ordinaire
+Temps de Gestation(en journées en jeu) = 18
+Temps de Récupération après la Mise Bas (en journées en jeu) = 1-3
+Taille de la Portée = 7-14
+Période de Croissance (Bébé à Adulte) en heures en jeu = 168
+Maximum de Cycles Reproductifs: 8
+
+<strong>-----Moutons-----</strong>
+Satiété Maximale = 16
+Mangent: Tout grain et fourrage (foin)
+Pâturent: Herbe, (Si Wild Farming est installé: Fougères, Fleurs)
+Mangent en Mangeoire: Tout grains excepté le riz, la majorité des légumes, du foin et de la pourriture dans une grande mangeoire.
+Sont les Prédateurs de: N/A
+Quantité d'Excréments Produits: Petite à Grande
+Type d'Excrément: Herbivore
+Temps de Gestation(en journées en jeu) = 20
+Temps de Récupération après la Mise Bas (en journées en jeu) = 14-21
+Taille de la Portée = 1
+Période de Croissance (Bébé à Adulte) en heures en jeu = 336
+Maximum de Cycles Reproductifs: 3
+Info Supplémentaire: Les brebis peuvent être traites et les adultes peuvent être tondus pour de la laine.
+
+<strong>-----Poules-----</strong>
+Satiété Maximale = 12
+Mangent: Tout grain 
+Pâturent: Herbe, champignons, (Si Wild Farming est installé: Fougères, Fleurs)
+Mangent en Mangeoire: Tous les grains sauf le riz dans une petite mangeoire
+Sont les Prédateurs de: Larves, (Si Primitive Survival est installé: Vers de Terre)
+Quantité d'Excréments Produits: Petite
+Type d'excrément: Guano
+Temps de Couvée (en journées en jeu) =  5
+Temps de Récupération après la Mise Bas (en journées en jeu) = N/A
+Taille de la Portée = 3
+Période de Croissance (Bébé à Adulte) en heures en jeu = 120
+Maximum d'Oeufs Pondus: 128
+Info Supplémentaire: Les poules stériles ne couvent plus les oeufs.
+
+<strong>-----Lièves-----</strong>
+Satiété Maximale = 8
+Mangent: Tout légume, ainsi que du fourrage (foin).
+Pâturent: Herbe, (Si Wild Farming est installé: Fougères, Fleurs)
+Mangent en Mangeoire: Tout grains excepté le riz, la majorité des légumes, du foin et de la pourriture dans une grande mangeoire.
+Sont les Prédateurs de: N/A
+Quantité d'Excréments Produits: Petite
+Type d'Excrément: Herbivore
+Temps de Gestation(en journées en jeu) = 5
+Temps de Récupération après la Mise Bas (en journées en jeu) = 1-3
+Taille de la Portée = 6-12
+Période de Croissance (Bébé à Adulte) en heures en jeu = 168
+Maximum de Cycles Reproductifs: 8
+Info Supplémentaire: Les mâles attaqueront les autres mâles et les lapereaux. Gardez-les séparés!
+
+<strong>-----Loups-----</strong>
+Satiété Maximale = 20
+Mangent: Toute viande
+Pâturent: N/A
+Mangent en Mangeoire: Seulement de la nourriture animale dans une petite ou grande mangeoire.
+Sont les Prédateurs de: Lièvres, Poules et les Joueurs!
+Quantité d'Excréments Produits: Petite à Moyenne
+Type d'Excrément: Ordinaire
+Temps de Gestation(en journées en jeu) = 12
+Temps de Récupération après la Mise Bas (en journées en jeu) = 7-10
+Taille de la Portée = 4-6
+Période de Croissance (Bébé à Adulte) en heures en jeu = 192
+Maximum de Cycles Reproductifs: 5
+Info Supplémentaire: Extrêmement hostiles, ils peuvent blesser gravement les joueurs en une morsure.
+
+<strong>-----Chiens-----</strong>
+Satiété Maximale = 20
+Mangent: Toute viande
+Pâturent: N/A
+Mangent en Mangeoire: Seulement de la nourriture animale dans une petite ou grande mangeoire.
+Sont les Prédateurs de: N/A
+Quantité d'Excréments Produits: Petite à Moyenne
+Type d'Excrément: Ordinaire
+Temps de Gestation(en journées en jeu) = 12
+Temps de Récupération après la Mise Bas (en journées en jeu) = 7-10
+Taille de la Portée = 4-6
+Période de Croissance (Bébé à Adulte) en heures en jeu = 192
+Maximum de Cycles Reproductifs: 5
+Info Supplémentaire: Le chien ne reçoit pas de nutriment des entités tués. Le propriétaire est considéré comme celui qui a tué l'entité.
+
+<strong>-----Aurochs(Si Medieval Expansion est installé)-----</strong>
+Satiété Maximale = 24
+Mangent: Tout grain et fourrage
+Pâturent: Herbe, (Si Wild Farming est installé: Fougères, Fleurs)
+Mangent en Mangeoire: Tout grains excepté le riz, des carottes et du foin dans une grande mangeoire.
+Sont les Prédateurs de: N/A
+Quantité d'Excréments Produits: Moyenne à Grande
+Type d'Excrément: Herbivore
+Temps de Gestation(en journées en jeu) = 20
+Temps de Récupération après la Mise Bas (en journées en jeu) = 4-11
+Taille de la Portée = 1
+Période de Croissance (Bébé à Adulte) en heures en jeu = 336
+Maximum de Cycles Reproductifs: 4
+Info Supplémentaire: Les femelles peuvent être traites.
+
+<strong>-----Cerfs(Si Lichen est installé)-----</strong>
+Satiété Maximale = 18
+Mangent: Tout grain et fourrage
+Pâturent: Herbe, (Si Wild Farming est installé: Fougères, Fleurs)
+Mangent en Mangeoire: Seulement de la nourriture animale dans une grande mangeoire.
+Sont les Prédateurs de: N/A
+Quantité d'Excréments Produits: Petite à Grande
+Type d'Excrément: Herbivore
+Temps de Gestation(en journées en jeu) = 12
+Temps de Récupération après la Mise Bas (en journées en jeu) = 4-11
+Taille de la Portée = 1-3
+Période de Croissance (Bébé à Adulte) en heures en jeu = 168
+Maximum de Cycles Reproductifs: 5
+Info Supplémentaire: Très agiles, ils peuvent sauter par-dessus les clôtures. Difficile à domestiquer. Les femelles produisent du lait et les mâles peuvent avoir leur bois cisaillés.
+
+<strong>-----Parties 3: Autres Connaissances Utiles-----</strong>
+
+<strong>-----Animaux Domestiques-----</strong>
+Les loups peuvent devenir des chiens lorsqu'ils atteignent le niveau de génération 10. Pour les transformer en chien, cliquer droit en maintenant SHIFT avec un <a href=\"handbook://item-farmlife:collar\">collier d'animal domestique</a> et vous en serez le propriétaire. Note: La couleur du chien peut différer de lorsque l'entité était un loup. Pour donner des ordres à un chien, utilisez un <a href=\"handbook://item-farmlife:petwhistle\">sifflet pour animaux domestiques</a>. Les chiens n'obéiront pas s'ils sont affamés. Shift+clic gauche pour donner un ordre et ctrl+clic gauche pour sélectionner un niveau d'agressivité. Shift+clic droit avec un chien en sélection pour leur donner l'ordre ou le niveau d'agressivité. Si vous ne regardez pas un animal domestique en particulier, l'ordre et le niveau d'agressivité sera donné à tous les animaux domestiques dans un rayon de 30 blocs.
+
+Ordres disponibles:
+<strong>Rester</strong>: L'animal domestique ne bougera pas.
+<strong>Se Promener</strong>: L'animal domestique se promènera librement.
+<strong>Suivre</strong>: L'animal domestique vous suivra et se téléportera vers vous si vous êtes trop éloignés.
+
+Niveaux d'agressivité disponible :
+<strong>Rester Passif</strong>: L'animal domestique n'attaquera pas.
+<strong>Defendre</strong>: L'animal domestique attaque les entités qui l'attaquent.
+<strong>Protéger</strong>: L'animal domestique attaque les entités qui l'attaquent, son propriétaire ou des animaux de génération 3.
+<strong>Chasser</strong>: L'animal domestique attaque les entités que son propriétaire attaque, qui l'attaquent, son propriétaire ou des animaux de génération 3.
+
+<strong>-----Larves-----</strong>
+Les<a href=\"handbook://item-insect-grub\">larves</a> peuvent être ramassées en plaçant un bac de compost rempli de pourriture au-dessus d'une trémie. Les larves grandiront et mangeront la pourriture et tomber dans la trémie. Elles peuvent être mangées pour une collation rapide (DÉGUEU!) et peuvent être placées au sol à l'aide d'un shift+clic droit. Elles se promèneront et mangeront des excréments.
+
+<strong>-----Gants de Manipulation Animale-----</strong>
+Ces <a href=\"handbook://item-farmlife:handlinggloves\">gants de cuir épais</a> peuvent être utilisés pour prendre tous les bébés issus de l'élevage ainsi que les lièvres et les poules. Cliquez droit pour les prendre et un autre clic droit pour les déposer. Note: Si vous subissez des dégâts ou changez d'objet dans la barre active, l'animal tenu sera relâché.
+
+<strong>-----Marchand d'Animaux-----</strong>
+Les marchands d'animaux se spécialisent dans la vente d'animaux domestiqués. Ils vendront des <a href=\"handbooksearch://caged\">bébés en cage</a> de génération 10 pour une coquette somme, bien entendu.
+
+<strong>-----Excrément-----</strong>
+Les <a href=\"handbooksearch://poop\">excréments</a> Peuvent être utilisés pour enrichir les sols agricoles ou pour transformer un sol de fertilité moyenne en sol de haute fertilité.
+
+<strong>-----Bac à Compost-----</strong>
+Le <a href=\"handbook://block-farmlife:compostbin\">bac à compost</a> peut être utilisé pour faire pourrir les objets périssable ou pour élever des asticots.
+
+<strong>-----Laine-----</strong>
+La laine peut être récupérée par la tonte des moutons adultes. Les <a href=\"handbook://item-farmlife:woolfibers\">fibres de laine graisseuse</a> doivent être nettoyée dans de l'eau de chaux pour être transformées en bobines et les <a href=\"handbook://item-farmlife:wooltwine\">bobines de laine</a> peuvent être transformées en <a href=\"handbook://block-wool-white-down\">couverture de laine</a>. La laine a les mêmes utilités que le lin ,mais possède le double des capacités réparatrices pour les vêtements.
+
+<strong>-----Other Tips & Knowledge-----</strong>
+Tenez SHIFT en remplissant une mangeoire pour insérer 4 aliments à la fois;
+Les cultures produisant des céréales produisent aussi du foin;
+Si vous avez de la viande issue d'autres mods, elle peut être donnée en pâture aux porcs et aux loups à condition qu'elle soit salée ou cuite.
+Même si les animaux pâturent sur les plantes sauvages, elles ne sont pas toutes sécuritaires pour eux. not all plants are good for them. Alors que le prêle redonne de la santé, le muguet, les amanites tue-mouches,l'osmonde cannelle et la Fougère-Aigle empoisonneront les animaux.
+Si vous voulez élever des chiens pour d'autres joueurs, assurez-vous de ne pas devenir propriétaire des loups! Du moment qu'un collier est donné à un loup, il devient un chien que seulement le propriétaire peut contrôler. Sa descendance appartiendra aussi au propriétaire des parents.
+Les caractéristiques montreront aussi l'âge des bébés et le nombre de cycles reproductifs restant pour les femelles. Si le mod Useful Stuff est installé, le nom donné à l'aide d'une tablette en céramique sera aussi affiché.
+Pour les animaux plus gros tels que les moutons, assurez-vous de leur mettre dans de grands espaces et de placer la mangeoire au milieu de l'enclos. Ils tourneront en rond s'il est impossible de faire le «pathfinding» correctement.
+",
+
+}

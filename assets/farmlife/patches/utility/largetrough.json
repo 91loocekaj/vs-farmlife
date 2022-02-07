@@ -12,7 +12,10 @@
         "foodForDesc": "trough-acceptable-pigs-sheep",
         "foodFor": [
           "pig-*",
-          "sheep-*"
+          "sheep-*",
+          "lichen:deer-*",
+          "lichen:white-hart",
+          "lichen:gemsbok-*"
         ],
         "quantityPerFillLevel": 1,
         "maxFillLevels": 64,
@@ -239,7 +242,10 @@
         ],
         "foodFor": [
           "pig-*",
-          "sheep-*"
+          "sheep-*",
+          "lichen:deer-*",
+          "lichen:white-hart",
+          "lichen:gemsbok-*"
         ],
         "textureCode": "contents-rye"
       },
@@ -320,7 +326,10 @@
         ],
         "foodFor": [
           "pig-*",
-          "sheep-*"
+          "sheep-*",
+          "lichen:deer-*",
+          "lichen:white-hart",
+          "lichen:gemsbok-*"
         ],
         "textureCode": "contents-spelt"
       },
@@ -332,7 +341,10 @@
         },
         "foodFor": [
           "pig-*",
-          "sheep-*"
+          "sheep-*",
+          "lichen:deer-*",
+          "lichen:white-hart",
+          "lichen:gemsbok-*"
         ],
         "foodForDesc": "trough-acceptable-pigs-sheep",
         "quantityPerFillLevel": 1,
@@ -413,7 +425,10 @@
         },
         "foodFor": [
           "pig-*",
-          "sheep-*"
+          "sheep-*",
+          "lichen:deer-*",
+          "lichen:white-hart",
+          "lichen:gemsbok-*"
         ],
         "foodForDesc": "trough-acceptable-pigs-sheep",
         "quantityPerFillLevel": 1,
@@ -572,7 +587,11 @@
           "code": "vegetable-cabbage"
         },
         "foodFor": [
-          "pig-*"
+          "pig-*",
+          "sheep-*",
+          "lichen:deer-*",
+          "lichen:white-hart",
+          "lichen:gemsbok-*"
         ],
         "foodForDesc": "trough-treat-pigs-sheep",
         "quantityPerFillLevel": 1,
@@ -652,7 +671,10 @@
         },
         "foodFor": [
           "pig-*",
-          "sheep-*"
+          "sheep-*",
+          "lichen:deer-*",
+          "lichen:white-hart",
+          "lichen:gemsbok-*"
         ],
         "foodForDesc": "trough-treat-pigs-sheep",
         "quantityPerFillLevel": 1,
@@ -811,7 +833,10 @@
         },
         "foodFor": [
           "pig-*",
-          "sheep-*"
+          "sheep-*",
+          "lichen:deer-*",
+          "lichen:white-hart",
+          "lichen:gemsbok-*"
         ],
         "foodForDesc": "trough-treat-pigs-sheep",
         "quantityPerFillLevel": 1,
@@ -1128,7 +1153,10 @@
         },
         "foodFor": [
           "pig-*",
-          "sheep-*"
+          "sheep-*",
+          "lichen:deer-*",
+          "lichen:white-hart",
+          "lichen:gemsbok-*"
         ],
         "foodForDesc": "trough-treat-pigs-sheep",
         "quantityPerFillLevel": 1,
@@ -1209,7 +1237,10 @@
         },
         "foodFor": [
           "pig-*",
-          "sheep-*"
+          "sheep-*",
+          "lichen:deer-*",
+          "lichen:white-hart",
+          "lichen:gemsbok-*"
         ],
         "foodForDesc": "trough-acceptable-pigs-sheep",
         "quantityPerFillLevel": 1,
@@ -1358,8 +1389,97 @@
         ],
         "foodFor": [
           "pig-*",
-          "sheep-*"
+          "sheep-*",
+          "lichen:deer-*",
+          "lichen:white-hart",
+          "lichen:gemsbok-*"
         ]
+      },
+
+      {
+        "code": "fruitmash",
+        "content": {
+          "type": "item",
+          "code": "pressedmash-apple"
+        },
+        "foodForDesc": "trough-acceptable-pigs-sheep",
+        "quantityPerFillLevel": 1,
+        "maxFillLevels": 64,
+        "shapesPerFillLevel": [
+          "block/wood/trough/large/grainfill1",
+          "block/wood/trough/large/grainfill1",
+          "block/wood/trough/large/grainfill1",
+          "block/wood/trough/large/grainfill1",
+          "block/wood/trough/large/grainfill1",
+          "block/wood/trough/large/grainfill1",
+          "block/wood/trough/large/grainfill1",
+          "block/wood/trough/large/grainfill1",
+          "block/wood/trough/large/grainfill1",
+          "block/wood/trough/large/grainfill1",
+          "block/wood/trough/large/grainfill1",
+          "block/wood/trough/large/grainfill1",
+          "block/wood/trough/large/grainfill1",
+          "block/wood/trough/large/grainfill1",
+          "block/wood/trough/large/grainfill1",
+          "block/wood/trough/large/grainfill1",
+          "block/wood/trough/large/grainfill2",
+          "block/wood/trough/large/grainfill2",
+          "block/wood/trough/large/grainfill2",
+          "block/wood/trough/large/grainfill2",
+          "block/wood/trough/large/grainfill2",
+          "block/wood/trough/large/grainfill2",
+          "block/wood/trough/large/grainfill2",
+          "block/wood/trough/large/grainfill2",
+          "block/wood/trough/large/grainfill2",
+          "block/wood/trough/large/grainfill2",
+          "block/wood/trough/large/grainfill2",
+          "block/wood/trough/large/grainfill2",
+          "block/wood/trough/large/grainfill2",
+          "block/wood/trough/large/grainfill2",
+          "block/wood/trough/large/grainfill2",
+          "block/wood/trough/large/grainfill2",
+          "block/wood/trough/large/grainfill3",
+          "block/wood/trough/large/grainfill3",
+          "block/wood/trough/large/grainfill3",
+          "block/wood/trough/large/grainfill3",
+          "block/wood/trough/large/grainfill3",
+          "block/wood/trough/large/grainfill3",
+          "block/wood/trough/large/grainfill3",
+          "block/wood/trough/large/grainfill3",
+          "block/wood/trough/large/grainfill3",
+          "block/wood/trough/large/grainfill3",
+          "block/wood/trough/large/grainfill3",
+          "block/wood/trough/large/grainfill3",
+          "block/wood/trough/large/grainfill3",
+          "block/wood/trough/large/grainfill3",
+          "block/wood/trough/large/grainfill3",
+          "block/wood/trough/large/grainfill3",
+          "block/wood/trough/large/grainfill4",
+          "block/wood/trough/large/grainfill4",
+          "block/wood/trough/large/grainfill4",
+          "block/wood/trough/large/grainfill4",
+          "block/wood/trough/large/grainfill4",
+          "block/wood/trough/large/grainfill4",
+          "block/wood/trough/large/grainfill4",
+          "block/wood/trough/large/grainfill4",
+          "block/wood/trough/large/grainfill4",
+          "block/wood/trough/large/grainfill4",
+          "block/wood/trough/large/grainfill4",
+          "block/wood/trough/large/grainfill4",
+          "block/wood/trough/large/grainfill4",
+          "block/wood/trough/large/grainfill4",
+          "block/wood/trough/large/grainfill4",
+          "block/wood/trough/large/grainfill4"
+        ],
+        "foodFor": [
+          "pig-*",
+          "sheep-*",
+          "lichen:deer-*",
+          "lichen:white-hart",
+          "lichen:gemsbok-*",
+          "medievalexpansion:aurochs-*"
+        ],
+        "textureCode": "contents-fruitmash"
       },
 
       {
@@ -1374,9 +1494,10 @@
           "sheep-*",
           "lichen:deer-*",
           "lichen:white-hart",
-          "medievalexpansion:aurochs-*",          
+          "medievalexpansion:aurochs-*",
           "game:wolf-*",
-          "farmlife:wolf-*"
+          "farmlife:wolf-*",
+          "lichen:gemsbok-*"
         ],
         "quantityPerFillLevel": 1,
         "maxFillLevels": 64,

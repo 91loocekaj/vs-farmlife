@@ -3,58 +3,77 @@
     "op": "add",
     "path": "/attributes",
     "value": {
-      "maxSaturation": 18,
-      "nutrition": 9
+      "maxSaturation": 9,
+      "nutrition": 5
     },
-    "file": "lichen:entities/land/white-hart.json",
+    "file": "lichen:entities/land/gemsbok-calf.json",
     "condition": { "when": "FLlichenEnabled", "isValue": "true" },
     "dependsOn": [{ "modid": "lichen" }]
   },
+
   {
     "op": "add",
     "path": "/client/behaviors/-",
     "value": {
       "code": "consume"
     },
-    "file": "lichen:entities/land/white-hart.json",
+    "file": "lichen:entities/land/gemsbok-calf.json",
     "condition": { "when": "FLlichenEnabled", "isValue": "true" },
     "dependsOn": [{ "modid": "lichen" }]
   },
+
+  {
+    "op": "replace",
+    "path": "/client/behaviors/1",
+    "value": { "code": "controlledphysics", "stepHeight": 2.5 },
+    "file": "lichen:entities/land/gemsbok-calf.json",
+    "condition": { "when": "FLlichenEnabled", "isValue": "true" },
+    "dependsOn": [{ "modid": "lichen" }]
+  },
+
   {
     "op": "add",
     "path": "/server/behaviors/-",
     "value": {
       "code": "consume",
       "poopCodes": [
-        "farmlife:poop-grazer-large"
+        "farmlife:poop-grazer-small",
+        "farmlife:poop-grazer-medium"
       ]
     },
-    "file": "lichen:entities/land/white-hart.json",
+    "file": "lichen:entities/land/gemsbok-calf.json",
     "condition": { "when": "FLlichenEnabled", "isValue": "true" },
     "dependsOn": [{ "modid": "lichen" }]
   },
-  {
-    "op": "replace",
-    "path": "/client/behaviors/1",
-    "value": { "code": "controlledphysics", "stepHeight": 2.5 },
-    "file": "lichen:entities/land/white-hart.json",
-    "condition": { "when": "FLlichenEnabled", "isValue": "true" },
-    "dependsOn": [{ "modid": "lichen" }]
-  },
+
   {
     "op": "replace",
     "path": "/server/behaviors/1",
     "value": { "code": "controlledphysics", "stepHeight": 2.5 },
-    "file": "lichen:entities/land/white-hart.json",
+    "file": "lichen:entities/land/gemsbok-calf.json",
     "condition": { "when": "FLlichenEnabled", "isValue": "true" },
     "dependsOn": [{ "modid": "lichen" }]
   },
-    {
-      "op": "replace",
-      "path": "/server/behaviors/9/aitasks/8",
+
+  {
+    "op": "replace",
+    "path": "/server/behaviors/9",
+    "value": {
+      "code": "foodgrow",
+      "hoursToGrow": 336,
+      "adultEntityCodes": ["lichen:gemsbok-male", "lichen:gemsbok-female" ],
+    },
+    "file": "lichen:entities/land/gemsbok-calf.json",
+    "condition": { "when": "FLlichenEnabled", "isValue": "true" },
+    "dependsOn": [{ "modid": "lichen" }]
+  },
+
+  {
+      "op": "add",
+      "path": "/server/behaviors/10/aitasks/-",
       "value": {
         "code": "seekfoodandeat",
-        "movespeed": 0.004,
+        "movespeed": 0.01,
         "priority": 1.37,
         "eatLooseItems": true,
         "eatItemCodes": [
@@ -69,10 +88,8 @@
         "mincooldownHours": 0,
         "maxcooldownHours": 0
       },
-      "file": "lichen:entities/land/white-hart.json",
+      "file": "lichen:entities/land/gemsbok-calf.json",
       "condition": { "when": "FLlichenEnabled", "isValue": "true" },
       "dependsOn": [{ "modid": "lichen" }]
-    },
-
-
+    }
 ]

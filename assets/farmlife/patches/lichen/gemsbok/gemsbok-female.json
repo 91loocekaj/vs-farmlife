@@ -4,10 +4,10 @@
     "path": "/attributes",
     "value": {
       "maxSaturation": 18,
-      "maxBirths": 5,
+      "maxBirths": 6,
       "nutrition": 9
     },
-    "file": "lichen:entities/land/deer-female.json",
+    "file": "lichen:entities/land/gemsbok-female.json",
     "condition": { "when": "FLlichenEnabled", "isValue": "true" },
     "dependsOn": [{ "modid": "lichen" }]
   },
@@ -18,7 +18,7 @@
     "value": {
       "code": "consume"
     },
-    "file": "lichen:entities/land/deer-female.json",
+    "file": "lichen:entities/land/gemsbok-female.json",
     "condition": { "when": "FLlichenEnabled", "isValue": "true" },
     "dependsOn": [{ "modid": "lichen" }]
   },
@@ -32,28 +32,7 @@
         "farmlife:poop-grazer-medium",
       ]
     },
-    "file": "lichen:entities/land/deer-female.json",
-    "condition": { "when": "FLlichenEnabled", "isValue": "true" },
-    "dependsOn": [{ "modid": "lichen" }]
-  },
-
-  {
-    "op": "add",
-    "path": "/client/behaviors/-",
-    "value": {
-      "code": "milkable"
-    },
-    "file": "lichen:entities/land/deer-female.json",
-    "condition": { "when": "FLlichenEnabled", "isValue": "true" },
-    "dependsOn": [{ "modid": "lichen" }]
-  },
-  {
-    "op": "add",
-    "path": "/server/behaviors/-",
-    "value": {
-      "code": "milkable"
-    },
-    "file": "lichen:entities/land/deer-female.json",
+    "file": "lichen:entities/land/gemsbok-female.json",
     "condition": { "when": "FLlichenEnabled", "isValue": "true" },
     "dependsOn": [{ "modid": "lichen" }]
   },
@@ -62,7 +41,7 @@
     "op": "replace",
     "path": "/client/behaviors/1",
     "value": { "code": "controlledphysics", "stepHeight": 2.5 },
-    "file": "lichen:entities/land/deer-female.json",
+    "file": "lichen:entities/land/gemsbok-female.json",
     "condition": { "when": "FLlichenEnabled", "isValue": "true" },
     "dependsOn": [{ "modid": "lichen" }]
   },
@@ -70,13 +49,13 @@
     "op": "replace",
     "path": "/server/behaviors/1",
     "value": { "code": "controlledphysics", "stepHeight": 2.5 },
-    "file": "lichen:entities/land/deer-female.json",
+    "file": "lichen:entities/land/gemsbok-female.json",
     "condition": { "when": "FLlichenEnabled", "isValue": "true" },
     "dependsOn": [{ "modid": "lichen" }]
   },
     {
       "op": "replace",
-      "path": "/server/behaviors/10/aitasks/8",
+      "path": "/server/behaviors/10/aitasks/6",
       "value": {
         "code": "seekfoodandeat",
         "movespeed": 0.01,
@@ -94,7 +73,7 @@
         "mincooldownHours": 0,
         "maxcooldownHours": 0
       },
-      "file": "lichen:entities/land/deer-female.json",
+      "file": "lichen:entities/land/gemsbok-female.json",
       "condition": { "when": "FLlichenEnabled", "isValue": "true" },
       "dependsOn": [{ "modid": "lichen" }]
     },
@@ -103,7 +82,7 @@
       "op": "replace",
       "path": "/client/behaviors/4/code",
       "value": "foodmultiply",
-      "file": "lichen:entities/land/deer-female.json",
+      "file": "lichen:entities/land/gemsbok-female.json",
       "condition": { "when": "FLlichenEnabled", "isValue": "true" },
       "dependsOn": [{ "modid": "lichen" }]
     },
@@ -111,7 +90,40 @@
       "op": "replace",
       "path": "/server/behaviors/8/code",
       "value": "foodmultiply",
-      "file": "lichen:entities/land/deer-female.json",
+      "file": "lichen:entities/land/gemsbok-female.json",
+      "condition": { "when": "FLlichenEnabled", "isValue": "true" },
+      "dependsOn": [{ "modid": "lichen" }]
+    },
+
+    {
+      "op": "add",
+      "path": "/client/behaviors/-",
+      "value": {
+        "code": "shearable",
+        "minQuantity": 1,
+        "maxQuantity": 2,
+        "shearableAt": 480,
+        "minGen": 1,
+        "scratchChance": 0.5,
+        "woolItem": "lichen:gems-horn"
+      },
+      "file": "lichen:entities/land/gemsbok-female.json",
+      "condition": { "when": "FLlichenEnabled", "isValue": "true" },
+      "dependsOn": [{ "modid": "lichen" }]
+    },
+    {
+      "op": "add",
+      "path": "/server/behaviors/-",
+      "value": {
+        "code": "shearable",
+        "minQuantity": 1,
+        "maxQuantity": 2,
+        "shearableAt": 480,
+        "minGen": 1,
+        "scratchChance": 0.5,
+        "woolItem": "lichen:gems-horn"
+      },
+      "file": "lichen:entities/land/gemsbok-female.json",
       "condition": { "when": "FLlichenEnabled", "isValue": "true" },
       "dependsOn": [{ "modid": "lichen" }]
     },

@@ -5,9 +5,10 @@
     "value": {
       "*-verysparse": {
         "eatenBlock": "rawclay-{type}-none",
-        "canEat": {"sheep-*" : 1, "hare-*" : 1, "pig-*" : 12, "chicken-*" : 12, "medievalexpansion:aurochs-*" : 12, "lichen:deer-*" : 1, "lichen:white-hart" : 1},
+        "canEat": {"sheep-*" : 1, "hare-*" : 1, "pig-*" : 12, "chicken-*" : 12, "medievalexpansion:aurochs-*" : 12, "lichen:deer-*" : 1, "lichen:white-hart" : 1, "lichen:gemsbok-*" : 1},
       }
     },
+    "condition": { "when": "FLgrazingEnabled", "isValue": "true" },
     "file": "game:blocktypes/soil/clay.json"
   },
   {
@@ -16,17 +17,18 @@
     "value": {
       "*-normal": {
         "eatenBlock": "cob-sparse",
-        "canEat": {"sheep-*" : 1, "hare-*" : 1, "pig-*" : 12, "chicken-*" : 12, "medievalexpansion:aurochs-*" : 12, "lichen:deer-*" : 1, "lichen:white-hart" : 1},
+        "canEat": {"sheep-*" : 1, "hare-*" : 1, "pig-*" : 12, "chicken-*" : 12, "medievalexpansion:aurochs-*" : 12, "lichen:deer-*" : 1, "lichen:white-hart" : 1, "lichen:gemsbok-*" : 1},
       },
       "*-sparse": {
         "eatenBlock": "cob-verysparse",
-        "canEat": {"sheep-*" : 1, "hare-*" : 1, "pig-*" : 12, "chicken-*" : 12, "medievalexpansion:aurochs-*" : 12, "lichen:deer-*" : 1, "lichen:white-hart" : 1},
+        "canEat": {"sheep-*" : 1, "hare-*" : 1, "pig-*" : 12, "chicken-*" : 12, "medievalexpansion:aurochs-*" : 12, "lichen:deer-*" : 1, "lichen:white-hart" : 1, "lichen:gemsbok-*" : 1},
       },
       "*-verysparse": {
         "eatenBlock": "cob-none",
-        "canEat": {"sheep-*" : 1, "hare-*" : 1, "pig-*" : 12, "chicken-*" : 12, "medievalexpansion:aurochs-*" : 12, "lichen:deer-*" : 1, "lichen:white-hart" : 1},
+        "canEat": {"sheep-*" : 1, "hare-*" : 1, "pig-*" : 12, "chicken-*" : 12, "medievalexpansion:aurochs-*" : 12, "lichen:deer-*" : 1, "lichen:white-hart" : 1, "lichen:gemsbok-*" : 1},
       }
     },
+    "condition": { "when": "FLgrazingEnabled", "isValue": "true" },
     "file": "game:blocktypes/soil/cob.json"
   },
   {
@@ -35,9 +37,10 @@
     "value": {
       "*-verysparse": {
         "eatenBlock": "peat-none",
-        "canEat": {"sheep-*" : 1, "hare-*" : 1, "pig-*" : 12, "chicken-*" : 12, "medievalexpansion:aurochs-*" : 12, "lichen:deer-*" : 1, "lichen:white-hart" : 1},
+        "canEat": {"sheep-*" : 1, "hare-*" : 1, "pig-*" : 12, "chicken-*" : 12, "medievalexpansion:aurochs-*" : 12, "lichen:deer-*" : 1, "lichen:white-hart" : 1, "lichen:gemsbok-*" : 1},
       }
     },
+    "condition": { "when": "FLgrazingEnabled", "isValue": "true" },
     "file": "game:blocktypes/soil/peat.json"
   },
   {
@@ -46,50 +49,19 @@
     "value": {
       "*-normal": {
         "eatenBlock": "soil-{fertility}-sparse",
-        "canEat": {"sheep-*" : 1, "hare-*" : 1, "pig-*" : 12, "chicken-*" : 12, "medievalexpansion:aurochs-*" : 12, "lichen:deer-*" : 1, "lichen:white-hart" : 1},
+        "canEat": {"sheep-*" : 1, "hare-*" : 1, "pig-*" : 12, "chicken-*" : 12, "medievalexpansion:aurochs-*" : 12, "lichen:deer-*" : 1, "lichen:white-hart" : 1, "lichen:gemsbok-*" : 1},
       },
       "*-sparse": {
         "eatenBlock": "soil-{fertility}-verysparse",
-        "canEat": {"sheep-*" : 1, "hare-*" : 1, "pig-*" : 12, "chicken-*" : 12, "medievalexpansion:aurochs-*" : 12, "lichen:deer-*" : 1, "lichen:white-hart" : 1},
+        "canEat": {"sheep-*" : 1, "hare-*" : 1, "pig-*" : 12, "chicken-*" : 12, "medievalexpansion:aurochs-*" : 12, "lichen:deer-*" : 1, "lichen:white-hart" : 1, "lichen:gemsbok-*" : 1},
       },
       "*-verysparse": {
         "eatenBlock": "soil-{fertility}-none",
-        "canEat": {"sheep-*" : 1, "hare-*" : 1, "pig-*" : 12, "chicken-*" : 12, "medievalexpansion:aurochs-*" : 12, "lichen:deer-*" : 1, "lichen:white-hart" : 1},
+        "canEat": {"sheep-*" : 1, "hare-*" : 1, "pig-*" : 12, "chicken-*" : 12, "medievalexpansion:aurochs-*" : 12, "lichen:deer-*" : 1, "lichen:white-hart" : 1, "lichen:gemsbok-*" : 1},
       }
     },
+    "condition": { "when": "FLgrazingEnabled", "isValue": "true" },
     "file": "game:blocktypes/soil/soil.json"
-  },
-  {
-    "op": "add",
-    "path": "/attributes/grazingPropertiesByType",
-    "value": {
-      "*-bolete-normal-*": {
-        "eatenBlock": "game:mushroom-bolete-harvested-{cover}",
-        "canEat": {
-          "pig-*": 1,
-          "chicken-*": 1
-        },
-        "saturation": 5
-      },
-      "*-fieldmushroom-normal-*": {
-        "eatenBlock": "game:mushroom-fieldmushroom-harvested-{cover}",
-        "canEat": {
-          "pig-*": 1,
-          "chicken-*": 1
-        },
-        "saturation": 5
-      },
-      "*-flyagaric-normal-*": {
-        "eatenBlock": "game:mushroom-flyagaric-harvested-{cover}",
-        "canEat": {
-          "pig-*": 1,
-          "chicken-*": 1
-        },
-        "saturation": 5,
-        "health": -2
-      }
-    },
-    "file": "game:blocktypes/plant/mushroom.json"
   },
   {
     "op": "add",
@@ -103,9 +75,11 @@
         "chicken-*": 12,
         "medievalexpansion:aurochs-*": 1,
         "lichen:deer-*": 1,
-        "lichen:white-hart": 1
+        "lichen:white-hart": 1,
+        "lichen:gemsbok-*" : 1
       }
     },
+    "condition": { "when": "FLgrazingEnabled", "isValue": "true" },
     "file": "game:blocktypes/plant/tallfern.json"
   },
   {
@@ -128,9 +102,11 @@
         "chicken-*": 12,
         "medievalexpansion:aurochs-*": 1,
         "lichen:deer-*": 1,
-        "lichen:white-hart": 1
+        "lichen:white-hart": 1,
+        "lichen:gemsbok-*" : 1
       }
     },
+    "condition": { "when": "FLgrazingEnabled", "isValue": "true" },
     "file": "game:blocktypes/plant/tallgrass.json"
   }
 ]

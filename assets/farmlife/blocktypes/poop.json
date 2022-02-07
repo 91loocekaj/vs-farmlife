@@ -2,9 +2,14 @@
 	code: "poop",
 	behaviors: [{name: "UnstableFalling"}, { name: "RightClickPickup", properties: {dropsPickupMode: true}}],
 	class: "BlockRequireSolidGround",
-	entityClass: "Transient",
 	entityBehaviors: [{ name: "FoodSource", properties: {foodType: "Poop", yOffset: 0, saturation: 0} }],
+	entityClass: "Transient",
 	attributes: {
+		fertilizerPropsByType: {
+      "*-omnivore-*": { n: 15, p: 15, k: 15 },
+      "*-avian-*": { n: 20, p: 4, k: 4 },
+      "*-grazer-*": { n: 4, p: 4, k: 20 },
+    },
 		transientProps: {
 			convertFrom: "*",
 			convertTo: "game:air",

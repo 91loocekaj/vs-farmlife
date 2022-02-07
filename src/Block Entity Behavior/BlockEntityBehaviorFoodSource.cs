@@ -19,6 +19,8 @@ namespace Farmlife
         {
             base.Initialize(api, properties);
 
+            if (!FarmerConfig.Loaded.GrazingEnabled) return;
+
             if (properties != null)
             {
                 food = properties["foodType"].AsString("Generic");
@@ -28,9 +30,12 @@ namespace Farmlife
                 saturation = properties["saturation"].AsFloat(1f);
             }
 
-            registrySystem = api.ModLoader.GetModSystem<POIRegistry>();
-            
-            registrySystem?.AddPOI(this);
+            if (api.Side == EnumAppSide.Server)
+            {
+                registrySystem = api.ModLoader.GetModSystem<POIRegistry>();
+
+                registrySystem?.AddPOI(this);
+            }
         }
 
         public BlockEntityBehaviorFoodSource(BlockEntity blockentity) : base(blockentity)
@@ -59,14 +64,16 @@ namespace Farmlife
 
         public override void OnBlockRemoved()
         {
+            if (!FarmerConfig.Loaded.GrazingEnabled) return;
             base.OnBlockRemoved();
-            registrySystem?.RemovePOI(this);
+            if (Blockentity.Api.Side == EnumAppSide.Server) registrySystem?.RemovePOI(this);
         }
 
         public override void OnBlockUnloaded()
         {
+            if (!FarmerConfig.Loaded.GrazingEnabled) return;
             base.OnBlockUnloaded();
-            registrySystem?.RemovePOI(this);
+            if (Blockentity.Api.Side == EnumAppSide.Server) registrySystem?.RemovePOI(this);
         }
 
     }

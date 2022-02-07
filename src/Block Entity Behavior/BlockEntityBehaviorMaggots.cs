@@ -3,6 +3,7 @@ using Vintagestory.GameContent;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Datastructures;
 using System;
+using System.Collections.Generic;
 
 namespace Farmlife
 {
@@ -15,6 +16,8 @@ namespace Farmlife
         int maxSpawn = 10;
         int minHours = 72;
         int maxHours = 120;
+        GasHelper gasPlug;
+        Dictionary<string, float> wasteGas;
 
         public override void Initialize(ICoreAPI api, JsonObject properties)
         {
@@ -29,6 +32,10 @@ namespace Farmlife
                 maxHours = properties["maxHours"].AsInt(120);
             }
 
+            gasPlug = api.ModLoader.GetModSystem<GasHelper>();
+            wasteGas = new Dictionary<string, float>();
+            wasteGas.Add("hydrogensulfide", 3);
+
             if (timer == 0) timer = api.World.Calendar.TotalHours;
             Blockentity.RegisterGameTickListener(AttractFlies, 3000);
         }
@@ -42,7 +49,7 @@ namespace Farmlife
             BlockEntityContainer chute = (Api.World.BlockAccessor.GetBlockEntity(chutePos) as BlockEntityContainer);
             ClimateCondition conds = Api.World.BlockAccessor.GetClimateAt(Blockentity.Pos);
 
-            if (!(Api.World.BlockAccessor.GetBlock(chutePos) is BlockHopper) || chute == null || conds.Temperature <= -10)
+            if (!(Api.World.BlockAccessor.GetBlock(chutePos) is BlockHopper) || chute == null || conds.Temperature <= 0)
             {
                 timer = Api.World.Calendar.TotalHours + 48;
                 return;
@@ -65,7 +72,7 @@ namespace Farmlife
             if (pupaeSwarm > 0)
             {
                 ItemStack pupae = new ItemStack(Api.World.GetItem(maggot), pupaeSwarm);
-                System.Diagnostics.Debug.WriteLine(pupae);
+                //System.Diagnostics.Debug.WriteLine(pupae);
                 DummySlot cocoon = new DummySlot(pupae);
 
                 for (int i = 0; i < chute.Inventory.Count; i++)
@@ -80,7 +87,7 @@ namespace Farmlife
                     if (cocoon.Empty) break;
                 }
             }
-
+            gasPlug.SendGasSpread(Blockentity.Pos, wasteGas);
             timer = Api.World.Calendar.TotalHours + Api.World.Rand.Next(minHours, maxHours + 1);
 
         }

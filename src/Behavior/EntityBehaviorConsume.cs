@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using Vintagestory.API;
 using Vintagestory.API.Common;
@@ -19,6 +20,8 @@ namespace Farmlife
         bool timeSkipProtection;
         EntityPartitioning entityUtil;
         float fullCheck;
+        GasHelper gasPlug;
+        Dictionary<string, float> wasteGas;
 
         public float MaxSat
         {
@@ -58,11 +61,15 @@ namespace Farmlife
             for (int i = 0; i < locs.Length; i++) locs[i] = new AssetLocation(codes[i]);
             PoopCodes = locs;
 
+            gasPlug = entity.Api.ModLoader.GetModSystem<GasHelper>();
+            wasteGas = new Dictionary<string, float>();
+            wasteGas.Add("hydrogensulfide", 0.25f);
+            wasteGas.Add("methane", 0.25f);
         }
 
         public override void OnGameTick(float deltaTime)
         {
-            if (!entity.Alive) return;
+            if (!entity.Alive || entity.Api.Side != EnumAppSide.Server) return;
 
             fullCheck += deltaTime;
             if (fullCheck >= 120)
@@ -70,7 +77,7 @@ namespace Farmlife
                 fullCheck = 0;
                 if (SatPerc >= 1)
                 {
-                    entity.GetBehavior<EntityBehaviorEmotionStates>()?.TryTriggerState("saturated");
+                    entity.GetBehavior<EntityBehaviorEmotionStates>()?.TryTriggerState("saturated", entity.EntityId);
                 }
             }
 
@@ -107,7 +114,11 @@ namespace Farmlife
                     TryPlace(block, 0, 0, 1)
                 ;
 
-                if (placed) entity.World.FrameProfiler.Mark("entity-createblock");
+                if (placed)
+                {
+                    gasPlug.SendGasSpread(entity.SidedPos.AsBlockPos, wasteGas);
+                    entity.World.FrameProfiler.Mark("entity-createblock");
+                }
             }
         }
 
@@ -178,7 +189,7 @@ namespace Farmlife
 
         public bool GetTrough()
         {
-            if (porregistry == null) return false;
+            if (entity.Api.Side != EnumAppSide.Server || porregistry == null || !entity.WatchedAttributes.GetBool("playerFed")) return false;
             
             IAnimalFoodSource targetPoi = (IAnimalFoodSource)porregistry.GetNearestPoi(entity.ServerPos.XYZ, 48, (poi) =>
             {
@@ -194,7 +205,6 @@ namespace Farmlife
                         float eaten = foodPoi.ConsumeOnePortion() * entity.Stats.GetBlended("digestion");
                         leftoverFood -= eaten;
                         CurrentSat += eaten;
-                        entity.WatchedAttributes.SetBool("playerFed", true);
                     }
 
                     CurrentSat = hunger.GetFloat("saturation") - leftoverFood;
@@ -223,7 +233,7 @@ namespace Farmlife
             CreateGenome();
         }
 
-        public override void OnEntityReceiveDamage(DamageSource damageSource, float damage)
+        public override void OnEntityReceiveDamage(DamageSource damageSource, ref float damage)
         {
             if (entity.WatchedAttributes.GetInt("generation") >= 3 && damageSource?.SourceEntity != null && damageSource.SourceEntity.HasBehavior<EntityBehaviorHealth>())
             {
@@ -242,7 +252,7 @@ namespace Farmlife
                 }
             }
 
-            base.OnEntityReceiveDamage(damageSource, damage);
+            base.OnEntityReceiveDamage(damageSource, ref damage);
         }
 
         private void CreateGenome()
@@ -274,7 +284,7 @@ namespace Farmlife
             int[] sequence = (genome["sequence"] as IntArrayAttribute).value;
 
             entity.Stats.Set("maxhealthExtraPoints", "genes", -1.5f + (sequence[0] * 0.5f), true); // 1 = -1, 2 = -0.5 3: 0, 4 = +0.5, 5 = +1
-            entity.Stats.Set("walkspeed", "genes", -0.6f + (sequence[1] * 0.2f), true); // 1 = -0.4, 2 = -0.2 3: 0, 4 = +0.2, 5 = +0.4
+            entity.Stats.Set("walkspeed", "genes", -0.3f + (sequence[1] * 0.1f), true); // 1 = -0.2, 2 = -0.1 3: 0, 4 = +0.1, 5 = +0.2
             entity.Stats.Set("digestion", "genes", -0.75f + (sequence[2] * 0.25f), true); // 1 = -0.5, 2 = -0.25 3: 0, 4 = +0.25, 5 = +0.5
             entity.Stats.Set("hungerrate", "genes", 0.75f + (sequence[3] * -0.25f), true); // 1 = +0.5, 2 = +0.25 3: 0, 4 = -0.25, 5 = -0.5
             entity.Stats.Set("vulenrability", "genes", 0.375f + (sequence[4] * -0.125f), true); // 1 = +0.25, 2 = +0.125 3: 0, 4 = -0.125, 5 = -0.25

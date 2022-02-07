@@ -75,7 +75,7 @@ namespace Farmlife
             EntityProperties type = byEntity.World.GetEntityType(new AssetLocation(Code.Domain, CodeEndWithoutParts(1)));
             if (type == null) return base.GetHeldTpIdleAnimation(activeHotbarSlot, byEntity, hand);
 
-            float size = Math.Max(type.HitBoxSize.X, type.HitBoxSize.Y);
+            float size = Math.Max(type.CollisionBoxSize.X, type.CollisionBoxSize.Y);
 
             if (size > 1) return "holdunderarm";
             return "holdbothhands";

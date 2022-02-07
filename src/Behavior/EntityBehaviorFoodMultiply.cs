@@ -6,6 +6,7 @@ using Vintagestory.API;
 using Vintagestory.API.Config;
 using System.Text;
 using Vintagestory.GameContent;
+using Vintagestory.API.Util;
 
 namespace Farmlife
 {
@@ -13,6 +14,7 @@ namespace Farmlife
     {
         long callback;
         JsonObject typeAttributes;
+        EntityPartitioning entityUtil;
 
         internal float PregnancyDays
         {
@@ -67,6 +69,8 @@ namespace Farmlife
         public override void Initialize(EntityProperties properties, JsonObject attributes)
         {
             this.typeAttributes = attributes;
+
+            entityUtil = entity.Api.ModLoader.GetModSystem<EntityPartitioning>();
 
             MultiplyCooldownDaysMin = attributes["multiplyCooldownDaysMin"].AsFloat(6);
             MultiplyCooldownDaysMax = attributes["multiplyCooldownDaysMax"].AsFloat(12);
@@ -128,6 +132,17 @@ namespace Farmlife
             if (bh != null && (bh.Health / bh.MaxHealth) < 0.25f * entity.Stats.GetBlended("vulenrability"))
             {
                 //Miscarriage due to poor health
+                TotalDaysLastBirth = daysNow;
+                TotalDaysCooldownUntil = daysNow + (MultiplyCooldownDaysMin + entity.World.Rand.NextDouble() * (MultiplyCooldownDaysMax - MultiplyCooldownDaysMin));
+                IsPregnant = false;
+                entity.WatchedAttributes.MarkPathDirty("multiply");
+                entity.Stats.Remove("hungerrate", "pregnant");
+                return;
+            }
+
+            if (!SpawnCapCheck())
+            {
+                //Miscarriage due to overpopulation
                 TotalDaysLastBirth = daysNow;
                 TotalDaysCooldownUntil = daysNow + (MultiplyCooldownDaysMin + entity.World.Rand.NextDouble() * (MultiplyCooldownDaysMax - MultiplyCooldownDaysMin));
                 IsPregnant = false;
@@ -200,8 +215,9 @@ namespace Farmlife
 
         private bool TryGetPregnant()
         {
-            if (entity.World.Rand.NextDouble() > 0.03) return false;
-            if (TotalDaysCooldownUntil > entity.World.Calendar.TotalDays) return false;
+            if (entity.World.Rand.NextDouble() > 1) return false;
+            if (!SpawnCapCheck() || TotalDaysCooldownUntil > entity.World.Calendar.TotalDays) return false;
+            if (!FarmerConfig.Loaded.WildBirthsEnabled && !entity.WatchedAttributes.GetBool("playerFed")) return false;
 
             EntityBehaviorConsume bc = entity.GetBehavior<EntityBehaviorConsume>();
             if (bc == null) return false;
@@ -226,6 +242,22 @@ namespace Farmlife
             }
 
             return false;
+        }
+
+        private bool SpawnCapCheck()
+        {
+            int members = 0;
+            int max = Math.Max(FarmerConfig.Loaded.BreedingCapMinPop, (int)SpawnQuantityMin * FarmerConfig.Loaded.BreedingCap);
+            entityUtil.WalkEntities(entity.SidedPos.XYZ, FarmerConfig.Loaded.BreedingCapRange, (ent) => {
+                if (ent != entity && ent.Code.Path.StartsWithFast(entity.FirstCodePart()) && ent.Alive) members++;
+                
+                return members < max;
+            });
+
+            multiplyTree.SetBool("spawnCap", members < max);
+            entity.WatchedAttributes.MarkPathDirty("multiply");
+
+            return members < max;
         }
 
         private Entity GetRequiredEntityNearby()
@@ -297,7 +329,8 @@ namespace Farmlife
                 }
                 else
                 {
-                    infotext.AppendLine(Lang.Get("Ready to mate"));
+                    if (!multiplyTree.GetBool("spawnCap")) infotext.AppendLine(Lang.Get("farmlife:breedingcap"));
+                    else infotext.AppendLine(Lang.Get("Ready to mate"));
                 }
             }
         }

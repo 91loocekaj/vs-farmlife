@@ -34,8 +34,9 @@ namespace Farmlife
             api.World.Config.SetBool("FLmedievalexpansionEnabled", FarmerConfig.Loaded.MedievalExpansionEnabled);
             api.World.Config.SetBool("FLprimitivesurvivalEnabled", FarmerConfig.Loaded.PrimitiveSurvivalEnabled);
             api.World.Config.SetBool("FLwildfarmingEnabled", FarmerConfig.Loaded.WildFarmingEnabled);
-            api.World.Config.SetBool("FLpetsEnabled", FarmerConfig.Loaded.PetsEnabled);
+            api.World.Config.SetBool("FLpetsEnabled", FarmerConfig.Loaded.PetsEnabled && !api.ModLoader.IsModEnabled("wolftaming"));
             api.World.Config.SetBool("FLshearingEnabled", FarmerConfig.Loaded.ShearingEnabled);
+            api.World.Config.SetBool("FLgrazingEnabled", FarmerConfig.Loaded.GrazingEnabled);
         }
 
         public override void Start(ICoreAPI api)
@@ -106,6 +107,12 @@ namespace Farmlife
 
         public float PathItemRange { get; set; } = 10f;
 
+        public float BreedingCapRange { get; set; } = 20;
+
+        public int BreedingCap { get; set; } = 3;
+
+        public int BreedingCapMinPop { get; set; } = 10;
+
         public bool PoopEnabled { get; set; } = true;
 
         public bool UnloadedHungerEnabled { get; set; } = true;
@@ -120,8 +127,12 @@ namespace Farmlife
 
         public bool WildFarmingEnabled { get; set; } = true;
 
-        public bool PetsEnabled { get; set; } = true;
+        public bool PetsEnabled { get; set; } = false;
 
         public bool GluttonyEnabled { get; set; } = true;
+
+        public bool WildBirthsEnabled { get; set; } = false;
+
+        public bool GrazingEnabled { get; set; } = true;
     }
 }

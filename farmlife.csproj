@@ -95,6 +95,7 @@
     <Compile Include="src\Item\ItemShiftCreature.cs" />
     <Compile Include="src\Item\ItemHandlingGloves.cs" />
     <Compile Include="src\Patches.cs" />
+    <Compile Include="src\Util\FLGasHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\" />
